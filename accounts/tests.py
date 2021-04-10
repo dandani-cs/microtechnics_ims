@@ -27,10 +27,12 @@ class UsersManagersTests(TestCase):
         User = get_user_model()
         admin_user = User.objects.create_superuser(generate_id(),
                                                    'super@user.com',
-                                                   'foo')
+                                                   'foo',
+                                                   is_admin=True)
 
         self.assertEqual(admin_user.email, 'super@user.com')
         self.assertTrue(admin_user.username.startswith(str(date.today().year)))
         self.assertTrue(admin_user.is_active)
         self.assertTrue(admin_user.is_staff)
         self.assertTrue(admin_user.is_superuser)
+        self.assertTrue(admin_user.is_admin)
