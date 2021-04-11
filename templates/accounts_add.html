@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}
+    ADD USER PAGE
+{% endblock title %}
+{% block content %}
+    {% csrf_token %}
+    {{ form }}
+{% endblock content %}
