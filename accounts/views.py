@@ -8,4 +8,4 @@ class CreateUserView(View):
     template_name = "accounts_add.html"
 
     def get(self, request):
-        return render(request, {'form': CustomUserCreationForm()})
+        return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
