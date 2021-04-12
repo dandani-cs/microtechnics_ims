@@ -5,5 +5,8 @@ from django.http import HttpResponse
 def login(request):
     return render(request, 'accounts/login.html')
 
+def forgotpass(request):
+    return render(request, 'accounts/forgot_pass.html')
+
 def home(request):
     return render(request, 'accounts/dashboard.html')
