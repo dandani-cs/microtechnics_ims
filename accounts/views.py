@@ -9,5 +9,8 @@ def login(request):
 def forgotpass(request):
     return render(request, 'forgot_pass.html')
 
+def newpass(request):
+    return render(request, 'add_new_pass.html')
+
 def home(request):
     return render(request, 'dashboard.html')
