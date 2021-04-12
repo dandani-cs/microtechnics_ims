@@ -10,4 +10,4 @@ def forgotpass(request):
     return render(request, 'accounts/forgot_pass.html')
 
 def home(request):
-    return render(request, 'accounts/dashboard.html')
+    return render(request, 'dashboard.html')
