@@ -4,6 +4,7 @@ from django.views import View
 # for redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
+from django.http import HttpResponse
 
 # system info
 from .forms import CustomUserCreationForm
@@ -32,3 +33,12 @@ class CreateUserView(View):
 
         else:
             return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
+
+def login(request):
+    return render(request, 'accounts/login.html')
+
+def forgotpass(request):
+    return render(request, 'accounts/forgot_pass.html')
+
+def home(request):
+    return render(request, 'accounts/dashboard.html')
