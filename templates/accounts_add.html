@@ -4,6 +4,17 @@
     ADD USER PAGE
 {% endblock title %}
 {% block content %}
-    {% csrf_token %}
-    {{ form }}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form }}
+
+        <br />
+        <button type="submit" /> Add User </button>
+
+        <!-- TODO: errors won't show-->
+        <p> {{ form.errors }} </p>
+        <p> {{ form.non_field_errors }} </p>
+    </form>
+
+
 {% endblock content %}
