@@ -8,7 +8,7 @@
         <p class="login-box-msg">Recover Password</p>
         <form action="#" method="post">
             <div class="input-group mb-3">
-                <input type="password" class="form-control" placeholder="New Password" required autofocus>
+                <input type="password" class="form-control password" placeholder="New Password" required autofocus>
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <i class="bi bi-lock-fill"></i>
@@ -32,11 +32,6 @@
         <p class="mt-3 mb-1">
             <a href="#" class="text-center">Login instead</a>
         </p>
-        <p class="mb-0">
-            <a href="#" class="text-center">
-                Create new account
-            </a>
-        </p>
         <!-- Extra space lang -->
         <div class="text-center mb-3">
 
@@ -45,4 +40,15 @@
     <!-- /.card-body -->
 </div>
 <!-- /.card -->
+<script type="text/javascript">
+    var passwordField = document.querySelector('.password');
+    var show = document.querySelector('.show');
+    var hide = document.querySelector('.hide');
+
+    show.onclick = function() {
+        passwordField.setAttribute("type", "text");
+        show.style.display = "none";
+        hide.style.display = "block";
+    }
+</script>
 {% endblock content %}
