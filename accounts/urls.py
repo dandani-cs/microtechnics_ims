@@ -10,4 +10,5 @@ urlpatterns = [
     path('', views.login),
     path('forgot-pass/', views.forgotpass),
     path('home/', views.home),
+    path('add', CreateUserView.as_view(), name="account_add"),
 ]
