@@ -1,0 +1,138 @@
+{% extends "Adminbase.html" %}
+
+{% block title %}
+	USER MANAGEMENT
+{% endblock title %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h3 class="m-1">User Management</h3>
+                </div>
+                <div class="col-sm-6 content-wrapper">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">User Management</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body table-responsive-lg ">
+                    <h4 class="align-items-center"><b>List Of Users</b></h4>
+                    <table class="table table-hover " style="overflow-x: auto; width:100%; height:100%; border:2px groove;">
+                        <thead class="thead-dark">
+                            <tr>
+                                
+                                <th>
+                                    <label>Full Name</label>
+                                </th>
+                                <th>
+                                    <label>Nickname</label>
+                                </th>
+                                <th>
+                                    <label>Username</label>
+                                </th>
+                                <th >
+                                    <label>Email</label>
+                                </th>
+                                <th >
+                                    <label>Contact Number</label>
+                                </th>
+                                <th >
+                                    <label>Address</label>
+                                </th>
+                                <th>
+                                    <label>Last Log-In</label>
+                                </th>
+                                <th>
+                                    <label>Role</label>
+                                </th> 
+                                <th></th>                                             
+                            </tr>
+                        </thead>
+                        <tr>
+                            <th>
+                                Roginald Glenn Dela Cruz
+                            </th>
+                            <th>
+                                Rogi
+                            </th>
+                            <th>
+                                Rgbdc22
+                            </th>
+                            <th>
+                                roginalddc22@gmail.com
+                            </th>
+                            <th>
+                                09232212343
+                            </th>
+                            <th>
+                                Makati City
+                            </th>
+                            <th>
+                                2 mins ago
+                            </th>
+                            <th>
+                                Admin
+                            </th>  
+                            <td class="align-middle">
+                                <div class="d-grid gap-2 ">
+                                    <a href="#" style="margin-bottom: 10px; height: 50%; width: 100%" class="p-2 btn btn-success btn-group-sm" >&ensp; Edit&ensp;<i class="fa fa-user-edit"></i></a>
+
+                                     <a href="#" data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm" style="margin-bottom: 10px; height: 50%; width: 100%;">Delete <i class="fa fa-user-alt-slash"></i></a>
+                                </div>
+                            </td>                                  
+                        </tr> 
+                        <tr>
+                            <th>
+                                Roginald Glenn Dela Cruz
+                            </th>
+                            <th>
+                                Rogi
+                            </th>
+                            <th>
+                                Rgbdc22
+                            </th>
+                            <th>
+                                roginalddc22@gmail.com
+                            </th>
+                            <th>
+                                09232212343
+                            </th>
+                            <th>
+                                Makati City
+                            </th>
+                            <th>
+                                2 mins ago
+                            </th>
+                            <th>
+                                Admin
+                            </th>  
+                            <td class="align-middle">
+                                    <div class="d-grid gap-2 ">
+                                        <a href="#" style="margin-bottom: 10px; height: 50%; width: 100%;" class="p-2 btn btn-success btn-group-sm" >&ensp; Edit&ensp;</a>
+
+                                        <a href="#" data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm" style="margin-bottom: 10px; height: 50%; width: 100%;">Delete </a>
+                                    </div>
+                            </td>      
+                        </tr> 
+                    </table>
+                    <div class="d-grid mx-auto float-lg-right" style="margin-bottom: 20px; margin-top: 20px; margin-left: 20px">
+                        <a href= "#" value="Show Tables" class="p-2 btn btn-primary">Create New User&ensp;<i class="fa fa-user"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+                        
+
+{% endblock content %}
