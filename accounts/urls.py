@@ -1,13 +1,8 @@
 from django.urls import path
 from . import views
 
-"""
--- first url: login.html
----- once logged in -> views.home
-"""
-
 urlpatterns = [
-    path('', views.login),
-    path('forgot-pass/', views.forgotpass),
-    path('home/', views.home),
+    path('forgot-pass/', views.forgotpass, name="forgot_pass"),
+    path('recover-pass/', views.newpass, name="recover_pass"),
+    path('add/', views.CreateUserView.as_view(), name="account_add"),
 ]
