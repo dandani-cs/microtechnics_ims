@@ -4,10 +4,11 @@
     <title>Microtechnics System Co. | Admin</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon"  href="/static/images/MSClogo.png"/>
+    {% load static %}
+    <link rel="icon"  href="{%static 'images/MSClogo.png'%}"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
   <body>   
     <div class="wrapper d-flex align-items-stretch">
@@ -20,33 +21,33 @@
         </div>
 
         <div class="p-4 pt-5">
-          <a href="index.html" class="logo"><img src="/static/images/MSC.png" class="mainLogo"></a>   
+          <a href="index.html" class="logo"><img src="{% static 'images/MSC.png' %}" class="mainLogo"></a>   
           <ul class="list-unstyled components mb-5">
             <li>
-                <a href="#" class="sideNavText"><img src="/static/icons/notification.png" class="sideNavIcon"> &nbsp;Notifications</a>
+                <a href="#" class="sideNavText"><img src="{% static 'icons/notification.png' %}" class="sideNavIcon"> &nbsp;Notifications</a>
             </li>
             <li class="active">
               <a href="#homeSubmenu" class="sideNavText">
-                <img src="/static/icons/Dashboard.png" class="sideNavIcon">&nbsp; Dashboard
+                <img src="{% static 'icons/Dashboard.png' %}" class="sideNavIcon">&nbsp; Dashboard
               </a>              
             </li>
             <li>
-                <a href="#" class="sideNavText"><img src="/static/icons/receipt.png" class="sideNavIcon"> &nbsp; Reports</a>
+                <a href="#" class="sideNavText"><img src="{% static 'icons/receipt.png' %}" class="sideNavIcon"> &nbsp; Reports</a>
             </li>
             <li>
-              <a href="#" class="sideNavText"><img src="/static/icons/purchase.png" class="sideNavIcon"> &nbsp; Purchase Management</a>              
+              <a href="#" class="sideNavText"><img src="{% static 'icons/purchase.png' %}" class="sideNavIcon"> &nbsp; Purchase Management</a>              
             </li>
             <li>
-              <a href="#" class="sideNavText"><img src="/static/icons/inventory.png" class="sideNavIcon"> &nbsp; Inventory Management</a>              
+              <a href="#" class="sideNavText"><img src="{% static 'icons/inventory.png' %}" class="sideNavIcon"> &nbsp; Inventory Management</a>              
             </li>
             <li>
-              <a href="#" class="sideNavText"><img class="sideNavIcon" src="/static/icons/orders.png"> &nbsp; Order Management</a>
+              <a href="#" class="sideNavText"><img class="sideNavIcon" src="{% static 'icons/orders.png' %}"> &nbsp; Order Management</a>
             </li>            
             <li>
-              <a href="UserMngmtAdmin.html" class="sideNavText"><img src="/static/icons/user.png">&nbsp; User Management</a>
+              <a href="UserMngmtAdmin.html" class="sideNavText"><img src="{% static 'icons/user.png' %}">&nbsp; User Management</a>
             </li>            
             <li>
-              <a href="#" class="sideNavText"><img class="sideNavIcon" src="/static/icons/logout.png"> &nbsp; Log Out</a>
+              <a href="#" class="sideNavText"><img class="sideNavIcon" src="{% static 'icons/logout.png' %}"> &nbsp; Log Out</a>
             </li>          
           </ul>     
 
@@ -66,9 +67,9 @@
         {% endblock %}         
       </div>
     <!-- scripts -->
-    <script src="static/js/jquery.min.js"></script>
-    <script src="static/js/popper.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="static/js/main.js"></script>
+    <script src="{% static 'js/jquery.min.js'%}"></script>
+    <script src="{% static 'js/popper.js'%}"></script>
+    <script src="{% static 'js/bootstrap.min.js'%}"></script>
+    <script src="{% static 'js/main.js'%}"></script>
   </body>
 </html>
