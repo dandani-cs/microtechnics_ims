@@ -1,0 +1,40 @@
+{% extends "Empbase.html" %}
+
+{% block title %}
+    View Inventory Items
+{% endblock title %}
+{% block content %}
+    <table cellpadding = "8px">
+        <tr>
+            <th>Item Code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Maximum Quantity</th>
+            <th>Quantity Status</th>
+            <th>Description</th>
+         </tr>
+        {% for item in object_list %}
+        <tr>
+            <td>{{ item.item_code    }}</td>
+            <td>{{ item.name         }}</td>
+            <td>{{ item.category     }}</td>
+            <td>{{ item.price        }}</td>
+            <td>{{ item.quantity     }}</td>
+            <td>{{ item.max_quantity }}</td>
+            <td>
+                {% if item.calc_quantity_level == 2 %}
+                    OK
+                {% elif item.calc_quantity_level == 1 %}
+                    Low
+                {% else %}
+                    Critical
+                {% endif %}
+            </td>
+            <td>{{ item.description  }}</td>
+         </tr>
+        {% endfor %}
+    </table>
+{% endblock content %}
+
