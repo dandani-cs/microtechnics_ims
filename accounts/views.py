@@ -34,14 +34,8 @@ class CreateUserView(View):
         else:
             return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
 
-def login(request):
-    return render(request, 'login.html')
-
 def forgotpass(request):
     return render(request, 'forgot_pass.html')
 
 def newpass(request):
     return render(request, 'add_new_pass.html')
-
-def home(request):
-    return render(request, 'dashboard.html')
