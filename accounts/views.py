@@ -35,10 +35,13 @@ class CreateUserView(View):
             return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
 
 def login(request):
-    return render(request, 'accounts/login.html')
+    return render(request, 'login.html')
 
 def forgotpass(request):
-    return render(request, 'accounts/forgot_pass.html')
+    return render(request, 'forgot_pass.html')
+
+def newpass(request):
+    return render(request, 'add_new_pass.html')
 
 def home(request):
-    return render(request, 'accounts/dashboard.html')
+    return render(request, 'dashboard.html')
