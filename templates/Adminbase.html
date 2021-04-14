@@ -1,5 +1,4 @@
 <!-- for active links -->
-{% url 'inventory' as inv %}
 {% url 'home' as dash %}
 <!doctype html>
 <html lang="en">
@@ -39,8 +38,8 @@
             <li>
               <a href="#" class="sideNavText"><img src="/static/icons/purchase.png" class="sideNavIcon"> &nbsp; Purchase Management</a>              
             </li>
-            <li class="{% if request.path == inv %}active{% endif %}">
-              <a href="{% url 'inventory' %}" class="sideNavText"><img src="/static/icons/inventory.png" class="sideNavIcon"> &nbsp; Inventory Management</a>              
+            <li>
+              <a href="#" class="sideNavText"><img src="/static/icons/inventory.png" class="sideNavIcon"> &nbsp; Inventory Management</a>              
             </li>
             <li>
               <a href="#" class="sideNavText"><img class="sideNavIcon" src="/static/icons/orders.png"> &nbsp; Order Management</a>
