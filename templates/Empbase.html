@@ -1,7 +1,10 @@
+<!-- for active links -->
+{% url 'view_items' as inv %}
 <!doctype html>
 <html lang="en">
   <head>
     <title>Microtechnics System Co. | Employee</title>
+    {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon"  href="/static/images/MSClogo.png"/>
@@ -28,14 +31,14 @@
             <li>
                 <a href="#" class="sideNavText"><img src="/static/icons/notification.png" class="sideNavIcon"> &nbsp;Notifications</a>
             </li>
-            <li>
+            <li class="{% if request.path == inv %}active{% endif %}">
               <a href="#" class="sideNavText"><img src="/static/icons/inventory.png" class="sideNavIcon"> &nbsp;Inventory Management</a>              
             </li>
-            <li class="active">
+            <li>
               <a href="#homeSubmenu" class="sideNavText">
                 <img src="/static/icons/purchase.png" class="sideNavIcon">&nbsp;Purchase Management</a>
             </li>
-            <li class="active">
+            <li>
               <a href="#homeSubmenu" class="sideNavText">
                 <img src="/static/icons/Dashboard.png" class="sideNavIcon">&nbsp;Project Management</a>
             </li>
@@ -67,9 +70,9 @@
         {% endblock %}         
       </div>
 
-    <script src="static/js/jquery.min.js"></script>
-    <script src="static/js/popper.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="static/js/main.js"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>
