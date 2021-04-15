@@ -17,7 +17,7 @@ class CategoryOptions():
     )
 
 class Category(models.Model):
-    cat_id = models.CharField(max_length = 10, primary_key = True, unique = True, default = uuid.uuid4)
+    cat_id = models.CharField(max_length = 10, primary_key = True, unique = True, default = generate_uuid)
     name   = models.CharField(max_length = 20)
     option = models.IntegerField(choices = CategoryOptions.CATEGORY_CHOICES, default = 2)
 
