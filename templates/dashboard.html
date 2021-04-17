@@ -79,7 +79,7 @@
             <h3 class="card-title">Reports</h3>
             <!-- .card-tools -->
             <div class="card-tools">
-              <a href="#" class="btn btn-tool btn-sm">
+              <a href="{% url 'export-csv' %}" class="btn btn-tool btn-sm">
                 <i class="fa fa-download"></i>
               </a>
             </div>
@@ -91,43 +91,18 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>Primera</th>
-                  <th>Segunda</th>
-                  <th>Tercera</th>
-                  <th>Cuarta</th>
+                  <!-- Temporary lang muna -->
+                  <th>First Name</th>
+                  <th>Last Name</th>
                 </tr>
               </thead>
               <tbody>
+                {% for user in users %}
                 <tr>
-                  <td>Rep1</td>
-                  <td>sample1</td>
-                  <td>oof1</td>
-                  <td>yay</td>
+                  <td>{{user.first_name}}</td>
+                  <td>{{user.last_name}}</td>
                 </tr>
-                <tr>
-                  <td>Rep2</td>
-                  <td>sample2</td>
-                  <td>oof2</td>
-                  <td>yay</td>
-                </tr>
-                <tr>
-                  <td>Rep3</td>
-                  <td>sample3</td>
-                  <td>oof3</td>
-                  <td>yay</td>
-                </tr>
-                <tr>
-                  <td>Rep4</td>
-                  <td>sample4</td>
-                  <td>oof4</td>
-                  <td>yay</td>
-                </tr>
-                <tr>
-                  <td>Rep5</td>
-                  <td>sample5</td>
-                  <td>oof5</td>
-                  <td>yay</td>
-                </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>

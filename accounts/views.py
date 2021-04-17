@@ -10,6 +10,12 @@ from django.http import HttpResponse
 from .forms import CustomUserCreationForm
 from .models import User
 
+# import csv
+import csv
+
+# date time
+import datetime
+
 # Create your views here.
 class CreateUserView(View):
     template_name = "accounts_add.html"
@@ -39,3 +45,20 @@ def forgotpass(request):
 
 def newpass(request):
     return render(request, 'add_new_pass.html')
+
+def home(request):
+    users = User.objects.all()
+    return render(request, 'dashboard.html', {'users': users})
+
+def export_csv(request):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition']='attachment; filename=accounts.csv'
+
+    writer = csv.writer(response)
+    writer.writerow(['First Name', 'Last Name'])
+    users = User.objects.filter(username=request.user)
+
+    for user in users:
+        writer.writerow([user.first_name, user.last_name])
+
+    return response
