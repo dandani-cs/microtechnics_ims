@@ -7,6 +7,68 @@
 <!-- Main Content -->
 <div class="content">
   <div class="container-fluid">
+    <!-- first row -->
+    <div class="row">
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box">
+          <span class="info-box-icon bg-info elevation-1"><i class="bi bi-cash"></i></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Sales</span>
+            <span class="info-box-number">
+              0
+              <small>%</small>
+            </span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-danger elevation-1"><i class="bi bi-exclamation-triangle-fill"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Orders Pending</span>
+            <span class="info-box-number">0</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+      <div class="clearfix hidden-md-up"></div>
+
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-success elevation-1"><i class="bi bi-inbox-fill"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Inventory something</span>
+            <span class="info-box-number">idk</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-12 col-sm-6 col-md-3">
+        <div class="info-box mb-3">
+          <span class="info-box-icon bg-warning elevation-1"><i class="bi bi-bar-chart-line-fill"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Projects on hold</span>
+            <span class="info-box-number">2,000 y u procrastinate</span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- / 1st .row -->
+    <!-- 2nd .row -->
     <div class="row">
       <div class="col-12">
 
@@ -17,7 +79,7 @@
             <h3 class="card-title">Reports</h3>
             <!-- .card-tools -->
             <div class="card-tools">
-              <a href="#" class="btn btn-tool btn-sm">
+              <a href="{% url 'export-csv' %}" class="btn btn-tool btn-sm">
                 <i class="fa fa-download"></i>
               </a>
             </div>
@@ -29,43 +91,18 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th>Primera</th>
-                  <th>Segunda</th>
-                  <th>Tercera</th>
-                  <th>Cuarta</th>
+                  <!-- Temporary lang muna -->
+                  <th>First Name</th>
+                  <th>Last Name</th>
                 </tr>
               </thead>
               <tbody>
+                {% for user in users %}
                 <tr>
-                  <td>Rep1</td>
-                  <td>sample1</td>
-                  <td>oof1</td>
-                  <td>yay</td>
+                  <td>{{user.first_name}}</td>
+                  <td>{{user.last_name}}</td>
                 </tr>
-                <tr>
-                  <td>Rep2</td>
-                  <td>sample2</td>
-                  <td>oof2</td>
-                  <td>yay</td>
-                </tr>
-                <tr>
-                  <td>Rep3</td>
-                  <td>sample3</td>
-                  <td>oof3</td>
-                  <td>yay</td>
-                </tr>
-                <tr>
-                  <td>Rep4</td>
-                  <td>sample4</td>
-                  <td>oof4</td>
-                  <td>yay</td>
-                </tr>
-                <tr>
-                  <td>Rep5</td>
-                  <td>sample5</td>
-                  <td>oof5</td>
-                  <td>yay</td>
-                </tr>
+                {% endfor %}
               </tbody>
             </table>
           </div>
@@ -75,7 +112,178 @@
       </div>
       <!-- /.col-lg-6 -->
     </div>
-    <!-- /.row -->
+    <!-- / 2nd .row -->
+    <!-- 3rd .row -->
+    <div class="row">
+      <!-- .col-md-8 -->
+      <div class="col-md-8">
+        
+        <!-- TABLE: LATEST ORDERS -->
+        <div class="card">
+          <div class="card-header border-transparent">
+            <h3 class="card-title">Latest Orders</h3>
+
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table m-0">
+                <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Item</th>
+                  <th>Status</th>
+                  <th>Popularity</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                  <td>Call of Duty IV</td>
+                  <td><span class="badge badge-success">Shipped</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                  <td>Samsung Smart TV</td>
+                  <td><span class="badge badge-warning">Pending</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                  <td>iPhone 6 Plus</td>
+                  <td><span class="badge badge-danger">Delivered</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                  <td>Samsung Smart TV</td>
+                  <td><span class="badge badge-info">Processing</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR1848</a></td>
+                  <td>Samsung Smart TV</td>
+                  <td><span class="badge badge-warning">Pending</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR7429</a></td>
+                  <td>iPhone 6 Plus</td>
+                  <td><span class="badge badge-danger">Delivered</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td><a href="pages/examples/invoice.html">OR9842</a></td>
+                  <td>Call of Duty IV</td>
+                  <td><span class="badge badge-success">Shipped</span></td>
+                  <td>
+                    <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.table-responsive -->
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer clearfix">
+            <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
+          </div>
+          <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <!-- /.col-md-8 -->
+      <!-- .col-md-4 -->
+      <div class="col-md-4">
+        <!-- PRODUCT LIST -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Recently Added Products</h3>
+
+          </div>
+          <!-- /.card-header -->
+          <div class="card-body p-0">
+            <ul class="products-list product-list-in-card pl-2 pr-2">
+              <li class="item">
+                <div class="product-img">
+                  <!-- image here -->
+                </div>
+                <div class="product-info">
+                  <a href="javascript:void(0)" class="product-title">Ding Dong Dantes Poster
+                    <span class="badge badge-warning float-right">Php 12.69</span></a>
+                  <span class="product-description">
+                    Para sa tito mong DDS.
+                  </span>
+                </div>
+              </li>
+              <!-- /.item -->
+              <li class="item">
+                <div class="product-img">
+                  
+                </div>
+                <div class="product-info">
+                  <a href="javascript:void(0)" class="product-title">Dolomite Beach
+                    <span class="badge badge-info float-right">Php 389,000,000</span></a>
+                  <span class="product-description">
+                    To improve your mental health.
+                  </span>
+                </div>
+              </li>
+              <!-- /.item -->
+              <li class="item">
+                <div class="product-img">
+                  
+                </div>
+                <div class="product-info">
+                  <a href="javascript:void(0)" class="product-title">
+                    PhilHealth Fund <span class="badge badge-danger float-right">
+                    Php 15,000,000,000
+                  </span>
+                  </a>
+                  <span class="product-description">
+                    TANGINA NASAN NA ANG 15 BILYON FUNDS
+                  </span>
+                </div>
+              </li>
+              <!-- /.item -->
+              <li class="item">
+                <div class="product-img">
+                  
+                </div>
+                <div class="product-info">
+                  <a href="javascript:void(0)" class="product-title">Tuta
+                    <span class="badge badge-success float-right">Free</span></a>
+                  <span class="product-description">
+                    Sumusunod naman.
+                  </span>
+                </div>
+              </li>
+              <!-- /.item -->
+            </ul>
+          </div>
+          <!-- /.card-body -->
+          <div class="card-footer text-center">
+            <a href="javascript:void(0)" class="uppercase">View All Products</a>
+          </div>
+          <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
   </div>
   <!-- /.container-fluid -->
 </div>
