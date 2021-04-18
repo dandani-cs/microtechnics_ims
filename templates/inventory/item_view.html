@@ -13,13 +13,7 @@
                     <!-- card-tools -->
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width:150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search...">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </div>
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search..." id="searchInv">
                         </div>
                     </div>
                 </div>
@@ -90,4 +84,16 @@
             <!-- /.card -->
         </div>
     </div>
+    <!-- Search inventory table -->
+    <script>
+        const searchInput = document.getElementById("searchInv");
+        const rows = document.querySelectorAll("tbody tr");
+        console.log(rows);
+        searchInput.addEventListener("keyup", function(event) {
+            const q = event.target.value.toLowerCase();
+            rows.forEach((row) => {
+                row.querySelector("td").textContent.toLowerCase().startsWith(q) ? (row.style.display = "table-row") : (row.style.display = "none");
+            });
+        });
+    </script>
 {% endblock content %}
