@@ -20,9 +20,12 @@ from .views import login, home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include("accounts.urls")),
     path('', login, name="final_login"),
     path('home/', home, name="home"),
     path('accounts/', include("accounts.urls")),
+<<<<<<< HEAD
     
+=======
+    path('inventory/', include("inventory.urls"))
+>>>>>>> main
 ]

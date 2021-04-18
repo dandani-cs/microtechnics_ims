@@ -1,8 +1,13 @@
+<<<<<<< HEAD
 
+=======
+<!-- for active links -->
+{% url 'home' as dash %}
+>>>>>>> main
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Microtechnics System Co. | Admin</title>
+    <title>{% block title %} {% endblock title %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% load static %}
@@ -27,7 +32,7 @@
             <li>
                 <a href="#" class="sideNavText"><img src="{% static 'icons/notification.png' %}" class="sideNavIcon"> &nbsp;Notifications</a>
             </li>
-            <li class="active">
+            <li class="{% if request.path == dash %}active{% endif %}">
               <a href="#homeSubmenu" class="sideNavText">
                 <img src="{% static 'icons/Dashboard.png' %}" class="sideNavIcon">&nbsp; Dashboard
               </a>              
