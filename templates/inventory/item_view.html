@@ -88,7 +88,6 @@
     <script>
         const searchInput = document.getElementById("searchInv");
         const rows = document.querySelectorAll("tbody tr");
-        console.log(rows);
         searchInput.addEventListener("keyup", function(event) {
             const q = event.target.value.toLowerCase();
             rows.forEach((row) => {
