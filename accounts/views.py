@@ -12,10 +12,10 @@ from .models import User
 
 # Create your views here.
 class CreateUserView(View):
-    template_name = "accounts_add.html"
+    template_name = "UserMngmtAdmin.html"
 
     def get(self, request):
-        return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
+        return render(request, "UserMngmtAdmin.html", {'form': CustomUserCreationForm()})
 
     def post(self, request, *args, **kwargs):
         user_form = CustomUserCreationForm(request.POST)
@@ -32,10 +32,14 @@ class CreateUserView(View):
             return HttpResponseRedirect(reverse_lazy("home"))
 
         else:
-            return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
+            print(user_form.errors)
+            return render(request, "UserMngmtAdmin.html", {'form': CustomUserCreationForm()})
 
 def forgotpass(request):
     return render(request, 'forgot_pass.html')
 
 def newpass(request):
     return render(request, 'add_new_pass.html')
+
+def usermanagement(request):
+    return  render(request, 'UserMngmtAdmin.html')
