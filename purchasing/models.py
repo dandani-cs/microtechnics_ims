@@ -12,11 +12,13 @@ class StatusPurchasingOptions():
     STATUS_CANCELLED = 0
     STATUS_FOR_APPROVAL = 1
     STATUS_APPROVED = 2
+    STATUS_RECEIVED = 3
 
     STATUS_CHOICES = (
                       (STATUS_CANCELLED, 'Cancelled'),
                       (STATUS_FOR_APPROVAL, 'For Approval'),
                       (STATUS_APPROVED, 'Approved'),
+                      (STATUS_RECEIVED, 'Received'),
     )
 
 
