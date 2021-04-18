@@ -8444,3 +8444,7 @@ a[data-toggle="collapse"] {
   opacity: 0.7;
   cursor: pointer;
 }
+
+.tableUser td th {
+  font-size: 20%;
+}

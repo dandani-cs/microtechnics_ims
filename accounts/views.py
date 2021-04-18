@@ -35,11 +35,23 @@ class CreateUserView(View):
             print(user_form.errors)
             return render(request, "UserMngmtAdmin.html", {'form': CustomUserCreationForm()})
 
+def usermanagement(request):
+    Users = User.objects.all()
+    return render(request, 'UserMngmtAdmin.html',{'Users':Users})
+
 def forgotpass(request):
     return render(request, 'forgot_pass.html')
 
 def newpass(request):
     return render(request, 'add_new_pass.html')
 
-def usermanagement(request):
-    return  render(request, 'UserMngmtAdmin.html')
+    
+
+def editUser(request):
+     
+    return render(request,'edit_account.html')  
+
+def deleteUser(request):
+    User = User.objects.get(id=id)  
+    User.delete()  
+    return redirect("/UserMngmtAdmin.html")
