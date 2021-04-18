@@ -1,0 +1,62 @@
+{% extends "Adminbase.html" %}
+{% load widget_tweaks %}
+{% block title %}
+	USER MANAGEMENT | Edit Account
+{% endblock title %}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">User Management | Edit </h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">User Management</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <form method="POST" class="post-form" action="/update/{{User.username}}">  
+        {% csrf_token %}  
+    <div class="container">  
+<br>  
+    <div class="form-group row">  
+        <label class="col-sm-1 col-form-label"></label>  
+        <div class="col-sm-4">  
+            <h3>Update Details</h3>  
+        </div>  
+  </div>   
+  <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Employee First Name:</label>  
+        <div class="col-sm-4">  
+            <input type="text" name="ename" id="id_ename" required maxlength="100" value="{{ User.first_name }}" />  
+        </div>  
+    </div> 
+    <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Employee Last Name:</label>  
+        <div class="col-sm-4">  
+            <input type="text" name="econtact" id="id_econtact" required maxlength="15" value="{{ employee.last_name }}" />  
+        </div>  
+    </div>   
+    <div class="form-group row">  
+        <label class="col-sm-2 col-form-label">Employee Email:</label>  
+        <div class="col-sm-4">  
+            <input type="email" name="eemail" id="id_eemail" required maxlength="254" value="{{ User.email }}" />  
+        </div>  
+    </div>  
+    <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <button type="submit" class="btn btn-success">Update</button>  
+    </div>  
+  </div>  
+    </div>  
+</form>  
+</div>
+
+{% endblock content %}
