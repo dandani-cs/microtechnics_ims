@@ -24,5 +24,6 @@ urlpatterns = [
     path('home/', home, name="home"),
     path('export_csv/', export_csv, name="export-csv"),
     path('accounts/', include("accounts.urls")),
-    path('inventory/', include("inventory.urls"))
+    path('inventory/', include("inventory.urls")),
+    path('purchasing/', include("purchasing.urls"))
 ]
