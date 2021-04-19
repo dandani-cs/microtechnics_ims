@@ -9,17 +9,11 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Inventory</h3>
+                    <h3 class="card-title">Inventory Overview</h3>
                     <!-- card-tools -->
                     <div class="card-tools">
                         <div class="input-group input-group-sm" style="width:150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search...">
-
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </div>
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search..." id="searchInv">
                         </div>
                     </div>
                 </div>
@@ -33,6 +27,7 @@
                                 <th>Category</th>
                                 <th>Price</th>
                                 <th>Quantity Status</th>
+                                <th style="width: 40px">Left</th>
                              </tr>
                         </thead>
                         <tbody>
@@ -40,14 +35,42 @@
                         <tr>
                             <td>{{ item.item_code    }}</td>
                             <td>{{ item.category     }}</td>
-                            <td>{{ item.price        }}</td>
+                            <td><span>&#8369;</span>{{ item.price        }}</td>
                             <td>
                                 {% if item.calc_quantity_level == 2 %}
-                                    OK
+                                    <!-- OK -->
+                                    <div class="progress-group">
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-success" style="width: 80%;"></div>
+                                        </div>
+                                    </div>
                                 {% elif item.calc_quantity_level == 1 %}
-                                    Low
+                                    <!-- LOW -->
+                                    <div class="progress-group">
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-warning" style="width: 60%;"></div>
+                                        </div>
+                                    </div>
                                 {% else %}
-                                    Critical
+                                    <!-- CRITICAL -->
+                                    <div class="progress-group">
+                                        <div class="progress progress-sm">
+                                            <div class="progress-bar bg-danger" style="width: 20%"></div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </td>
+                            <!-- Threshold Label -->
+                            <td>
+                                <!-- OK -->
+                                {% if item.calc_quantity_level == 2 %}
+                                    <span class="badge bg-success">{{item.quantity}}</span>
+                                <!-- LOW -->
+                                {% elif item.calc_quantity_level == 1 %}
+                                    <span class="badge bg-warning">{{item.quantity}}</span>
+                                <!-- CRITICAL -->
+                                {% else %}
+                                    <span class="badge bg-danger">{{item.quantity}}</span>
                                 {% endif %}
                             </td>
                          </tr>
@@ -61,4 +84,15 @@
             <!-- /.card -->
         </div>
     </div>
+    <!-- Search inventory table -->
+    <script>
+        const searchInput = document.getElementById("searchInv");
+        const rows = document.querySelectorAll("tbody tr");
+        searchInput.addEventListener("keyup", function(event) {
+            const q = event.target.value.toLowerCase();
+            rows.forEach((row) => {
+                row.querySelector("td").textContent.toLowerCase().startsWith(q) ? (row.style.display = "table-row") : (row.style.display = "none");
+            });
+        });
+    </script>
 {% endblock content %}
