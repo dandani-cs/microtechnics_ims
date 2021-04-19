@@ -6,7 +6,19 @@
 {% block content %}
     <form method="POST">
         {% csrf_token %}
-        {{ form }}
+        {% for form in formset %}
+        <div class="row form-row spacer">
+            <div class="col-4">
+                <div class="input-group">
+                    {{ form.item }}
+                    {{ form.quantity }}
+                    <div class="input-group-append">
+                        <input type="button" value="+" class="btn btn-success add-form-row">
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
 
         <br />
         <button type="submit" /> Add Purchasing </button>
@@ -15,4 +27,9 @@
         <p> {{ form.errors }} </p>
         <p> {{ form.non_field_errors }} </p>
     </form>
+
+
+<script type='text/javascript'>
+
+</script>
 {% endblock content %}
