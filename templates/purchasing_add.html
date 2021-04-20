@@ -1,0 +1,65 @@
+{% extends "Adminbase.html" %}
+
+{% load static %}
+{% block title %}
+    ADD PURCHASING PAGE
+{% endblock title %}
+{% block content %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.management_form }}
+        <div id = "item_input_container">
+            {% for f in form %}
+                <div class="form_input"> {{ f }} </div>
+            {% endfor %}
+        </div>
+
+        <button type="submit" /> Add Purchasing </button>
+        <button type = "button" onclick="create_new_item_input()">Add Item</button>
+        <!-- TODO: errors won't show-->
+    </form>
+
+    <script type="text/javascript">
+        // Each selected option in all of the dropdowns must be unique
+
+        // TODO: If an option is selected in a newer dropdown, the option 
+        // must be made unavailable other dropdowns
+        function update_item_choices() {
+        }
+
+        // If "Add Item" is clicked, currently selected options from older
+        // dropdowns are unavailable from newer dropdowns
+        function update_clone_children(clone, last_selected_index) {
+            // ID format id_form-[index]-[item | quantity]
+            var clone_item = clone.querySelector("select");
+            var clone_qty  = clone.querySelector("input[type = 'number']");
+
+            var increment_index = function(idx) { return parseInt(idx) + 1; };
+
+            clone_item.name = clone_item.name.replace(/(\d+)/, increment_index);
+            clone_qty.name  = clone_qty.name.replace(/(\d+)/,  increment_index);
+
+            clone_item.id   = clone_item.id.replace(/(\d+)/, increment_index);
+            clone_qty.id    = clone_qty.id.replace(/(\d+)/, increment_index); 
+
+            clone_item.remove(last_selected_index);
+            console.log(clone_item);
+            console.log(clone_qty);
+        }
+
+        function create_new_item_input() {
+            var main_container    = document.getElementById("item_input_container");
+            var all_current_items = document.getElementsByClassName("form_input");
+            var last_input        = all_current_items[all_current_items.length - 1];
+            var last_input_clone  = last_input.cloneNode(true)
+
+            update_clone_children(last_input_clone,
+                                  last_input.querySelector("select").selectedIndex);
+
+            var total_forms   = document.querySelector("#id_form-TOTAL_FORMS");
+            total_forms.value = parseInt(total_forms.value) + 1;
+
+            main_container.appendChild(last_input_clone);
+        }
+    </script>
+{% endblock content %}
