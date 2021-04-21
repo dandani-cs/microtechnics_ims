@@ -10,7 +10,7 @@
             <div class="card-header p-2">
                 <ul class="nav nav-pills">
                   <li class="nav-item"><a class="nav-link active" href="#invTable" data-toggle="tab">Inventory</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#details" data-toggle="tab">Details</a></li>
                 </ul>
             </div>
             <!-- /.card-header -->
@@ -25,7 +25,7 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h3 class="card-title">
-                                            Inventory Stats
+                                            Inventory Overview
                                         </h3>
                                     </div>
                                     <div class="card-body">
@@ -72,7 +72,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">Inventory Overview</h3>
+                                        <h3 class="card-title">Inventory Table</h3>
                                         <!-- card-tools -->
                                         <div class="card-tools">
                                             <div class="input-group input-group-sm" style="width: 150px;">
@@ -89,6 +89,7 @@
                                                     <th>Price</th>
                                                     <th>Quantity Status</th>
                                                     <th style="width: 40px">Left</th>
+                                                    <th style="width: 20%"></th>
                                                  </tr>
                                             </thead>
                                             <tbody>
@@ -134,6 +135,19 @@
                                                         <span class="badge bg-danger">{{item.quantity}}</span>
                                                     {% endif %}
                                                 </td>
+                                                <!-- inventory management tools -->
+                                                <td class="project-actions text-right">
+                                                    <a class="btn btn-info btn-sm" href="#">
+                                                        <i class="fa fa-pencil">
+                                                        </i>
+                                                        Edit
+                                                    </a>
+                                                    <a class="btn btn-danger btn-sm" href="#">
+                                                        <i class="fa fa-trash">
+                                                        </i>
+                                                        Delete
+                                                    </a>
+                                                </td>
                                              </tr>
                                             {% endfor %}
                                             </tbody>
@@ -172,33 +186,96 @@
                     <!-- /.card-body -->
                 </div>
                 <!-- .tab-pane -->
-                <!-- .tab-pane #settings -->
-                <div class="tab-pane" id="settings">
+                <!-- .tab-pane #details -->
+                <div class="tab-pane" id="details">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-12">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <h3 class="card-title">What do you want to do?</h3>
+                                <div id="accordion">
+                                    <div class="card">
+                                      <div class="card-header" id="headingOne">
+                                        <h5 class="mb-0">
+                                          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Inventory System Details
+                                          </button>
+                                        </h5>
+                                      </div>
+                                  
+                                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                                        <div class="card-body">
+                                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                        </div>
+                                      </div>
                                     </div>
-                                    <!-- /.card-header -->
-                                    <div class="card-body">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-default">Action</button>
-                                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                                              <span class="sr-only">Toggle Dropdown</span>
-                                              <div class="dropdown-menu" role="menu">
-                                                <a class="dropdown-item" href="#">Add</a>
-                                                <a class="dropdown-item" href="#">Edit</a>
-                                                <a class="dropdown-item" href="#">Delete</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="#">Need help?</a>
+                                    <div class="card">
+                                      <div class="card-header" id="headingTwo">
+                                        <h5 class="mb-0">
+                                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                            Add item
+                                          </button>
+                                        </h5>
+                                      </div>
+                                      <!-- Add Item Form -->
+                                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                                        <div class="card-body">
+                                            <div class="card card-primary">
+                                                <div class="card-header">
+                                                  <h3 class="card-title">Submit item</h3>
+                                                </div>
+                                                <!-- /.card-header -->
+                                                <!-- form start -->
+                                                <form role="form" method="POST">
+                                                  <div class="card-body">
+                                                    <div class="form-group">
+                                                      <label for="exampleInputEmail1">Email address</label>
+                                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="exampleInputPassword1">Password</label>
+                                                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                    </div>
+                                                    <div class="form-group">
+                                                      <label for="exampleInputFile">File input</label>
+                                                      <div class="input-group">
+                                                        <div class="custom-file">
+                                                          <input type="file" class="custom-file-input" id="exampleInputFile">
+                                                          <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                        </div>
+                                                        <div class="input-group-append">
+                                                          <span class="input-group-text" id="">Upload</span>
+                                                        </div>
+                                                      </div>
+                                                    </div>
+                                                    <div class="form-check">
+                                                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                                    </div>
+                                                  </div>
+                                                  <!-- /.card-body -->
+                                  
+                                                  <div class="card-footer">
+                                                    <button type="submit" class="btn btn-primary">Add</button>
+                                                  </div>
+                                                </form>
                                               </div>
-                                            </button>
-                                          </div>
+                                        </div>
+                                      </div>
                                     </div>
-                                </div>
-                                <!-- /.card -->
+                                    <div class="card">
+                                      <div class="card-header" id="headingThree">
+                                        <h5 class="mb-0">
+                                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                            Delete
+                                          </button>
+                                        </h5>
+                                      </div>
+                                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                                        <div class="card-body">
+                                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                             </div>
                         </div>
                         <!-- /.row -->
@@ -209,6 +286,10 @@
             </div>
         </div>
         <!-- /.card -->
+        <!-- Add -->
+        <div class="card" id="addInv">
+
+        </div>
     </div>
     <!-- /.col-md-12 -->
     <script>
