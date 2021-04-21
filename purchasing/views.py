@@ -8,11 +8,10 @@ from inventory.models import Item
 class CreatePurchasingView(View):
     def post(self, request):
         item_formset = ItemFormSet(request.POST)
-        
+
         if item_formset.is_valid():
-            for form in item_formset:
-                data = form.cleaned_data
-                print(data)
+            print([(form.cleaned_data['item'], form.cleaned_data['quantity']) for form in item_formset])
+
         return render(request, "purchasing_add.html", {'form': ItemFormSet()})
 
     def get(self, request):

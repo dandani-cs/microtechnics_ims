@@ -22,9 +22,10 @@
     <script type="text/javascript">
         // Each selected option in all of the dropdowns must be unique
 
-        // TODO: If an option is selected in a newer dropdown, the option 
+        // TODO: If an option is selected in a newer dropdown, the option
         // must be made unavailable other dropdowns
         function update_item_choices() {
+            
         }
 
         // If "Add Item" is clicked, currently selected options from older
@@ -40,7 +41,7 @@
             clone_qty.name  = clone_qty.name.replace(/(\d+)/,  increment_index);
 
             clone_item.id   = clone_item.id.replace(/(\d+)/, increment_index);
-            clone_qty.id    = clone_qty.id.replace(/(\d+)/, increment_index); 
+            clone_qty.id    = clone_qty.id.replace(/(\d+)/, increment_index);
 
             clone_item.remove(last_selected_index);
             console.log(clone_item);
