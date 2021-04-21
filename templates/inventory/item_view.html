@@ -5,87 +5,214 @@
 {% endblock title %}
 {% block content %}
     {% include 'content-header.html' %}
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Inventory Overview</h3>
-                    <!-- card-tools -->
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width:150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search..." id="searchInv">
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-header -->
-                <!-- table of inventory -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Item Code</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Quantity Status</th>
-                                <th style="width: 40px">Left</th>
-                             </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in object_list %}
-                        <tr>
-                            <td>{{ item.item_code    }}</td>
-                            <td>{{ item.category     }}</td>
-                            <td><span>&#8369;</span>{{ item.price        }}</td>
-                            <td>
-                                {% if item.calc_quantity_level == 2 %}
-                                    <!-- OK -->
-                                    <div class="progress-group">
-                                        <div class="progress progress-sm">
-                                            <div class="progress-bar bg-success" style="width: 80%;"></div>
-                                        </div>
-                                    </div>
-                                {% elif item.calc_quantity_level == 1 %}
-                                    <!-- LOW -->
-                                    <div class="progress-group">
-                                        <div class="progress progress-sm">
-                                            <div class="progress-bar bg-warning" style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                {% else %}
-                                    <!-- CRITICAL -->
-                                    <div class="progress-group">
-                                        <div class="progress progress-sm">
-                                            <div class="progress-bar bg-danger" style="width: 20%"></div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </td>
-                            <!-- Threshold Label -->
-                            <td>
-                                <!-- OK -->
-                                {% if item.calc_quantity_level == 2 %}
-                                    <span class="badge bg-success">{{item.quantity}}</span>
-                                <!-- LOW -->
-                                {% elif item.calc_quantity_level == 1 %}
-                                    <span class="badge bg-warning">{{item.quantity}}</span>
-                                <!-- CRITICAL -->
-                                {% else %}
-                                    <span class="badge bg-danger">{{item.quantity}}</span>
-                                {% endif %}
-                            </td>
-                         </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <!-- /.table -->
-                </div>
-                <!-- /.card-body -->
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#invTable" data-toggle="tab">Inventory</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                </ul>
             </div>
-            <!-- /.card -->
+            <!-- /.card-header -->
+            <!-- .tab-content -->
+            <div class="tab-content">
+                <!-- .tab-pane #invTable -->
+                <div class="tab-pane active" id="invTable">
+                    <!-- inventory stats and information -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">
+                                            Inventory Stats
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-12 col-md-12 col-lg-16 order-2 order-md-1">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="info-box bg-light">
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text text-center text-muted">
+                                                                Total Items Stored
+                                                            </span>
+                                                            <span class="info-box-number text-center text-muted mb-0">{{items_count}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="info-box bg-light">
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text text-center text-muted">
+                                                                Title
+                                                            </span>
+                                                            <span class="info-box-number text-center text-muted mb-0">69</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="info-box bg-light">
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text text-center text-muted">
+                                                                Title
+                                                            </span>
+                                                            <span class="info-box-number text-center text-muted mb-0">69</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Inventory Overview</h3>
+                                        <!-- card-tools -->
+                                        <div class="card-tools">
+                                            <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="table_search" id="searchInv" class="form-control float-right" placeholder="Search..."></div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover" id="inventoryTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item Code</th>
+                                                    <th>Category</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity Status</th>
+                                                    <th style="width: 40px">Left</th>
+                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in object_list %}
+                                            <tr>
+                                                <td>{{ item.item_code    }}</td>
+                                                <td>{{ item.category     }}</td>
+                                                <td><span>&#8369;</span>{{ item.price        }}</td>
+                                                <td>
+                                                    {% if item.calc_quantity_level == 2 %}
+                                                        <!-- OK -->
+                                                        <div class="progress-group">
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar bg-success" style="width: 80%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    {% elif item.calc_quantity_level == 1 %}
+                                                        <!-- LOW -->
+                                                        <div class="progress-group">
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar bg-warning" style="width: 40%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    {% else %}
+                                                        <!-- CRITICAL -->
+                                                        <div class="progress-group">
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar bg-danger" style="width: 20%"></div>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </td>
+                                                <!-- Threshold Label -->
+                                                <td>
+                                                    <!-- OK -->
+                                                    {% if item.calc_quantity_level == 2 %}
+                                                        <span class="badge bg-success">{{item.quantity}}</span>
+                                                    <!-- LOW -->
+                                                    {% elif item.calc_quantity_level == 1 %}
+                                                        <span class="badge bg-warning">{{item.quantity}}</span>
+                                                    <!-- CRITICAL -->
+                                                    {% else %}
+                                                        <span class="badge bg-danger">{{item.quantity}}</span>
+                                                    {% endif %}
+                                                </td>
+                                             </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <!-- /.table -->
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <!-- table pagination -->
+                                    <div class="card-footer clearfix">
+                                        <ul class="pagination pagination-sm m-0 float-left">
+                                            <li class="page-item">
+                                                <a href="#" class="page-link">Previous</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="#" class="page-link">1</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="#" class="page-link">2</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="#" class="page-link">3</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a href="#" class="page-link">Next</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- /.card-footer -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col-12 -->
+                        </div>
+                        <!-- /inventoryTable -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- .tab-pane -->
+                <!-- .tab-pane #settings -->
+                <div class="tab-pane" id="settings">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">What do you want to do?</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <div class="card-body">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default">Action</button>
+                                            <button type="button" class="btn btn-default dropdown-toggle dropdown-icon" data-toggle="dropdown">
+                                              <span class="sr-only">Toggle Dropdown</span>
+                                              <div class="dropdown-menu" role="menu">
+                                                <a class="dropdown-item" href="#">Add</a>
+                                                <a class="dropdown-item" href="#">Edit</a>
+                                                <a class="dropdown-item" href="#">Delete</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="#">Need help?</a>
+                                              </div>
+                                            </button>
+                                          </div>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.tab-pane #settings -->
+            </div>
         </div>
+        <!-- /.card -->
     </div>
-    <!-- Search inventory table -->
+    <!-- /.col-md-12 -->
     <script>
+        // Search table
         const searchInput = document.getElementById("searchInv");
         const rows = document.querySelectorAll("tbody tr");
         searchInput.addEventListener("keyup", function(event) {
@@ -94,5 +221,9 @@
                 row.querySelector("td").textContent.toLowerCase().startsWith(q) ? (row.style.display = "table-row") : (row.style.display = "none");
             });
         });
+
+        // Table pagination
+        
+        // Add, edit, delete data
     </script>
 {% endblock content %}
