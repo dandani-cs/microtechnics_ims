@@ -9,7 +9,7 @@ import json
 # Create your views here.
 class CreatePurchasingView(View):
     def post(self, request):
-        items = [i.item_code for i in Item.objects.all()]
+        items = [[i.item_code, i.name] for i in Item.objects.all()]
         item_formset = ItemFormSet(request.POST)
 
         if item_formset.is_valid():
@@ -18,5 +18,6 @@ class CreatePurchasingView(View):
         return render(request, "purchasing_add.html", {'form': ItemFormSet(), 'item_codes': json.dumps(items)})
 
     def get(self, request):
+        items = [[i.item_code, i.name] for i in Item.objects.all()]
         item_formset = ItemFormSet()
-        return render(request, "purchasing_add.html", {'form': item_formset})
+        return render(request, "purchasing_add.html", {'form': item_formset, 'item_codes': json.dumps(items)})
