@@ -26,7 +26,6 @@ class ConfirmPurchasingView(View):
             purchase.total_price = Decimal(final_purchase_info['subtotal'])
 
             if current_user != None and current_user.is_admin:
-                print("User making the purchase is an admin")
                 purchase.status         = StatusPurchasingOptions.STATUS_APPROVED
                 purchase.approved_admin = current_user
 
