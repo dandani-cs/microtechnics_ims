@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'accounts.apps.AccountsConfig',
     'inventory.apps.InventoryConfig',
+    'purchasing.apps.PurchasingConfig',
 ]
 
 MIDDLEWARE = [
