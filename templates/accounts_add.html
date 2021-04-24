@@ -3,16 +3,50 @@
 {% block title %}
     ADD USER PAGE
 {% endblock title %}
+{% load widget_tweaks %}
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form }}
 
-        <br />
-        <button type="submit" /> Add User </button>
-
-        <!-- TODO: errors won't show-->
-        <p> {{ form.errors }} </p>
-        <p> {{ form.non_field_errors }} </p>
-    </form>
+     <div class="" id="createForm">
+                        <h1 style="text-align: center;" > User Creation </h1>
+                       <form method="POST">
+                            {% csrf_token %} 
+                        <div class="row" style="align-content: center;">
+                            <div class="col">
+                                <label class="label">First Name:</label>
+                                {% render_field form.first_name class='form-control' placeholder="Ex. Joshua" %}                                  
+                            </div>
+                            <div class="col">
+                                <label class="label">Last Name:</label>
+                                {% render_field form.last_name class='form-control' placeholder="Ex. Dela Cruz" %}                                 
+                            </div>                              
+                        </div>                               
+                        <div class="form-group">
+                            <label class="label">Email: </label>     
+                            {% render_field form.email class='form-control' placeholder="your@email.com" %}                                                       
+                        </div>
+                        <div class="form-check">                             
+                            {% render_field form.is_admin class='form-check-input' type='checkbox'%}
+                            <label class="label">Admin Privileges</label>                             
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Password: </label>                           
+                               {% render_field form.password1 class='form-control' placeholder="Enter Password" %}                                       
+                        </div>
+                        <div class="form-group">
+                            <label class="label">Confirm Password: </label>                           
+                                {% render_field form.password2 class='form-control' placeholder="Confirm Password" %} 
+                        </div>                          
+                        <div class="row" style="align-items: center;">
+                            <div class="col">
+                                <button  class="btn-default  btn-lg btn-block btn" type="submit"> Add User </button> 
+                            </div>
+                            <div class="col">
+                                <a href="/userManagement/" class=" btn-danger btn-lg btn-block btn" type="button"> Cancel</a>
+                            </div>
+                        </div>            
 {% endblock content %}
+
+
+
+                       
+                                                     
