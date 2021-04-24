@@ -8,11 +8,8 @@ from .models import Purchasing
 class PurchaseConfirmForm(forms.ModelForm):
     class Meta:
         all_users = Item.objects.all()
-        model   = Purchasing
-        fields  = ('purchase_num', 
-                   'requested_user', 
-                   'status',
-                   'total_price' )
+        model     = Purchasing
+        fields    = ( 'requested_user', ) # Not necessarily an employee
 
 class ItemAddForm(forms.Form):
     all_items = Item.objects.order_by('name')
