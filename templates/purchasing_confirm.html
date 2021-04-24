@@ -1,0 +1,50 @@
+{% extends "Adminbase.html" %}
+
+{% block title %}
+    CONFIRM PURCHASING PAGE
+{% endblock title %}
+{% block content %}
+    <h3>Confirm your purchase</h3>
+    <hr/>
+
+    <h5>Purchase Details</h5>
+    <form method = "POST">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>Purchase Number: </td>
+            <td>{{ form.purchase_num.value }}</td>
+        </tr>
+    </table>
+    <br/>
+    <h5>Selected Items</h5>
+    <table cellpadding = "10px">
+        <tr>
+            <th>Item Code  </th>
+            <th>Name       </th>
+            <th>Quantity   </th>
+            <th>Price      </th>
+            <th>Category   </th>
+            <th>Description</th>
+        </tr>
+
+        {% for item in item_set %}
+        <tr>
+            <td>{{ item.item_code   }}</td>
+            <td>{{ item.name        }}</td>
+            <td>{{ item.quantity    }}</td>
+            <td>PHP {{ item.price | floatformat:2 }}</td>
+            <td>{{ item.category    }}</td>
+            <td>{{ item.description }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan=5 align=right><b>Subtotal</b></td>
+            <td>PHP {{ form.total_price.value | floatformat:2 }}</td>
+        </tr>
+
+    </table>
+        <button type = "Button">Cancel</button>
+        <button type = "Submit">Confirm</button>
+    </form>
+{% endblock content %}
