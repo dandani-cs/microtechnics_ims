@@ -1,0 +1,65 @@
+{% extends "Empbase.html" %}
+
+{% block title %}
+  Projects
+{% endblock title %}
+
+
+<head>
+  <title>Projects</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
+<style type="text/css">
+  @import url("StylesProgress.css"); 
+</style>
+	
+</head>
+
+{% block content %}
+{% include 'content-header.html' %}
+
+<section class="projects no-padding-top">
+<div class="container">
+  <!-- Project-->
+  <body>
+	
+    <section class="projects no-padding-top">
+    <div class="container">
+      <!-- Project-->
+      <div class="project">
+        <div class="row bg-white has-shadow">
+          <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+            <div class="project-title d-flex align-items-center">
+              <div class="text">
+                <h3 class="h4">Project Title</h3><small>Project Description</small>
+              </div>
+            </div>
+            <div class="project-date"><span class="hidden-sm-down">Today at 4:24 AM</span></div>
+          </div>
+          <div class="right-col col-lg-6 d-flex align-items-center">
+            <div class="time"><i class="fa fa-clock-o"></i>12:00 PM </div>
+          </div>
+        </div>
+      </div>
+    </div>		
+      
+    <div class="container">
+      <button type="button" class="btn btn-info">Add</button>
+      
+      <button type="button" class="btn btn-info">Delete</button>
+    </div>	
+    
+      
+      
+    </section>
+    
+    </body>
+{% endblock content %}
+
+
+
