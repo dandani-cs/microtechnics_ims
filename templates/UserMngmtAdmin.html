@@ -49,17 +49,23 @@
                             </tr>
                         </thead>
                         <tr>
+                            {% for accounts in object_list %}
                             <td>
-                                Roginald Glenn
+                                {{accounts.first_name}}
                             </td>
                             <td>
-                                Dela Cruz
+                               {{accounts.Last Name}}
                             </td>
                             <td>
-                                rdsomething@email.com
+                                {{accounts.email}}
                             </td>
                             <td>
-                                Employee
+                                {% if accounts.is_admin == 1}
+                                  <p>Admin</p>
+                                {% endblock content%}
+                                {% if accounts.is_admin == 0}
+                                    <p>Employee </p>
+                                {% endblock content%}
                             </td>
                              <td class="align-middle">
                                 <div class="d-grid gap-2 ">
@@ -72,56 +78,6 @@
                                 </div>                                 
                             </td>             
                         </tr>
-                        <tr>
-                            <td>
-                                Joshua 
-                            </td>
-                            <td>
-                                Jacinto
-                            </td>
-                            <td>
-                                JJsomething@email.com
-                            </td>
-                            <td>
-                                Employee
-                            </td>
-                              <td class="align-middle">
-                                <div class="d-grid gap-2 ">
-                                    <a href="#" style="margin-bottom: 10px; height: 50%; width: 100%"  id="editForm" class="p-2 btn  btn-group-sm" ><img src="{% static 'icons/edit.png'%}" class="sideNavIcon"></a>                                    
-                                </div>
-                            </td>  
-                            <td>
-                                <div class="d-grid gap-2">
-                                    <a href="#" data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm"  id="deleteForm" style="margin-bottom: 10px; height: 50%; width: 100%;"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
-                                </div>                                 
-                            </td>           
-                        </tr>
-                        <!-- TODO: try using list view  (still not working)-->   
-                        {% for User in Users %}
-                        <tr>
-                            <td>
-                                {{Users.first_name}}
-                            </td>
-                            <td>
-                                {{Users.last_name}}
-                            </td>
-                            <td>
-                                {{Users.email}}
-                            </td>
-                            <td>
-                                Admin
-                            </td>                            
-                            <td class="align-middle">
-                                <div class="d-grid gap-2 ">
-                                    <a href="#" style="margin-bottom: 10px; height: 50%; width: 100%"  id="editForm" class="p-2 btn  btn-group-sm" >&ensp; <img src="{% static 'icons/edit.png'%}" class="sideNavIcon">&ensp;<i class="fa fa-user-edit"></i></a>                                    
-                                </div>
-                            </td>  
-                            <td>
-                                <div class="d-grid gap-2">
-                                    <a href="#" data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm"  id="deleteForm" style="margin-bottom: 10px; height: 50%; width: 100%;"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
-                                </div>                                 
-                            </td>                                
-                        </tr> 
                         {% endfor %}
                     </table>
                     <div class="d-grid mx-auto float-lg-right" style="margin-bottom: 20px; margin-top: 20px; margin-left: 20px">
