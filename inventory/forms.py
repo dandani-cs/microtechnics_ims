@@ -5,12 +5,4 @@ class InventoryForm(forms.ModelForm):
     class Meta:
         model = Item
 
-        fields = [
-            "item_code",
-            "name",
-            "price",
-            "quantity",
-            "category",
-            "max_quantity",
-            "description",
-        ]
+        fields = '__all__'

@@ -1,0 +1,19 @@
+{% extends "Empbase.html" %}
+    {% block title %} 
+        Add Items
+    {% endblock title %}
+{% block content %}
+{% include 'content-header.html' %}
+    <form method="POST">
+        {% csrf_token %}
+        <table>
+            {% for fields in add_form %}
+                <tr>
+                    <th>{{fields.name}}</th>
+                    <td>{{ fields }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <button type="submit" class="btn btn-default">Add</button>
+    </form>
+{% endblock content %}
