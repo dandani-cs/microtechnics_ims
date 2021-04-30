@@ -22,14 +22,14 @@ class ItemEditListView(LoginRequiredMixin, ListView):
     template_name = "inventory/edit_inv.html"
 
 def addItem(request):
-    template_name = "inventory/add_inv.html"
+    #template_name = "inventory/add_inv.html"
     add = InventoryForm()
     if request.method == 'POST':
-        add = InventoryForm(request.POST, request.FILES)
+        print('Printing POST:', request.POST)
+        add = InventoryForm(request.POST)
         if add.is_valid():
             add.save()
-            return redirect(template_name)
-        else:
-            return HttpResponseRedirect(reverse_lazy("home"))
-    else:
-        return render(request, template_name, {'add_form' : add})
+            return redirect('view_items')
+
+    context = {'add_form': add}
+    return render(request, 'inventory/add_inv.html', context)
