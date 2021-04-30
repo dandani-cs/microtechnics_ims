@@ -9,6 +9,7 @@ verify_ssl = true
 django = "==3.2"
 django-widget-tweaks = "*"
 fontawesome-free = "==5.15.3"
+django-filter = "*"
 
 [requires]
 python_version = "3.7"

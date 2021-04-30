@@ -6,6 +6,7 @@ from django.urls import reverse_lazy
 from inventory.models import Item
 from .forms import InventoryForm
 from django.views import View
+from .filters import ItemFilter
 
 # Create your views here.
 class ItemListView(LoginRequiredMixin, ListView):
