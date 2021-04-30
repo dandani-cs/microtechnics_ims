@@ -33,10 +33,10 @@ class Purchasing(models.Model):
     requested_user = models.ForeignKey(User,
                                        on_delete = models.SET_NULL,
                                        null = True,
-                                       related_name = "requested_by")
+                                       related_name = "purchase_requested_by")
     approved_admin = models.ForeignKey(User,
                                        on_delete = models.SET_NULL,
                                        null = True,
-                                       related_name = "approved_by")
+                                       related_name = "purchase_approved_by")
     status = models.IntegerField(choices = StatusPurchasingOptions.STATUS_CHOICES, default = 1)
     date_created = models.DateTimeField(auto_now_add=True)
