@@ -11,7 +11,6 @@ from django.views import View
 class ItemListView(LoginRequiredMixin, ListView):
     login_url = 'final_login'
     redirect_field_name = 'redirect_to'
-
     model         = Item
     template_name = "inventory/item_view.html"
 
@@ -22,14 +21,17 @@ class ItemEditListView(LoginRequiredMixin, ListView):
     template_name = "inventory/edit_inv.html"
 
 def addItem(request):
-    #template_name = "inventory/add_inv.html"
     add = InventoryForm()
     if request.method == 'POST':
-        print('Printing POST:', request.POST)
         add = InventoryForm(request.POST)
         if add.is_valid():
             add.save()
             return redirect('view_items')
 
     context = {'add_form': add}
+    return render(request, 'inventory/add_inv.html', context)
+
+def editItem(request):
+    update = InventoryForm()
+    context = {'update_form': update}
     return render(request, 'inventory/add_inv.html', context)
