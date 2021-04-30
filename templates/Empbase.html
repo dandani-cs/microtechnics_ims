@@ -32,7 +32,7 @@
                 <a href="#" class="sideNavText"><img src="/static/icons/notification.png" class="sideNavIcon"> &nbsp;Notifications</a>
             </li>
             <li class="{% if request.path == inv %}active{% endif %}">
-              <a href="#" class="sideNavText"><img src="/static/icons/inventory.png" class="sideNavIcon"> &nbsp;Inventory Management</a>              
+              <a href="{% url 'view_items' %}" class="sideNavText"><img src="/static/icons/inventory.png" class="sideNavIcon"> &nbsp;Inventory Management</a>              
             </li>
             <li>
               <a href="#homeSubmenu" class="sideNavText">
