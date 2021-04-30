@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'inventory.apps.InventoryConfig',
     'purchasing.apps.PurchasingConfig',
-    'djang_filters',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
