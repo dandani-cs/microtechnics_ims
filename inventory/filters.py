@@ -1,4 +1,4 @@
-import djang_filters
+import django_filters
 from .models import *
 
 class ItemFilter(django_filters.FilterSet):
