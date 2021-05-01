@@ -32,3 +32,11 @@ class PurchasingListView(LoginRequiredMixin, ListView):
 
     model = Purchasing
     template_name = "purchasing_view.html"
+
+
+class PurchasingDetailView(LoginRequiredMixin, DetailView):
+    login_url = 'final_login'
+    redirect_field_name = 'redirect_to'
+
+    model = Purchasing
+    template_name = "purchasing_view.html"
