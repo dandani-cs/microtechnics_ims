@@ -1,5 +1,5 @@
 import django_filters
-from .models import *
+from .models import Item
 
 class ItemFilter(django_filters.FilterSet):
     class Meta:

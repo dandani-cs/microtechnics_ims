@@ -37,7 +37,7 @@
                                                             <span class="info-box-text text-center text-muted">
                                                                 Total Items Stored
                                                             </span>
-                                                            <span class="info-box-number text-center text-muted mb-0">{{items_count}}</span>
+                                                            <span class="info-box-number text-center text-muted mb-0">{{page_obj.paginator.num_pages}}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -164,26 +164,23 @@
                                     <div class="card-footer clearfix">
                                         <!-- table pagination -->
                                         <ul class="pagination pagination-sm m-0 float-left">
+                                            {% if page_obj.has_previous %}
+                                                <li class="page-item">
+                                                    <a href="?page=1" class="page-link">&laquo; First</a>
+                                                    <a href="?={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+                                                </li>
+                                            {% endif %}
+                                            {% if page_obj.has_next %}
                                             <li class="page-item">
-                                                <a href="#" class="page-link">Previous</a>
+                                                <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a>
                                             </li>
                                             <li class="page-item">
-                                                <a href="#" class="page-link">1</a>
+                                                <a href="?={{ page_obj.paginator.num_pages }}" class="page-link">Last</a>
                                             </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">2</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">3</a>
-                                            </li>
-                                            <li class="page-item">
-                                                <a href="#" class="page-link">Next</a>
-                                            </li>
+                                            {% endif %}
                                         </ul>
                                         <!-- add data -->
-                                        <div class="m-0 float-right">
-                                            <button type="submit" class="btn btn-default">Add Item</button>
-                                        </div>
+                                        <a href="{% url 'add_items' %}" class="btn btn-info float-right"><i class="fa fa-plus"></i> Add Item </a>
                                     </div>
                                     <!-- /.card-footer -->
                                 </div>
