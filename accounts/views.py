@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.list import ListView
 # for redirect
@@ -50,11 +50,11 @@ def editUser(request):
      
     return render(request,'edit_account.html')  
 
-def deleteUser(request):
-    User = User.objects.get(id=id)  
-    User.delete()  
+def deleteUser(request, employee_id):
+    User = User.objects.get(username= employee_id)  
+    User.is_active == 0 
     return redirect("/UserMngmtAdmin.html")
-    
+
 class usermanagement(ListView):
     model = User
     template_name = "UserMngmtAdmin.html"

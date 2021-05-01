@@ -8448,3 +8448,7 @@ a[data-toggle="collapse"] {
 .tableUser td th {
   font-size: 20%;
 }
+
+.page_container {
+  width: 100%;
+}
