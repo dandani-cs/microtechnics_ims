@@ -51,9 +51,10 @@ def editUser(request):
     return render(request,'edit_account.html')  
 
 def deleteUser(request, employee_id):
-    User = User.objects.get(username= employee_id)  
-    User.is_active == 0 
-    return redirect("/UserMngmtAdmin.html")
+    emp = User.objects.get(username= employee_id)  
+    emp.is_active = False
+    emp.save()
+    return redirect("show_list")
 
 class usermanagement(ListView):
     model = User
