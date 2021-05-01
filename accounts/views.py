@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import View
-
+from django.views.generic.list import ListView
 # for redirect
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -12,10 +12,10 @@ from .models import User
 
 # Create your views here.
 class CreateUserView(View):
-    template_name = "UserMngmtAdmin.html"
+    template_name = "accounts_add.html"
 
     def get(self, request):
-        return render(request, "UserMngmtAdmin.html", {'form': CustomUserCreationForm()})
+        return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
 
     def post(self, request, *args, **kwargs):
         user_form = CustomUserCreationForm(request.POST)
@@ -33,11 +33,10 @@ class CreateUserView(View):
 
         else:
             print(user_form.errors)
-            return render(request, "UserMngmtAdmin.html", {'form': CustomUserCreationForm()})
+            return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
 
-def usermanagement(request):
-    Users = User.objects.all()
-    return render(request, 'UserMngmtAdmin.html',{'Users':Users})
+
+  
 
 def forgotpass(request):
     return render(request, 'forgot_pass.html')
@@ -55,3 +54,7 @@ def deleteUser(request):
     User = User.objects.get(id=id)  
     User.delete()  
     return redirect("/UserMngmtAdmin.html")
+    
+class usermanagement(ListView):
+    model = User
+    template_name = "UserMngmtAdmin.html"

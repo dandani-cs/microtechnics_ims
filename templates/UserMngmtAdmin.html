@@ -54,18 +54,18 @@
                                 {{accounts.first_name}}
                             </td>
                             <td>
-                               {{accounts.Last Name}}
+                               {{accounts.last_name}}
                             </td>
                             <td>
                                 {{accounts.email}}
                             </td>
                             <td>
-                                {% if accounts.is_admin == 1}
+                                {% if accounts.is_admin == 1 %}
                                   <p>Admin</p>
-                                {% endblock content%}
-                                {% if accounts.is_admin == 0}
+                                {% endif %}
+                                {% if accounts.is_admin == 0 %}
                                     <p>Employee </p>
-                                {% endblock content%}
+                                {% endif %}
                             </td>
                              <td class="align-middle">
                                 <div class="d-grid gap-2 ">
