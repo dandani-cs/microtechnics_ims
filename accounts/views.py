@@ -56,6 +56,10 @@ def deleteUser(request, employee_id):
     emp.save()
     return redirect("show_list")
 
+def userProfile(request, employee_id):
+    emp = User.objects.get(username = employee_id)
+    return render(request, "user_profile.html", {'emp': emp})
+
 class usermanagement(ListView):
     model = User
     template_name = "UserMngmtAdmin.html"

@@ -49,8 +49,10 @@
                              <tr>
                             {% for user in object_list %}
                                 {% if user.is_active == 1 %}
-                            <td>
-                                {{user.first_name}}
+                            <td> 
+                                <a href="{% url 'user_profile' user.username %}">
+                                    {{user.first_name}}
+                                </a>                                
                             </td>
                             <td>
                                {{user.last_name}}
