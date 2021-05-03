@@ -19,35 +19,55 @@
                         <li class="breadcrumb-item active">Purchase Details</li>
                     </ol>
                 </div><!-- /.col -->
-                <hr />
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
 
         <div class="container-fluid card">
             <div class="row mt-2">
                 <div class="col-sm-12">
-                    <h3> Purchasing details </h3>
+                    <p class="subtitle no-margin"> Items </p>
                 </div>
             </div>
-            <hr>
+            <hr class="no-margin"/>
 
-            <h2>Items</h2>
-            {% for item_num, quantity in object.items.items %}
-                <p><em>{{ item_num }}:</em> {{ quantity }}</p>
-            {% endfor %}
+            {{ object.items }}
 
-            <h2>Details</h2>
-            <p><em>Date requested: </em> {{ object.date_created }}</p>
+            <div class="row mt-4">
+                <div class="col-sm-6">
+                    <p class="subtitle no-margin">Details</p>
+                </div>
 
-            <p><em>Total Price:</em> {{ object.total_price }}</p>
+            </div>
+            <hr class="no-margin" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="subtitle no-margin"> {{ object.status }} </p>
+                    <p class="grayed"> Status </p>
 
-            <p><em>Requested user:</em> {{ object.requested_user.last_name }}, {{ object.requested_user.first_name }}</p>
+                    {% if object.status == 1 and request.user.is_superuser %}
+                        <button class="btn btn-default" type="button" name="button">Approve</button>
+                    {% elif object.status == 3 and request.user.is_superuser %}
+                        <button class="btn btn-default" type="button" name="button">Received</button>
+                    {% else %}
+                        <button class="btn btn-danger full-width" type="button" name="button">Cancel</button>
+                    {% endif %}
+                </div>
+                <div class="col-sm-6">
+                    <p class="subtitle no-margin"> {{ object.date_created }}</p>
+                    <p class="grayed">Date created</p>
 
-            <p><em>Approved by:</em> {{ object.approved_admin.last_name}}, {{ object.approved_admin.first_name }}</p>
+                    <p class="subtitle no-margin">{{ object.total_price }}</p>
+                    <p class="grayed">Total Price </p>
 
-            <p><em>Status:</em> {{ object.status }}</p>
-        </div>
-    </div>
+                    <p class="subtitle no-margin">{{ object.requested_user.last_name }}, {{ object.requested_user.first_name }}</p>
+                    <p class="grayed">Requested User</p>
+
+                    <p class="subtitle no-margin">{{ object.approved_admin.last_name}}, {{ object.approved_admin.first_name }}</p>
+                    <p class="grayed">Approved Admin</p>
+                </div>
+            </div>
+        </div> <!-- container fluid card -->
+    </div> <!-- content header-->
 </div>
 
 {% endblock content %}
