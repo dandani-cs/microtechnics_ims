@@ -3,6 +3,8 @@
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+
+ main color: #00334e
  */
 :root {
   --blue: #007bff;
@@ -8303,7 +8305,7 @@ a[data-toggle="collapse"] {
   min-height: 100vh;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
-  transition: all 0.3s; 
+  transition: all 0.3s;
   background: #e8e8e8; }
 
 .btn.btn-primary {
@@ -8343,7 +8345,7 @@ a[data-toggle="collapse"] {
   .sideNavIcon {
   width: 20px;
   height: 20px;
-  
+
   }
   .sideIconFill{
     fill: #FFF;
@@ -8351,7 +8353,7 @@ a[data-toggle="collapse"] {
   }
 
   .mainLogo {
-    
+
     width: 100%;
     height: 50%;
     padding-bottom: 70px;
@@ -8362,7 +8364,7 @@ a[data-toggle="collapse"] {
   }
 
   /* pop up form */
- 
+
 .open-button {
   background-color: #555;
   color: white;
@@ -8384,7 +8386,7 @@ a[data-toggle="collapse"] {
   left: 50%;
   transform: translate(-50%, -50%);
   border: 3px solid #f1f1f1;
-  z-index: 9;  
+  z-index: 9;
 }
 
 /* Add styles to the form container */
@@ -8447,4 +8449,13 @@ a[data-toggle="collapse"] {
 
 .tableUser td th {
   font-size: 20%;
+}
+
+.page_container {
+  width: 100%;
+}
+
+.subtitle {
+    color: #00334e;
+    font-weight: bold; 
 }

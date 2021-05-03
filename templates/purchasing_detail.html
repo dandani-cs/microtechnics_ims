@@ -5,12 +5,12 @@
 {% endblock title %}
 
 {% block content %}
-<div class="content-wrapper">
+<div class="page-container">
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Purchasing  #{{ object.purchase_num}}</h1>
+                    <h1 class="m-0">Purchase  #{{ object.purchase_num }}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -19,33 +19,35 @@
                         <li class="breadcrumb-item active">Purchase Details</li>
                     </ol>
                 </div><!-- /.col -->
+                <hr />
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
+
+        <div class="container-fluid card">
+            <div class="row mt-2">
+                <div class="col-sm-12">
+                    <h3> Purchasing details </h3>
+                </div>
+            </div>
+            <hr>
+
+            <h2>Items</h2>
+            {% for item_num, quantity in object.items.items %}
+                <p><em>{{ item_num }}:</em> {{ quantity }}</p>
+            {% endfor %}
+
+            <h2>Details</h2>
+            <p><em>Date requested: </em> {{ object.date_created }}</p>
+
+            <p><em>Total Price:</em> {{ object.total_price }}</p>
+
+            <p><em>Requested user:</em> {{ object.requested_user.last_name }}, {{ object.requested_user.first_name }}</p>
+
+            <p><em>Approved by:</em> {{ object.approved_admin.last_name}}, {{ object.approved_admin.first_name }}</p>
+
+            <p><em>Status:</em> {{ object.status }}</p>
+        </div>
     </div>
-    <h1> </h1>
-    <hr>
-    <h3> Purchasing details </h3>
-
-    <h2>Items</h2>
-    <hr>
-
-    {% for item_num, quantity in object.items.items %}
-        <p><em>{{ item_num }}:</em> {{ quantity }}</p>
-    {% endfor %}
-
-    <h2>Details</h2>
-    <p><em>Date requested: </em> {{ object.date_created }}</p>
-
-    <p><em>Total Price:</em> {{ object.total_price }}</p>
-
-    <p><em>Requested user:</em> {{ object.requested_user.last_name }}, {{ object.requested_user.first_name }}</p>
-
-    <p><em>Approved by:</em> {{ object.approved_admin.last_name}}, {{ object.approved_admin.first_name }}</p>
-
-    <p><em>Status:</em> {{ object.status }}</p>
-
-
-    <p>
 </div>
 
 {% endblock content %}
