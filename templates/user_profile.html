@@ -1,0 +1,59 @@
+{% extends "Adminbase.html" %}
+{% load widget_tweaks %}
+{% block title %}
+    USER PROFILE
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<div class="page-content pt-10 mt-10" id="page-content" style="width: 100%;">
+    <div class="page-content mt-10">
+        <div class="row d-flex justify-content-center page-content mt-10">
+            <div class="col-xl-6 col-md-12 page-content">
+                <div class="card user-card-full page-content">
+                    <div class="row m-l-0 m-r-0 page-content">
+                        <div class="col-sm-4 user-profile" style="background-color: #00334e">
+                            <div class="card-block text-center text-white">
+                                <div class="m-b-25"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
+                                <h6 class="f-w-600">{{emp.first_name}}&nbsp;{{emp.last_name}}</h6>
+                                {% if emp.is_admin == 1 %}
+                                  <p>Admin</p>
+                                {% endif %}
+                                {% if emp.is_admin == 0 %}
+                                    <p>Employee </p>
+                                {% endif %}
+                                <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="card-block">
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">Email</p>
+                                        <h6 class="text-muted f-w-400">{{emp.email}}</h6>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p class="m-b-10 f-w-600">Employee ID</p>
+                                        <h6 class="text-muted f-w-400">{{emp.username}}</h6>
+                                    </div>
+                                </div>
+                                <h6 class="m-b-20 m-t-
+                                40 p-b-5 b-b-default f-w-600">Actions</h6>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <a href="{% url 'update_user' emp.username %}" style="margin-bottom: 10px; height: 100%; width: 100%; background-color: #00334e;"  id="editForm" class="p-2 btn  btn-group-sm" ><img src="{% static 'icons/edit.png'%}" class="sideNavIcon"></a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="{% url 'delete_user' emp.username %}" data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm"  id="deleteForm" style="margin-bottom: 10px; height: 100%; width: 100%;"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
