@@ -8472,3 +8472,7 @@ a[data-toggle="collapse"] {
 .full-width {
     width: 100%;
 }
+
+.indented {
+    margin-left: 15px;
+}

@@ -43,7 +43,13 @@ class PurchasingDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['items'] = context['object'].items
 
-        context['items'] = json.loads['items']
+        context['item_details'] = dict()
+
+        keys = list(context['object'].items.keys())
+
+        for item_key in keys:
+            context['item_details'][item_key] =  Item.objects.get(item_code=item_key)
 
         return context
