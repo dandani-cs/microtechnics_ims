@@ -42,8 +42,12 @@ def editItem(request):
 def deleteItem(request, pk):
     item = Item.objects.get(pk=pk)
 
-    if request.method == 'POST':
-        item.delete()
+    try:
+        if request.method == 'POST':
+            item.delete()
+            return redirect('view_items')
+    except item.DoesNotExist:
+        print("Item does not exist")
         return redirect('view_items')
 
     context = {'item': item}
