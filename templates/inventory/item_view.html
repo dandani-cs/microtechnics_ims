@@ -84,7 +84,7 @@
                                         <table class="table table-hover" id="inventoryTable">
                                             <thead>
                                                 <tr>
-                                                    <th>Item Code</th>
+                                                    <th>Item</th>
                                                     <th>Category</th>
                                                     <th>Price</th>
                                                     <th>Quantity Status</th>
@@ -96,7 +96,7 @@
                                             <tbody>
                                                 {% for item in object_list %}
                                             <tr>
-                                                <td>{{ item.item_code    }}</td>
+                                                <td>{{ item.name    }}</td>
                                                 <td>{{ item.category.name     }}</td>
                                                 <td><span>&#8369;</span>{{ item.price        }}</td>
                                                 <td>
@@ -147,7 +147,7 @@
                                                         </i>
                                                         Edit
                                                     </a>
-                                                    <a class="btn btn-danger btn-sm" href="#">
+                                                    <a class="btn btn-danger btn-sm" href="{% url 'delete_items' pk=item.pk %}">
                                                         <i class="fa fa-trash">
                                                         </i>
                                                         Delete
@@ -167,7 +167,7 @@
                                             {% if page_obj.has_previous %}
                                                 <li class="page-item">
                                                     <a href="?page=1" class="page-link">&laquo; First</a>
-                                                    <a href="?={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+                                                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
                                                 </li>
                                             {% endif %}
                                             {% if page_obj.has_next %}
@@ -175,7 +175,7 @@
                                                 <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a>
                                             </li>
                                             <li class="page-item">
-                                                <a href="?={{ page_obj.paginator.num_pages }}" class="page-link">Last</a>
+                                                <a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Last</a>
                                             </li>
                                             {% endif %}
                                         </ul>
@@ -254,9 +254,5 @@
                 row.querySelector("td").textContent.toLowerCase().startsWith(q) ? (row.style.display = "table-row") : (row.style.display = "none");
             });
         });
-
-        // Table pagination
-        
-        // Add, edit, delete data
     </script>
 {% endblock content %}

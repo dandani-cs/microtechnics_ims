@@ -1,0 +1,13 @@
+{% extends 'Empbase.html' %}
+{% block title %}
+    Delete Item
+{% endblock title %}
+{% block content %}
+    {% include 'content-header.html' %}
+    <p>Are you sure you want to delete {{item}}?</p>
+    <form action="{% url 'delete_items' pk=item.pk %}" method="POST">
+        {% csrf_token %}
+        <a href="{% url 'view_items' %}">Cancel</a>
+        <input type="submit" value="Confirm Action">
+    </form>
+{% endblock content %}

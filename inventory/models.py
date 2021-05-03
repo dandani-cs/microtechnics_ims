@@ -29,6 +29,9 @@ class Item(models.Model):
     category     = models.ForeignKey(Category, on_delete = models.SET_NULL, null = True)
     max_quantity = models.IntegerField(default = 0)
     description  = models.CharField(max_length = 50)
+
+    def __str__(self):
+        return self.name
     
     def calc_quantity_level(item):
         thresholds = [ 0.1, 0.25, 1.0 ]

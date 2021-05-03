@@ -38,3 +38,13 @@ def editItem(request):
     update = InventoryForm()
     context = {'update_form': update}
     return render(request, 'inventory/add_inv.html', context)
+
+def deleteItem(request, pk):
+    item = Item.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        item.delete()
+        return redirect('view_items')
+
+    context = {'item': item}
+    return render(request, 'inventory/delete_item.html', context)
