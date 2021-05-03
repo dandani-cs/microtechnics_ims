@@ -39,4 +39,4 @@ class PurchasingDetailView(LoginRequiredMixin, DetailView):
     redirect_field_name = 'redirect_to'
 
     model = Purchasing
-    template_name = "purchasing_view.html"
+    template_name = "purchasing_detail.html"
