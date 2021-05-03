@@ -47,8 +47,12 @@ def newpass(request):
     
 
 def editUser(request):
-     
-    return render(request,'edit_account.html')  
+    emp = User.objects.get(username = employee_id)  
+    form = CustomUserChangeForm(request.POST, instance = emp)  
+    if form.is_valid():  
+        form.save()  
+        return redirect("show_list")    
+    return render(request, "edit_account.html", {'emp': emp})
 
 def deleteUser(request, employee_id):
     emp = User.objects.get(username= employee_id)  
