@@ -40,3 +40,10 @@ class PurchasingDetailView(LoginRequiredMixin, DetailView):
 
     model = Purchasing
     template_name = "purchasing_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['items'] = json_response['items']
+
+        return context
