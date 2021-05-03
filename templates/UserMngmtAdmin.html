@@ -6,7 +6,7 @@
 
 {% block content %}
 {% load static %}
-<div class="page_container">    
+    <div class="page_container">    
         <div class="page_container">
             <div class="row mb-2">
                 <div class="col-sm-6">
@@ -18,85 +18,66 @@
                         <li class="breadcrumb-item active">User Management</li>
                     </ol>
                 </div>
-
                 <section class="page_container">
-        <div class="page_container">
-            <div class="card">
-                <div class="card-body table-responsive-lg ">
-                    <h4 class="align-items-center"><b>List Of Users</b></h4>
-                    <input class="float-sm-right  btn form-control-plaintext" type="text" id="searchTable" onkeyup="searchTable()" placeholder="Search for names.." title="Type in a name" style="width: 25%; color: #000; background-color: #e6e6e6; border-width: 0.5px; margin-bottom: 10px;">
-                    <table id="table_list" class="table table-hover  tableUser" style="overflow-x: auto; width:100%; height:100%; border:2px groove;">
-                        <thead class="thead-dark">
-                            <tr>
-                                
-                                <th>
-                                    <label>First Name</label>
-                                </th>
-                                <th>
-                                    <label>Last Name</label>
-                                </th>
-                                <th >
-                                    <label>Email</label>
-                                </th>
-                                <th>
-                                    <label>Role</label>
-                                </th> 
-                                <th></th>  
-                                <th></th>                                           
-                            </tr>
-                        </thead>
-                        <tbody id="userTable">
-                             <tr>
-                            {% for user in object_list %}
-                                {% if user.is_active == 1 %}
-                            <td> 
-                                <a href="{% url 'user_profile' user.username %}">
-                                    {{user.first_name}}
-                                </a>                                
-                            </td>
-                            <td>
-                               {{user.last_name}}
-                            </td>
-                            <td>
-                                {{user.email}}
-                            </td>
-                            <td>
-                                {% if user.is_admin == 1 %}
-                                  <p>Admin</p>
-                                {% endif %}
-                                {% if user.is_admin == 0 %}
-                                    <p>Employee </p>
-                                {% endif %}
-                            </td>
-                             <td class="align-middle">
-                                <div class="d-grid gap-2 ">
-                                    <a href="{% url 'edit_user' user.username %}" style="margin-bottom: 10px; height: 50%; width: 100%"  id="editForm" class="p-2 btn  btn-group-sm" ><img src="{% static 'icons/edit.png'%}" class="sideNavIcon"></a>                                    
+                    <div class="page_container">
+                        <div class="card">
+                            <div class="card-body table-responsive-lg ">
+                                <h4 class="align-items-center"><b>List Of Users</b></h4>
+                                <input class="float-sm-right  btn form-control-plaintext" type="text" id="searchTable" onkeyup="searchTable()" placeholder="Search for names.." title="Type in a name" style="width: 25%; color: #000; background-color: #e6e6e6; border-width: 0.5px; margin-bottom: 10px;">
+                                <table id="table_list" class="table table-hover  tableUser" style="overflow-x: auto; width:100%; height:100%; border:2px groove;">
+                                    <thead class="thead-dark">
+                                        <tr>                                
+                                            <th>
+                                                 <label>Email</label>
+                                            </th>
+                                            <th>
+                                                <label>Last Name</label>
+                                            </th>
+                                            <th>
+                                                <label>First Name</label>
+                                            </th>
+                                            <th>
+                                                <label>Role</label>
+                                            </th>                                          
+                                        </tr>
+                                    </thead>
+                                    <tbody id="userTable">
+                                        {% for user in object_list %}
+                                        <tr class="clickable-row" data-href="{% url 'user_profile' user.username %}">
+                                        
+                                            {% if user.is_active == 1 %}
+                                            <td>
+                                                {{user.email}}                          
+                                            </td>
+                                            <td>
+                                                {{user.last_name}}
+                                            </td>
+                                            <td>
+                                                 {{user.first_name}} 
+                                            </td>
+                                            <td>
+                                                {% if user.is_admin == 1 %}
+                                                    <p>Admin</p>
+                                                {% endif %}
+                                                {% if user.is_admin == 0 %}
+                                                    <p>Employee </p>
+                                                {% endif %}
+                                            </td>                                   
+                                        </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tbody>                                   
+                                </table>
+                                <div class="d-grid mx-auto float-lg-right" style="margin-bottom: 20px; margin-top: 20px; margin-left: 20px">
+                                    <a href="{% url 'add_user' %}"class="p-2 btn btn-default">Create New User&ensp;<i class="fa fa-user"></i></a>                   
                                 </div>
-                            </td>  
-                            <td>
-                                <div class="d-grid gap-2">
-                                    <a href="{% url 'delete_user' user.username %}" data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm"  id="deleteForm" style="margin-bottom: 10px; height: 50%; width: 100%;"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
-                                </div>                                 
-                            </td>             
-                        </tr>
-                        {% endif %}
-                        {% endfor %}
-                        </tbody>
-                       
-                    </table>
-                    <div class="d-grid mx-auto float-lg-right" style="margin-bottom: 20px; margin-top: 20px; margin-left: 20px">
-                        <a href="{% url 'add_user' %}"class="p-2 btn btn-default">Create New User&ensp;<i class="fa fa-user"></i></a>                        
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                </section>
+            </div>      
         </div>
-    </section>
-            </div>
-       
-    </div>
-
-
-                        
+    </div>          
 
 
 
@@ -104,22 +85,27 @@
                    
                      
                         <!-- TODO: errors won't show (still not working)-->                    
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>                    
-<script>
-$(document).ready(function(){
-  $("#searchTable").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#userTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-$(document).ready(function () {
-$('#table_list').DataTable();
-$('.dataTables_length').addClass('bs-select');
-});
-</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>                    
+    <script>
+        $(document).ready(function(){
+          $("#searchTable").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#userTable tr").filter(function() {
+              $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+          });
+        });
 
-                        
+        $(document).ready(function () {
+        $('#table_list').DataTable();
+        $('.dataTables_length').addClass('bs-select');
+        });
+
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
+    </script>                       
 
 {% endblock content %}

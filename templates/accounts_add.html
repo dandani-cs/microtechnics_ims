@@ -3,16 +3,93 @@
 {% block title %}
     ADD USER PAGE
 {% endblock title %}
+{% load widget_tweaks %}
 {% block content %}
-    <form method="POST">
-        {% csrf_token %}
-        {{ form }}
-
-        <br />
-        <button type="submit" /> Add User </button>
-
-        <!-- TODO: errors won't show-->
-        <p> {{ form.errors }} </p>
-        <p> {{ form.non_field_errors }} </p>
+   <form method="post">
+    {% csrf_token %} 
+  <h2>Create New User</h2>
+    <div class="form-group" style="width: 100%;">
+        <div class="row">
+            <div class="col">
+                <label class="floatLabel">First Name</label>
+                {% render_field form.first_name class="form-control lg" %}
+            </div>
+            <div class="col">
+                 <label class="floatLabel">Last Name</label>
+                 {% render_field form.last_name class="form-control lg" %}
+            </div>
+        </div>
+        <div>
+             <label  class="floatLabel">Email</label>
+              {% render_field form.email class="form-control lg" %}
+            </div>
+        </div>
+        <div>
+            <label for="password" class="floatLabel">Password</label>
+            {% render_field form.password1 class="form-control lg" %}
+        </div>
+        <div>
+            <label for="confirm_password" class="floatLabel">Password</label>
+            {% render_field form.password2 class="form-control lg" %}
+        </div>
+        <div>
+            <input style="width: 100%; margin-top: 20px;" type="submit" value="Submit" id="submit">
+        </div>
+            
+        </form>
     </form>
+
+    <script>
+    var $password = $("#password");
+    var $confirmPassword = $("#confirm_password");
+
+//Hide hints
+$("form span").hide();
+
+function isPasswordValid() {
+  return $password.val().length > 8;
+}
+
+function arePasswordsMatching() {
+  return $password.val() === $confirmPassword.val();
+}
+
+function canSubmit() {
+  return isPasswordValid() && arePasswordsMatching();
+}
+
+function passwordEvent(){
+    //Find out if password is valid  
+    if(isPasswordValid()) {
+      //Hide hint if valid
+      $password.next().hide();
+    } else {
+      //else show hint
+      $password.next().show();
+    }
+}
+
+function confirmPasswordEvent() {
+  //Find out if password and confirmation match
+  if(arePasswordsMatching()) {
+    //Hide hint if match
+    $confirmPassword.next().hide();
+  } else {
+    //else show hint 
+    $confirmPassword.next().show();
+  }
+}
+
+function enableSubmitEvent() {
+  $("#submit").prop("disabled", !canSubmit());
+}
+
+//When event happens on password input
+$password.focus(passwordEvent).keyup(passwordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
+
+//When event happens on confirmation input
+$confirmPassword.focus(confirmPasswordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
+
+enableSubmitEvent();
+    </script>
 {% endblock content %}

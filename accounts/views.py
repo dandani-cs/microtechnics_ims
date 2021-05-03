@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 
 # system info
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import User
 
 # Create your views here.
@@ -46,7 +46,7 @@ def newpass(request):
 
     
 
-def editUser(request):
+def editUser(request, employee_id):
     emp = User.objects.get(username = employee_id)  
     form = CustomUserChangeForm(request.POST, instance = emp)  
     if form.is_valid():  
