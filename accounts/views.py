@@ -44,18 +44,24 @@ def forgotpass(request):
 def newpass(request):
     return render(request, 'add_new_pass.html')
 
-def editUser(request, employee_id):
-    emp = User.objects.get(username = employee_id)   
-    return render(request, "edit_account.html", {'emp': emp})
+
+  
 
 def updateUser(request, employee_id):
-    emp = User.objects.get(username = employee_id)  
-    form = CustomUserCreationForm(request.POST, instance = emp)  
-    if form.is_valid():  
-        emp = form.save(commit = False)
+    if request.method  == "GET":
+        emp = User.objects.get(username = employee_id)   
+        return render(request, "edit_account.html", {'emp': emp})
+    else:
+        emp = User.objects.get(username = employee_id)  
+        form = CustomUserChangeForm(request.POST, instance = emp)  
+        if form.is_valid():  
+            print("valid")
+            emp = form.save(commit = False)
 
-        emp.save()  
-    return redirect("show_list")    
+            emp.save() 
+        print(form.errors) 
+        return redirect("show_list")    
+
    
 
 def deleteUser(request, employee_id):

@@ -42,7 +42,7 @@
                                 40 p-b-5 b-b-default f-w-600">Actions</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a href="{% url 'edit_user' emp.username %}" style="margin-bottom: 10px; height: 100%; width: 100%; background-color: #00334e;"  id="editForm" class="p-2 btn  btn-group-sm" ><img src="{% static 'icons/edit.png'%}" class="sideNavIcon"></a>
+                                        <a href="{% url 'update_user' emp.username %}" style="margin-bottom: 10px; height: 100%; width: 100%; background-color: #00334e;"  id="editForm" class="p-2 btn  btn-group-sm" ><img src="{% static 'icons/edit.png'%}" class="sideNavIcon"></a>
                                     </div>
                                     <div class="col-sm-6">
                                         <a href="{% url 'delete_user' emp.username %}" data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm"  id="deleteForm" style="margin-bottom: 10px; height: 100%; width: 100%;"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
