@@ -8451,6 +8451,7 @@ a[data-toggle="collapse"] {
 
 .page_container {
   width: 100%;
+  vertical-align: middle;
 }
 
 body {
@@ -8465,12 +8466,14 @@ body {
     overflow: hidden
 }
 
-.card {
+.card_profile {
     border-radius: 5px;
     -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
     border: none;
-    margin-bottom: 30px
+    margin-bottom: 2px
+    height: 50%;
+    vertical-align: middle;
 }
 
 .m-r-0 {
@@ -8481,7 +8484,7 @@ body {
     margin-left: 0px
 }
 
-.user-card-full .user-profile {
+.user-card_profile-full .user-profile {
     border-radius: 5px 0 0 5px
 }
 

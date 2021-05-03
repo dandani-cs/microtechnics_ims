@@ -29,7 +29,7 @@ class CreateUserView(View):
 
             user.save()
 
-            return HttpResponseRedirect(reverse_lazy("home"))
+            return HttpResponseRedirect(reverse_lazy("show_list"))
 
         else:
             print(user_form.errors)
@@ -44,15 +44,19 @@ def forgotpass(request):
 def newpass(request):
     return render(request, 'add_new_pass.html')
 
-    
-
 def editUser(request, employee_id):
-    emp = User.objects.get(username = employee_id)  
-    form = CustomUserChangeForm(request.POST, instance = emp)  
-    if form.is_valid():  
-        form.save()  
-        return redirect("show_list")    
+    emp = User.objects.get(username = employee_id)   
     return render(request, "edit_account.html", {'emp': emp})
+
+def updateUser(request, employee_id):
+    emp = User.objects.get(username = employee_id)  
+    form = CustomUserCreationForm(request.POST, instance = emp)  
+    if form.is_valid():  
+        emp = form.save(commit = False)
+
+        emp.save()  
+    return redirect("show_list")    
+   
 
 def deleteUser(request, employee_id):
     emp = User.objects.get(username= employee_id)  

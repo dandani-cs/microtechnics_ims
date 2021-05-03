@@ -33,7 +33,10 @@
             {% render_field form.password2 class="form-control lg" %}
         </div>
         <div>
-            <input style="width: 100%; margin-top: 20px;" type="submit" value="Submit" id="submit">
+            <input style="width: 100%; margin-top: 20px; background-color:#00334e; color:#FFF" class="btn" type="submit" value="Submit" id="submit">
+        </div>
+        <div>
+            <a href="{% url 'show_list' %}" class="btn btn-danger" style="width: 100%; margin-top: 20px; color:#FFF" >Cancel </a>
         </div>
             
         </form>
