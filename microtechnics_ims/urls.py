@@ -20,7 +20,7 @@ from .views import login, home, export_csv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', login, name="final_login"),
+    path('', views.UserLoginView.as_view(), name="final_login"),
     path('home/', home, name="home"),
     path('export_csv/', export_csv, name="export-csv"),
     path('accounts/', include("accounts.urls")),
