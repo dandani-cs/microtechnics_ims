@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from django.views import View
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-
+from django.contrib.auth import authenticate, login
 # import csv
 import csv
 
@@ -27,6 +27,12 @@ class UserLoginView(View):
 
     def get(self, request):
         return render(request, 'login/login.html', {'error':False})
+
+def get_user(email):
+    try: 
+        return User.objects.get(email=email.lower())
+    except User.DoesNotExist:
+        return None
 
 def home(request):
     users = User.objects.all()

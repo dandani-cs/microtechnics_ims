@@ -1,6 +1,5 @@
 {% extends 'baseform.html' %}
     {% block title %} Login {% endblock title %}
-    {% load widget_tweaks %}
 {% block content %}
 <div class="card">
     <div class="card-body login-card-body">
@@ -8,8 +7,7 @@
         <form action="#" method="post">
             {% csrf_token %}
             <div class="input-group mb-3">
-                <label  class="floatLabel">Email</label>
-                {% render_field form.username  class="form-control" placeholder="Email" required autofocus%}
+                <input name="email" type="email" class="form-control" placeholder="Email" required autofocus>
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <i class="bi bi-envelope-fill"></i>
@@ -17,8 +15,7 @@
                 </div>
             </div>
             <div class="input-group mb-3">
-                <label  class="floatLabel">password</label>
-                {% render_field form.password1  class="form-control" placeholder="Password" required autofocus%}
+                <input name="password" type="password" class="form-control" placeholder="Password" required/>
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <i class="bi bi-lock-fill"></i>
