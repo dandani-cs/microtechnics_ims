@@ -2,10 +2,11 @@
 {% url 'view_items' as inv %}
 {% url 'add_items' as add %}
 {% url 'delete_items' as del %}
+{% url 'edit_items' as edit %}
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Microtechnics System Co. | Employee</title>
+    <title>{% block title %}{% endblock title %}</title>
     {% load static %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">

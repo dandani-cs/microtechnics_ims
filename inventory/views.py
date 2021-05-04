@@ -34,10 +34,32 @@ def addItem(request):
     context = {'add_form': add}
     return render(request, 'inventory/add_inv.html', context)
 
-def editItem(request):
-    update = InventoryForm()
-    context = {'update_form': update}
-    return render(request, 'inventory/add_inv.html', context)
+def editItem(request, pk):
+    #update = InventoryForm()
+    #context = {'update_form': update}
+    template_name = 'inventory/edit_inv.html'
+    #item_edit = Item.objects.get(pk=pk)
+    #update = InventoryForm()
+    
+    #if request.method == 'POST':
+    #    update = InventoryForm(request.POST)
+    #    if update.is_valid():
+    #        update.save()
+    #        return redirect('view_items')
+
+    #context = {'edit_form': update}
+    pk = str(pk)
+
+    try:
+        select_item = Item.objects.get(item_code = pk)
+    except item.DoesNotExist:
+        return redirect('view_items')
+    update_form = InventoryForm(request.POST or None, instance = select_item)
+    if update_form.is_valid():
+        update_form.save()
+        print("sucessfully updated")
+        return redirect('view_items')
+    return render(request, template_name, {'update_form': update_form})
 
 def deleteItem(request, pk):
     item = Item.objects.get(pk=pk)

@@ -5,5 +5,16 @@
 {% block content %}
     {% include 'content-header.html' %}
 
-    <h1>EDIT SOMETHING</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {% for field in update_form %}
+            <tr>
+                <th>{{ field.label }}</th>
+                <td> {{ field }} </td>
+            </tr>
+        {% endfor %}
+        </table>
+        <button type="submit">Update</button>
+    </form>
 {% endblock content %}
