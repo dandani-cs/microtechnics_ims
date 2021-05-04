@@ -1,0 +1,61 @@
+{% extends "Adminbase.html" %}
+
+{% block title %}
+    Confirm Your Order
+{% endblock title %}
+{% block content %}
+    <h3>Confirm Your Order</h3>
+    <hr/>
+
+    <h5>Purchase Details</h5>
+    <form method = "POST">
+    {% csrf_token %}
+    <table cellpadding = "10px">
+        <tr>
+            <td>Requested User: </td>
+            <td>{{ order_form.requested_user }}</td>
+        </tr>
+        <tr>
+            <td>Approved Admin: </td>
+            {% if current_user != None and current_user.is_admin %}
+            <td>{{ current_user.username }}</td>
+            {% endif %}
+            <td><i>(Pending for approval)</i></td>
+        </tr>
+    </table>
+    <br/>
+    <h5>Selected Items</h5>
+    <div class="row">
+        <div class="col md-auto">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <th>Item Code  </th>
+            <th>Name       </th>
+            <th>Category   </th>
+            <th>Description</th>
+            <th>Quantity   </th>
+            <th>Price      </th>
+        </thead>
+
+        {% for item in item_set %}
+        <tr>
+            <td>{{ item.item_code   }}</td>
+            <td>{{ item.name        }}</td>
+            <td>{{ item.category    }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.quantity    }}</td>
+            <td>PHP {{ item.price | floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan=5 align=right><b>Subtotal</b></td>
+            <td>PHP {{ subtotal | floatformat:2 }}</td>
+        </tr>
+
+    </table>
+        </div>
+    </div>
+        <button type="Button" class="btn btn-danger">Cancel</button>
+        <button type="Submit" class="btn btn-success">Confirm</button>
+    </form>
+{% endblock content %}
