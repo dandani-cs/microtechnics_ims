@@ -147,9 +147,7 @@
                                                         </i>
                                                         Edit
                                                     </a>
-                                                    <a class="btn btn-danger btn-sm" href="{% url 'delete_items' pk=item.pk %}">
-                                                        <i class="fa fa-trash">
-                                                        </i>
+                                                    <a href="{% url 'delete_items' pk=item.pk %}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
                                                         Delete
                                                     </a>
                                                 </td>
@@ -273,5 +271,14 @@
                 row.querySelector("td").textContent.toLowerCase().startsWith(q) ? (row.style.display = "table-row") : (row.style.display = "none");
             });
         });
+
+        //Delete Item
+        function openForm() {
+            document.getElementById('deleteForm').style.display = "block";
+        }
+
+        function closeDeleteForm() {
+            document.getElementById('deleteForm').style.display = "none";
+        }
     </script>
 {% endblock content %}
