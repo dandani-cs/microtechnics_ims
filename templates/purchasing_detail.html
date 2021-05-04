@@ -30,8 +30,8 @@
             </div>
             <hr class="no-margin"/>
 
-            <div class="row">
-                {% for item_code, details in item_details.items %}
+            {% for item_code, details in item_details.items %}
+                <div class="row">
                     <div class="col-sm-4">
                         <p class="subtitle no-margin"> {{ details.name }}</p>
                         <p class="grayed indented"> {{ item_code }} </p>
@@ -42,8 +42,8 @@
                     <div class="col-sm-4">
                         <p class="subtitle"> 51.25</p>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
 
             <div class="row mt-4">
                 <div class="col-sm-6">
