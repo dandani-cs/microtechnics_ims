@@ -31,7 +31,7 @@ def addItem(request):
             add.save()
             return redirect('view_items')
 
-    context = {'add_form': add}
+    context = {'form': add}
     return render(request, 'inventory/add_inv.html', context)
 
 def editItem(request, pk):
@@ -59,7 +59,7 @@ def editItem(request, pk):
         update_form.save()
         print("sucessfully updated")
         return redirect('view_items')
-    return render(request, template_name, {'update_form': update_form})
+    return render(request, template_name, {'form': update_form})
 
 def deleteItem(request, pk):
     item = Item.objects.get(pk=pk)
