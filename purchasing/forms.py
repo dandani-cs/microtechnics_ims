@@ -16,6 +16,8 @@ class ItemAddForm(forms.Form):
 
     item     = forms.ChoiceField(choices=[(i.item_code, i.name) for i in all_items])
     quantity = forms.IntegerField()
-    item.widget.attrs.update({'onchange': 'update_item_choices()'})
+    quantity.widget.attrs.update({ 'class': 'item-qty form-control'})
+    item.widget.attrs.update({ 'class'   : 'form-control form-select',
+                               'onchange': 'update_item_choices()'})
 
 ItemFormSet = formset_factory(ItemAddForm, extra = 1)
