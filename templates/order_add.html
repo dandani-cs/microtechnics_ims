@@ -1,0 +1,78 @@
+{% extends "Adminbase.html" %}
+{% load static %}
+{% block title %}
+    ADD ORDER PAGE
+{% endblock title %}
+{% block content %}
+    <h2>Select Order Items</h2>
+    <p class="lead"> Use the dropdowns below to select the desired items to order and enter the desired quantity </p>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.management_form }}
+
+        <div class="row">
+            <div class="col md-auto">
+                <table id="item_input_container" class="table">
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Desired Quantity</th>
+                    </tr>
+                        {% for f in form %}
+                        <tr class="form_input">
+                            <td>{{ f.item }}</td>
+                            <td>{{ f.quantity }}</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-danger" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <!-- maybe add plus button here -->
+                            </td>
+                        </tr>
+                        {% endfor %}
+                </table>
+            </div>
+            <div class="col col-sm-0 col-md-2"></div>
+        </div>
+        <div class="row justify-content-md-right">
+            <div class="float-right"> 
+                <button type="button" class="btn" onclick="create_new_item_input()">Add Item</button>
+                <button type="submit" class="btn btn-success"/> Add Order</button>
+            <div>
+        </div>
+
+    </form>
+
+    <script src="{% static 'js/item_selection.js' %}"></script>
+
+    <script type="text/javascript">
+        function update_max_quantity_fields(options_arr) {
+            var all_quantity_fields = document.querySelectorAll("#item_input_container input[type='number']");
+            var all_item_dropdowns  = document.querySelectorAll("#item_input_container select");
+
+            var item_set = {};
+
+            for(i = 0; i < options_arr.length; i++)
+                item_set[options_arr[i][0]] = options_arr[i][2];
+
+            for(i = 0; i < all_quantity_fields.length; i++) {
+                var adjacent_select = all_item_dropdowns[i];
+                var quantity_field  = all_quantity_fields[i]; 
+                var item_code       = adjacent_select.options[adjacent_select.selectedIndex].value;
+
+                quantity_field.max = item_set[item_code];
+                quantity_field.placeholder = item_set[item_code];
+            }
+
+        }
+
+        update_max_quantity_fields({{ item_codes | safe}});
+
+        function update_item_choices() {
+            var item_codes = {{ item_codes|safe }};
+            update_max_quantity_fields(item_codes);
+            update_item_dropdowns(item_codes);
+        }
+    </script>
+
+{% endblock content %}
