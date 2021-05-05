@@ -142,12 +142,16 @@
                                                 </td>
                                                 <!-- inventory management tools -->
                                                 <td class="project-actions text-right">
+                                                    <!-- edit item -->
                                                     <a class="btn btn-info btn-sm" href="{% url 'edit_items' pk=item.pk %}">
                                                         <i class="fa fa-pencil">
                                                         </i>
                                                     </a>
-                                                    <a href="{% url 'delete_items' pk=item.pk %}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                                    <button class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i></button>
+                                                    <!-- delete item [redirect to webpage] -->
+                                                    <a href="{% url 'delete_items' pk=item.pk %}" class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                    <!-- delete item [modal] -->
                                                     <a href="javascript:void(0)" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-url="{% url 'delete_items' pk=item.pk %}" data-tooltip><i class="fa fa-trash"></i></a>
                                                 </td>
                                              </tr>
