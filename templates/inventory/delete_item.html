@@ -4,7 +4,7 @@
 {% endblock title %}
 {% block content %}
     {% include 'content-header.html' %}
-    <p>Are you sure you want to delete {{item}}?</p>
+    <p>Are you sure you want to delete {{item.name}}?</p>
     <form action="{% url 'delete_items' pk=item.pk %}" method="POST">
         {% csrf_token %}
         <a href="{% url 'view_items' %}">Cancel</a>
