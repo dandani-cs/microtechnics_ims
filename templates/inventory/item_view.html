@@ -145,11 +145,10 @@
                                                     <a class="btn btn-info btn-sm" href="{% url 'edit_items' pk=item.pk %}">
                                                         <i class="fa fa-pencil">
                                                         </i>
-                                                        Edit
                                                     </a>
-                                                    <a href="{% url 'delete_items' pk=item.pk %}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>
-                                                        Delete
-                                                    </a>
+                                                    <a href="{% url 'delete_items' pk=item.pk %}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                    <button class="btn btn-danger btn-sm" ><i class="fa fa-trash"></i></button>
+                                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-url="{% url 'delete_items' pk=item.pk %}" data-tooltip><i class="fa fa-trash"></i></a>
                                                 </td>
                                              </tr>
                                             {% endfor %}
@@ -255,9 +254,29 @@
             </div>
         </div>
         <!-- /.card -->
-        <!-- Add -->
-        <div class="card" id="addInv">
-
+        <!-- modal -->
+        <div class="modal fade" id="deleteModal" role="dialog" style="padding: 17px;">
+            <div class="modal-dialog">
+                <!-- modal-content -->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirm Action</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete {{ item.name }}? </p>
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Cancel
+                        </button>
+                        <input type="submit" value="Confirm Deletion" class="btn btn-danger">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /.col-md-12 -->
