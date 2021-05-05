@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'inventory.apps.InventoryConfig',
     'purchasing.apps.PurchasingConfig',
     'django_filters',
+    'bootstrap_modal_forms',
 ]
 
 MIDDLEWARE = [
