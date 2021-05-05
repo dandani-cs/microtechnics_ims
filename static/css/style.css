@@ -8611,8 +8611,7 @@ body {
 form {
   background: #fff;
   padding: 4em 4em 2em;
-  max-width: 400px;
-  margin: 50px auto 0;
+  max-width: 100%;
   box-shadow: 0 0 1em #222;
   border-radius: 2px;
   h2 {
