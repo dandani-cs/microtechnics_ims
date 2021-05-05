@@ -8453,6 +8453,13 @@ a[data-toggle="collapse"] {
   width: 100%;
   vertical-align: middle;
 }
+#profile {
+  width: 80%;
+  height: 50%;
+  margin-top: 200px;
+  max-width: 700px;
+  vertical-align: middle; 
+}
 
 body {
     background-color: #f9f9fa
@@ -8498,7 +8505,8 @@ body {
 }
 
 .card-block {
-    padding: 1.25rem
+    padding: 1.25rem;
+    height: 30%;
 }
 
 .m-b-25 {
