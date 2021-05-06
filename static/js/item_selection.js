@@ -2,8 +2,6 @@ function update_item_dropdowns(options_arr) {
     var selected_items = []
     var selected_values = []
 
-    alert("wtf");
-
     var all_current_items = document.getElementsByClassName("form_input");
 
     for (i = 0; i < all_current_items.length; i++) {
@@ -20,7 +18,6 @@ function update_item_dropdowns(options_arr) {
             options_arr.splice(i, 1);
         }
     }
-
 
     for (i = 0; i < all_current_items.length; i++) {
         var new_option = document.createElement("option")
@@ -60,6 +57,11 @@ function create_new_item_input() {
 
     update_clone_children(last_input_clone,
         last_input.querySelector("select").selectedIndex);
+
+    var add_item_btn  = last_input.querySelector("#add-item");
+    all_current_items[all_current_items.length - 1].appendChild(add_item_btn);
+    add_item_btn.remove();
+
 
     var total_forms   = document.querySelector("#id_form-TOTAL_FORMS");
     total_forms.value = parseInt(total_forms.value) + 1;
