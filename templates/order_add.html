@@ -4,44 +4,44 @@
     ADD ORDER PAGE
 {% endblock title %}
 {% block content %}
-    <h2>Select Order Items</h2>
-    <p class="lead"> Use the dropdowns below to select the desired items to order and enter the desired quantity </p>
+    <div class="m-auto w-75 align-items-center">
+    <h2>Select Items to Order</h2>
+    <p class="lead"> Use the form below to select the desired items to order and enter the desired quantity </p>
 
-    <form method="POST">
+    <form>
         {% csrf_token %}
         {{ form.management_form }}
 
+        <div class="justify-content-center">
+            <table id="item_input_container" class="table">
+                <tr class="row unset-css">
+                    <th class="col-6">Item Name</th>
+                    <th class="col-4">Desired Quantity</th>
+                </tr>
+                {% for f in form %}
+                <tr class="row form_input">
+                    <td class="col-6">{{ f.item }}</td>
+                    <td class="col-4">{{ f.quantity }}</td>
+                    <td class="col-2 item-btn-group">
+                        <button type="button" class="del-item btn btn-outline-danger" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <button id="add-item" type="button" class="btn btn-outline-success" onclick="create_new_item_input()">+</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
         <div class="row">
-            <div class="col md-auto">
-                <table id="item_input_container" class="table">
-                    <tr>
-                        <th>Item Name</th>
-                        <th>Desired Quantity</th>
-                    </tr>
-                        {% for f in form %}
-                        <tr class="form_input">
-                            <td>{{ f.item }}</td>
-                            <td>{{ f.quantity }}</td>
-                            <td>
-                                <button type="button" class="btn btn-outline-danger" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <!-- maybe add plus button here -->
-                            </td>
-                        </tr>
-                        {% endfor %}
-                </table>
+            <div class="col-6">
+            <button type="button" class="btn btn-block btn-secondary"/>Reset</button>
             </div>
-            <div class="col col-sm-0 col-md-2"></div>
+            <div class="col-6">
+            <button type="submit" class="btn btn-block btn-success"/>Proceed</button>
+            </div>
         </div>
-        <div class="row justify-content-md-right">
-            <div class="float-right"> 
-                <button type="button" class="btn" onclick="create_new_item_input()">Add Item</button>
-                <button type="submit" class="btn btn-success"/> Add Order</button>
-            <div>
-        </div>
-
     </form>
+    </div>
 
     <script src="{% static 'js/item_selection.js' %}"></script>
 
@@ -66,12 +66,49 @@
 
         }
 
+        function delete_item_input(index) {
+            var all_current_items = document.querySelectorAll(".form_input");
+            var formset_counter   = document.querySelector("#id_form-TOTAL_FORMS");
+
+            if(parseInt(formset_counter.value) > 1) {
+                console.log("Removing input index", index);
+                var last_input   = all_current_items[all_current_items.length - 1];
+                var add_item_btn = document.querySelector("#add-item");
+
+                // Index might be the last input the form, so moving the 
+                // add item to the last row causes it to be duplicated and deleted anyway
+                var last_input_offset = index < all_current_items.length - 1 ? 1 : 2;
+
+                all_current_items[all_current_items.length - last_input_offset]
+                    .querySelector(".item-btn-group")
+                    .appendChild(add_item_btn);
+
+                all_current_items[index].remove();
+
+                formset_counter.value = parseInt(formset_counter.value) - 1;
+                update_row_deletion();
+            }
+        }
+
+        function update_row_deletion() {
+            var main_container    = document.getElementById("item_input_container");
+            var all_current_items = document.getElementsByClassName("form_input");
+
+            for(i = 0; i < all_current_items.length; i++) {
+                (function(i) {
+                    var delete_button = all_current_items[i].querySelector(".del-item");
+                    delete_button.onclick = function() { delete_item_input(i); }
+                })(i);
+            }
+        }
+
         update_max_quantity_fields({{ item_codes | safe}});
 
         function update_item_choices() {
             var item_codes = {{ item_codes|safe }};
             update_max_quantity_fields(item_codes);
             update_item_dropdowns(item_codes);
+            update_row_deletion();
         }
     </script>
 
