@@ -64,6 +64,7 @@ class ConfirmPurchasingView(View):
                                         'current_user'  : current_user
                                     })
 
+
 class CreatePurchasingView(View):
     def post(self, request):
         items = [[i.item_code, i.name] for i in Item.objects.all()]
@@ -80,12 +81,12 @@ class CreatePurchasingView(View):
         return render(request, "purchasing_add.html", {'form': item_formset, 'item_codes': json.dumps(items)})
 
 
-
 def get_user(user):
     try:
         return User.objects.get(username = user)
     except User.DoesNotExist:
         return None
+
 
 class PurchasingListView(LoginRequiredMixin, ListView):
     login_url = 'final_login'
