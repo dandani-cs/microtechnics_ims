@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 
 # system info
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import User
 
 # Create your views here.
@@ -29,11 +29,15 @@ class CreateUserView(View):
 
             user.save()
 
-            return HttpResponseRedirect(reverse_lazy("home"))
+            return HttpResponseRedirect(reverse_lazy("show_list"))
 
         else:
             print(user_form.errors)
             return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
+
+
+
+  
 
 
 def forgotpass(request):
@@ -42,19 +46,38 @@ def forgotpass(request):
 def newpass(request):
     return render(request, 'add_new_pass.html')
 
+
 def userProfile(request, employee_id):
     user = User.objects.get(username = employee_id)    
     return render(request, "user_profile.html", {'user': user})
 
-def editUser(request, employee_id):
-    user = User.objects.get(username = employee_id) 
-    return render(request,'edit_account.html', {'user': user})  
+def updateUser(request, employee_id):
+    if request.method  == "GET":
+        emp = User.objects.get(username = employee_id)   
+        return render(request, "edit_account.html", {'emp': emp})
+    else:
+        emp = User.objects.get(username = employee_id)  
+        form = CustomUserChangeForm(request.POST, instance = emp)  
+        if form.is_valid():  
+            print("valid")
+            emp = form.save(commit = False)
+
+            emp.save() 
+        print(form.errors) 
+        return redirect("show_list")    
+
+   
 
 def deleteUser(request, employee_id):
-    emp = User.objects.get(username = employee_id)  
-    emp.is_active == 0
-    return redirect("userManagement/")
+    emp = User.objects.get(username= employee_id)  
+    emp.is_active = False
+    emp.save()
+    return redirect("show_list")
+
+def userProfile(request, employee_id):
+    emp = User.objects.get(username = employee_id)
+    return render(request, "user_profile.html", {'emp': emp})
 
 class usermanagement(ListView):
-    model         = User
+    model = User
     template_name = "UserMngmtAdmin.html"

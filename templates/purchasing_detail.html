@@ -1,0 +1,86 @@
+{% extends "Adminbase.html" %}
+{% load widget_tweaks %}
+{% block title %}
+	USER MANAGEMENT | Edit Account
+{% endblock title %}
+
+{% block content %}
+<div class="page-container">
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Purchase  #{{ object.purchase_num }}</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Purchasing</a></li>
+                        <li class="breadcrumb-item active">Purchase Details</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+
+        <div class="container-fluid card">
+            <div class="row mt-2">
+                <div class="col-sm-12">
+                    <p class="subtitle no-margin"> Items </p>
+                </div>
+            </div>
+            <hr class="no-margin"/>
+
+            {% for item_code, details in item_details.items %}
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="subtitle no-margin"> {{ details.name }}</p>
+                        <p class="grayed indented"> {{ item_code }} </p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class=""> {{ details.price }} @ x5 </p>
+                    </div>
+                    <div class="col-sm-4">
+                        <p class="subtitle"> 51.25</p>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="row mt-4">
+                <div class="col-sm-6">
+                    <p class="subtitle no-margin">Details</p>
+                </div>
+
+            </div>
+            <hr class="no-margin" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <p class="subtitle no-margin"> {{ object.status }} </p>
+                    <p class="grayed"> Status </p>
+
+                    {% if object.status == 1 and request.user.is_superuser %}
+                        <button class="btn btn-default" type="button" name="button">Approve</button>
+                    {% elif object.status == 3 and request.user.is_superuser %}
+                        <button class="btn btn-default" type="button" name="button">Received</button>
+                    {% else %}
+                        <button class="btn btn-danger full-width" type="button" name="button">Cancel</button>
+                    {% endif %}
+                </div>
+                <div class="col-sm-6">
+                    <p class="subtitle no-margin"> {{ object.date_created }}</p>
+                    <p class="grayed">Date created</p>
+
+                    <p class="subtitle no-margin">{{ object.total_price }}</p>
+                    <p class="grayed">Total Price </p>
+
+                    <p class="subtitle no-margin">{{ object.requested_user.last_name }}, {{ object.requested_user.first_name }}</p>
+                    <p class="grayed">Requested User</p>
+
+                    <p class="subtitle no-margin">{{ object.approved_admin.last_name}}, {{ object.approved_admin.first_name }}</p>
+                    <p class="grayed">Approved Admin</p>
+                </div>
+            </div>
+        </div> <!-- container fluid card -->
+    </div> <!-- content header-->
+</div>
+
+{% endblock content %}

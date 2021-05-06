@@ -3,6 +3,8 @@
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+
+ main color: #00334e
  */
 :root {
   --blue: #007bff;
@@ -8303,7 +8305,7 @@ a[data-toggle="collapse"] {
   min-height: 100vh;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
-  transition: all 0.3s; 
+  transition: all 0.3s;
   background: #e8e8e8; }
 
 .btn.btn-primary {
@@ -8343,7 +8345,7 @@ a[data-toggle="collapse"] {
   .sideNavIcon {
   width: 20px;
   height: 20px;
-  
+
   }
   .sideIconFill{
     fill: #FFF;
@@ -8351,7 +8353,7 @@ a[data-toggle="collapse"] {
   }
 
   .mainLogo {
-    
+
     width: 100%;
     height: 50%;
     padding-bottom: 70px;
@@ -8362,7 +8364,7 @@ a[data-toggle="collapse"] {
   }
 
   /* pop up form */
- 
+
 .open-button {
   background-color: #555;
   color: white;
@@ -8384,7 +8386,7 @@ a[data-toggle="collapse"] {
   left: 50%;
   transform: translate(-50%, -50%);
   border: 3px solid #f1f1f1;
-  z-index: 9;  
+  z-index: 9;
 }
 
 /* Add styles to the form container */
@@ -8433,13 +8435,14 @@ a[data-toggle="collapse"] {
 }
 
 .btn-default {
-  background-color: #00334e;
+  background-color: #00334e !important;
+  color: #FFFFFF !important;
   width: 100%;
   border-color: #00334e;
 }
 
 .btn-default : hover {
-  background-color: #00111a;
+  background-color: #00334e;
   border-color: #00334e;
   opacity: 0.7;
   cursor: pointer;
@@ -8447,4 +8450,318 @@ a[data-toggle="collapse"] {
 
 .tableUser td th {
   font-size: 20%;
+}
+
+.page_container {
+  width: 100%;
+  vertical-align: middle;
+}
+#profile {
+  width: 80%;
+  height: 50%;
+  margin-top: 200px;
+  max-width: 700px;
+  vertical-align: middle;
+}
+
+body {
+    background-color: #f9f9fa
+}
+
+.padding {
+    padding: 3rem !important
+}
+
+.user-card-full {
+    overflow: hidden
+}
+
+.card_profile {
+    border-radius: 5px;
+    -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+    border: none;
+    margin-bottom: 2px
+    height: 50%;
+    vertical-align: middle;
+}
+
+.m-r-0 {
+    margin-right: 0px
+}
+
+.m-l-0 {
+    margin-left: 0px
+}
+
+.user-card_profile-full .user-profile {
+    border-radius: 5px 0 0 5px
+}
+
+.bg-c-lite-green {
+    background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
+    background: linear-gradient(to right, #ee5a6f, #f29263)
+}
+
+.user-profile {
+    padding: 20px 0
+}
+
+.card-block {
+    padding: 1.25rem;
+    height: 30%;
+}
+
+.m-b-25 {
+    margin-bottom: 25px
+}
+
+.img-radius {
+    border-radius: 5px
+}
+
+h6 {
+    font-size: 14px
+}
+
+.card .card-block p {
+    line-height: 25px
+}
+
+@media only screen and (min-width: 1400px) {
+    p {
+        font-size: 14px
+    }
+}
+
+.card-block {
+    padding: 1.25rem
+}
+
+.b-b-default {
+    border-bottom: 1px solid #e0e0e0
+}
+
+.m-b-20 {
+    margin-bottom: 20px
+}
+
+.p-b-5 {
+    padding-bottom: 5px !important
+}
+
+.card .card-block p {
+    line-height: 25px
+}
+
+.m-b-10 {
+    margin-bottom: 10px
+}
+
+.text-muted {
+    color: #919aa3 !important
+}
+
+.b-b-default {
+    border-bottom: 1px solid #e0e0e0
+}
+
+.f-w-600 {
+    font-weight: 600
+}
+
+.m-b-20 {
+    margin-bottom: 20px
+}
+
+.m-t-40 {
+    margin-top: 20px
+}
+
+.p-b-5 {
+    padding-bottom: 5px !important
+}
+
+.m-b-10 {
+    margin-bottom: 10px
+}
+
+.m-t-40 {
+    margin-top: 20px
+}
+
+.user-card-full .social-link li {
+    display: inline-block
+}
+
+.user-card-full .social-link li a {
+    font-size: 20px;
+    margin: 0 10px 0 0;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out
+}
+
+tr:hover {
+   background: red;
+}
+td a {
+   display: block;
+   border: 1px solid black;
+   padding: 16px;
+}
+
+@import "compass/css3";
+
+$button: rgba(148,186,101,0.7);
+
+body {
+  background: #384047;
+  font-family: sans-serif;
+  font-size: 10px
+}
+form {
+  background: #fff;
+  padding: 4em 4em 2em;
+  max-width: 100%;
+  box-shadow: 0 0 1em #222;
+  border-radius: 2px;
+  h2 {
+    margin:0 0 50px 0;
+    padding:10px;
+    text-align:center;
+    font-size:30px;
+    color:darken(#e5e5e5, 50%);
+    border-bottom:solid 1px #e5e5e5;
+  }
+  p {
+    margin: 0 0 3em 0;
+    position: relative;
+  }
+  input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    outline: none;
+    margin:0;
+  }
+  input[type="text"],
+  input[type="password"] {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    font-size: 1.6em;
+    padding: .8em .5em;
+    border-radius: 2px;
+  }
+  input[type="text"]:focus,
+  input[type="password"]:focus {
+    background: #fff
+  }
+  span {
+    display:block;
+    background: #F9A5A5;
+    padding: 2px 5px;
+    color: #666;
+  }
+  input[type="submit"] {
+    background: $button;
+    box-shadow: 0 3px 0 0 darken($button, 10%);
+    border-radius: 2px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: block;
+    font-size: 2em;
+    line-height: 1.6em;
+    margin: 2em 0 0;
+    outline: none;
+    padding: .8em 0;
+    text-shadow: 0 1px #68B25B;
+  }
+  input[type="submit"]:hover {
+    background: rgba(148,175,101,1);
+    text-shadow:0 1px 3px darken($button, 30%);
+  }
+  input[type="submit"]:hover {
+
+  }
+  label{
+    position: absolute;
+    left: 8px;
+    top: 12px;
+    color: #999;
+    font-size: 16px;
+    display: inline-block;
+    padding: 4px 10px;
+    font-weight: 400;
+    background-color: rgba(255,255,255,0);
+    @include transition(color .3s, top .3s, background-color .8s);
+    &.floatLabel{
+      top: -11px;
+      background-color: rgba(255,255,255,0.8);
+      font-size: 14px;
+    }
+  }
+
+}
+
+.subtitle {
+    color: #00334e;
+    font-weight: bold;
+}
+
+.no-margin {
+    margin: 0 !important
+}
+
+.grayed {
+    color: #808080;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.indented {
+    margin-left: 15px;
+}
+
+.register-switch {
+  height: 50px;
+  margin-bottom: 15px;
+  padding: 4px;
+  background:#00334e;
+  border-radius: 2px;
+  background-image: -webkit-linear-gradient(top, #00334e, #00334e);
+  background-image: -moz-linear-gradient(top, #00334e,#00334e);
+  background-image: -o-linear-gradient(top, #00334e, #00334e);
+  background-image: linear-gradient(to bottom, #00334e,#00334e);
+  -webkit-box-shadow: inset 0 1px rgba(0, 0, 0, 0.05), inset 1px 0 rgba(0, 0, 0, 0.02), inset -1px 0 rgba(0, 0, 0, 0.02);
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.05), inset 1px 0 rgba(0, 0, 0, 0.02), inset -1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.register-switch-input {
+  display: none;
+}
+
+.register-switch-label {
+  float: left;
+  width: 50%;
+  line-height: 42px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.register-switch-input:checked + .register-switch-label {
+  font-weight: 500;
+  color: #434248;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+  background: #8b8b8c;
+  border-radius: 2px;
+  background-image: -webkit-linear-gradient(top,#dedede, #dedede);
+  background-image: -moz-linear-gradient(top, #dedede, #dedede);
+  background-image: -o-linear-gradient(top, #dedede, #dedede);
+  background-image: linear-gradient(to bottom, #dedede, #dedede);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }

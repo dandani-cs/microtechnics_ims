@@ -4,49 +4,103 @@
     ADD USER PAGE
 {% endblock title %}
 {% load widget_tweaks %}
-{% block content %}
+{% block content %}           
+                                                     
+   <form method="post">
+    {% csrf_token %} 
+  <h2>Create New User</h2>
+    <div class="form-group" style="width: 100%;">
+        <div class="row">
+            <div class="col">
+                <label class="floatLabel">First Name</label>
+                {% render_field form.first_name class="form-control lg" %}
+            </div>
+            <div class="col">
+                 <label class="floatLabel">Last Name</label>
+                 {% render_field form.last_name class="form-control lg" %}
+            </div>
+        </div>
+        <div>
+             <label  class="floatLabel">Email</label>
+              {% render_field form.email class="form-control lg" %}
+            </div>
+        </div>
+        <div class="register-switch">
+          <input type="radio" name="is_admin" value="True" id="sex_f" class="register-switch-input" checked>
+          <label for="sex_f" class="register-switch-label">Admin</label>
+          <input type="radio" name="is_admin" value="False" id="sex_m" class="register-switch-input">
+          <label for="sex_m" class="register-switch-label">Employee</label>
+        </div>        
+        <div>
+            <label for="password" class="floatLabel">Password</label>
+            {% render_field form.password1 class="form-control lg" %}
+        </div>
+        <div>
+            <label for="confirm_password" class="floatLabel">Password</label>
+            {% render_field form.password2 class="form-control lg" %}
+        </div>
+        <div>
+            <input style="width: 100%; margin-top: 20px; background-color:#00334e; color:#FFF" class="btn" type="submit" value="Submit" id="submit">
+        </div>
+        <div>
+            <a href="{% url 'show_list' %}" class="btn btn-danger" style="width: 100%; margin-top: 20px; color:#FFF" >Cancel </a>
+        </div>
+            
+        </form>
+    </form>
 
-     <div class="" id="createForm">
-                        <h1 style="text-align: center;" > User Creation </h1>
-                       <form method="POST">
-                            {% csrf_token %} 
-                        <div class="row" style="align-content: center;">
-                            <div class="col">
-                                <label class="label">First Name:</label>
-                                {% render_field form.first_name class='form-control' placeholder="Ex. Joshua" %}                                  
-                            </div>
-                            <div class="col">
-                                <label class="label">Last Name:</label>
-                                {% render_field form.last_name class='form-control' placeholder="Ex. Dela Cruz" %}                                 
-                            </div>                              
-                        </div>                               
-                        <div class="form-group">
-                            <label class="label">Email: </label>     
-                            {% render_field form.email class='form-control' placeholder="your@email.com" %}                                                       
-                        </div>
-                        <div class="form-check">                             
-                            {% render_field form.is_admin class='form-check-input' type='checkbox'%}
-                            <label class="label">Admin Privileges</label>                             
-                        </div>
-                        <div class="form-group">
-                            <label class="label">Password: </label>                           
-                               {% render_field form.password1 class='form-control' placeholder="Enter Password" %}                                       
-                        </div>
-                        <div class="form-group">
-                            <label class="label">Confirm Password: </label>                           
-                                {% render_field form.password2 class='form-control' placeholder="Confirm Password" %} 
-                        </div>                          
-                        <div class="row" style="align-items: center;">
-                            <div class="col">
-                                <button  class="btn-default  btn-lg btn-block btn" type="submit"> Add User </button> 
-                            </div>
-                            <div class="col">
-                                <a href="/userManagement/" class=" btn-danger btn-lg btn-block btn" type="button"> Cancel</a>
-                            </div>
-                        </div>            
+<script>
+var $password = $("#password");
+var $confirmPassword = $("#confirm_password");
+
+//Hide hints
+$("form span").hide();
+
+function isPasswordValid() {
+  return $password.val().length > 8;
+}
+
+function arePasswordsMatching() {
+  return $password.val() === $confirmPassword.val();
+}
+
+function canSubmit() {
+  return isPasswordValid() && arePasswordsMatching();
+}
+
+function passwordEvent(){
+    //Find out if password is valid  
+    if(isPasswordValid()) {
+      //Hide hint if valid
+      $password.next().hide();
+    } else {
+      //else show hint
+      $password.next().show();
+    }
+}
+
+function confirmPasswordEvent() {
+  //Find out if password and confirmation match
+  if(arePasswordsMatching()) {
+    //Hide hint if match
+    $confirmPassword.next().hide();
+  } else {
+    //else show hint 
+    $confirmPassword.next().show();
+  }
+}
+
+function enableSubmitEvent() {
+  $("#submit").prop("disabled", !canSubmit());
+}
+
+//When event happens on password input
+$password.focus(passwordEvent).keyup(passwordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
+
+//When event happens on confirmation input
+$confirmPassword.focus(confirmPasswordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
+
+enableSubmitEvent();
+</script>
 {% endblock content %}
 
-
-
-                       
-                                                     
