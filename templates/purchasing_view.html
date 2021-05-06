@@ -1,27 +1,19 @@
 {% extends "Empbase.html" %}
 
 {% block title %}
-    View Inventory Items
+    View Purchases
 {% endblock title %}
 {% block content %}
-    {% include 'content-header.html' %}
+    <h1 class="m-0 text-dark mb-3">
+        Purchases
+    </h1>
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Inventory Overview</h3>
-                    <!-- card-tools -->
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width:150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search..." id="searchInv">
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-header -->
                 <!-- table of inventory -->
                 <div class="card-body table-responsive p-0">
                     <table class="table table-hover">
-                        <thead>
+                        <thead class="thead-dark">
                             <tr>
                                 <th> Date Requested</th>
                                 <th> Purchase Number </th>
