@@ -3,6 +3,8 @@
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+
+ main color: #00334e
  */
 :root {
   --blue: #007bff;
@@ -8303,7 +8305,7 @@ a[data-toggle="collapse"] {
   min-height: 100vh;
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
-  transition: all 0.3s; 
+  transition: all 0.3s;
   background: #e8e8e8; }
 
 .btn.btn-primary {
@@ -8343,7 +8345,7 @@ a[data-toggle="collapse"] {
   .sideNavIcon {
   width: 20px;
   height: 20px;
-  
+
   }
   .sideIconFill{
     fill: #FFF;
@@ -8351,7 +8353,7 @@ a[data-toggle="collapse"] {
   }
 
   .mainLogo {
-    
+
     width: 100%;
     height: 50%;
     padding-bottom: 70px;
@@ -8362,7 +8364,7 @@ a[data-toggle="collapse"] {
   }
 
   /* pop up form */
- 
+
 .open-button {
   background-color: #555;
   color: white;
@@ -8384,7 +8386,7 @@ a[data-toggle="collapse"] {
   left: 50%;
   transform: translate(-50%, -50%);
   border: 3px solid #f1f1f1;
-  z-index: 9;  
+  z-index: 9;
 }
 
 /* Add styles to the form container */
@@ -8433,13 +8435,14 @@ a[data-toggle="collapse"] {
 }
 
 .btn-default {
-  background-color: #00334e;
+  background-color: #00334e !important;
+  color: #FFFFFF !important;
   width: 100%;
   border-color: #00334e;
 }
 
 .btn-default : hover {
-  background-color: #00111a;
+  background-color: #00334e;
   border-color: #00334e;
   opacity: 0.7;
   cursor: pointer;
@@ -8458,7 +8461,7 @@ a[data-toggle="collapse"] {
   height: 50%;
   margin-top: 200px;
   max-width: 700px;
-  vertical-align: middle; 
+  vertical-align: middle;
 }
 
 body {
@@ -8598,13 +8601,13 @@ h6 {
     transition: all 0.3s ease-in-out
 }
 
-tr:hover { 
-   background: red; 
+tr:hover {
+   background: red;
 }
-td a { 
-   display: block; 
+td a {
+   display: block;
    border: 1px solid black;
-   padding: 16px; 
+   padding: 16px;
 }
 
 @import "compass/css3";
@@ -8679,7 +8682,7 @@ form {
     text-shadow:0 1px 3px darken($button, 30%);
   }
   input[type="submit"]:hover {
-    
+
   }
   label{
     position: absolute;
@@ -8698,5 +8701,26 @@ form {
       font-size: 14px;
     }
   }
-  
+
+}
+
+.subtitle {
+    color: #00334e;
+    font-weight: bold;
+}
+
+.no-margin {
+    margin: 0 !important
+}
+
+.grayed {
+    color: #808080;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.indented {
+    margin-left: 15px;
 }

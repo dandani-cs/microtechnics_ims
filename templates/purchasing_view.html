@@ -1,0 +1,61 @@
+{% extends "Empbase.html" %}
+
+{% block title %}
+    View Purchases
+{% endblock title %}
+{% block content %}
+    <h1 class="m-0 text-dark mb-3">
+        Purchases
+    </h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- table of inventory -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th> Date Requested</th>
+                                <th> Purchase Number </th>
+                                <th> Requested By </th>
+                                <th> Approved By</th>
+                                <th> Total Price <th>
+                                <th> Status </th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                            {% for purchasing in object_list %}
+                        <tr>
+                            <td>{{ purchasing.date_created }}</td>
+                            <td>{{ purchasing.purchase_num }}</td>
+                            <td>{{ purchasing.requested_user.last_name }},
+                                {{ purchasing.requested_user.first_name }}
+                            </td>
+                            <td>{{ purchasing.approved_admin.last_name }},
+                                {{ purchasing.approved_admin.first_name }}
+                            </td>
+                            <td>{{ purchasing.total_price }}</td>
+                            <td>{{ purchasing.status }}</td>
+                         </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- /.table -->
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <!-- Search inventory table -->
+    <script>
+        const searchInput = document.getElementById("searchInv");
+        const rows = document.querySelectorAll("tbody tr");
+        searchInput.addEventListener("keyup", function(event) {
+            const q = event.target.value.toLowerCase();
+            rows.forEach((row) => {
+                row.querySelector("td").textContent.toLowerCase().startsWith(q) ? (row.style.display = "table-row") : (row.style.display = "none");
+            });
+        });
+    </script>
+{% endblock content %}

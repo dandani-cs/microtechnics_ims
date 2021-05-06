@@ -5,6 +5,9 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from decimal import *
 
+from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .forms import ItemAddForm, ItemFormSet, PurchaseConfirmForm
 from .models import Purchasing, StatusPurchasingOptions
 
@@ -50,11 +53,11 @@ class ConfirmPurchasingView(View):
         subtotal     = sum([ item.price * item.quantity for item in item_set ])
         current_user = get_user(request.user)
 
-        request.session['final_purchase_info'] = { 'items'    : purchased_items, 
+        request.session['final_purchase_info'] = { 'items'    : purchased_items,
                                                    'subtotal' : round(float(subtotal), 2) }
 
-        return render(request, "purchasing_confirm.html", 
-                                    { 
+        return render(request, "purchasing_confirm.html",
+                                    {
                                         'item_set'      : item_set,
                                         'subtotal'      : subtotal,
                                         'purchase_form' : PurchaseConfirmForm(),
@@ -68,7 +71,12 @@ class CreatePurchasingView(View):
 
         if item_formset.is_valid():
             request.session['purchasing_info'] = [(form.cleaned_data['item'], form.cleaned_data['quantity']) for form in item_formset]
-        return HttpResponseRedirect(reverse_lazy('purchasing_confirm')) 
+<<<<<<< HEAD
+        return HttpResponseRedirect(reverse_lazy('purchasing_confirm'))
+=======
+
+        return render(request, "purchasing_add.html", {'form': ItemFormSet(), 'item_codes': json.dumps(items)})
+>>>>>>> purchasing_form
 
     def get(self, request):
         items = [[i.item_code, i.name] for i in Item.objects.all()]
@@ -76,8 +84,38 @@ class CreatePurchasingView(View):
         return render(request, "purchasing_add.html", {'form': item_formset, 'item_codes': json.dumps(items)})
 
 
+<<<<<<< HEAD
 def get_user(user):
     try:
         return User.objects.get(username = user)
     except User.DoesNotExist:
         return None
+=======
+class PurchasingListView(LoginRequiredMixin, ListView):
+    login_url = 'final_login'
+    redirect_field_name = 'redirect_to'
+
+    model = Purchasing
+    template_name = "purchasing_view.html"
+
+
+class PurchasingDetailView(LoginRequiredMixin, DetailView):
+    login_url = 'final_login'
+    redirect_field_name = 'redirect_to'
+
+    model = Purchasing
+    template_name = "purchasing_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['items'] = context['object'].items
+
+        context['item_details'] = dict()
+
+        keys = list(context['object'].items.keys())
+
+        for item_key in keys:
+            context['item_details'][item_key] =  Item.objects.get(item_code=item_key)
+
+        return context
+>>>>>>> purchasing_form
