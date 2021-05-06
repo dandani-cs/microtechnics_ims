@@ -1,15 +1,38 @@
 from django.shortcuts import render
 from accounts.models import User
 from django.http import HttpResponse
-
+from django.views import View
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
+from django.contrib.auth import authenticate, login
 # import csv
 import csv
 
 # date time
 import datetime
 
-def login(request):
-    return render(request, 'login.html')
+class UserLoginView(View):
+    def post(self, request, *args,**kwargs):
+        email = request.POST['email']
+        password = request.POST['password']
+        username = get_user(email)
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse_lazy('home'))
+
+        else:
+            return render(request, 'login/login.html', {'error': True})
+
+    def get(self, request):
+        return render(request, 'login/login.html', {'error':False})
+
+def get_user(email):
+    try: 
+        return User.objects.get(email=email.lower())
+    except User.DoesNotExist:
+        return None
 
 def home(request):
     users = User.objects.all()

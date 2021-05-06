@@ -16,11 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from .views import login, home, export_csv
+from .views import UserLoginView, home, export_csv
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', login, name="final_login"),
+    path('', UserLoginView.as_view(), name="final_login"),
     path('home/', home, name="home"),
     path('export_csv/', export_csv, name="export-csv"),
     path('accounts/', include("accounts.urls")),
