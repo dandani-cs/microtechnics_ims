@@ -97,7 +97,7 @@
                                                 {% for item in object_list %}
                                             <tr>
                                                 <td>{{ item.name    }}</td>
-                                                <td>{{ item.category.name     }}</td>
+                                                <td>{{ item.category     }}</td>
                                                 <td><span>&#8369;</span>{{ item.price        }}</td>
                                                 <td>
                                                     {% if item.calc_quantity_level == 2 %}
@@ -143,9 +143,9 @@
                                                 <!-- inventory management tools -->
                                                 <td class="project-actions text-right">
                                                     <!-- view item details button -->
-                                                    <button class="read-item btn btn-success btn-sm bs-modal" data-form-url="{% url 'read_items' item.pk %}">
+                                                    <a href="{% url 'read_items' item.pk %}" class="btn btn-success btn-sm">
                                                         <i class="fa fa-eye"></i>
-                                                    </button>
+                                                    </a>
                                                     <!-- edit item -->
                                                     <a class="btn btn-info btn-sm" href="{% url 'edit_items' pk=item.pk %}">
                                                         <i class="fa fa-pencil">
@@ -155,8 +155,6 @@
                                                     <a href="{% url 'delete_items' pk=item.pk %}" class="btn btn-danger btn-sm">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
-                                                    <!-- delete item [modal] -->
-                                                    <a href="javascript:void(0)" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal" data-url="{% url 'delete_items' pk=item.pk %}" data-tooltip><i class="fa fa-trash"></i></a>
                                                 </td>
                                              </tr>
                                             {% endfor %}
@@ -213,6 +211,8 @@
                             <!-- /.col-12 -->
                         </div>
                         <!-- /inventoryTable -->
+                        <!-- add item category -->
+                        <a href="{% url 'add_category' %}">Add Category</a>
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -262,30 +262,6 @@
             </div>
         </div>
         <!-- /.card -->
-        <!-- modal -->
-        <div class="modal fade" id="deleteModal" role="dialog" style="padding: 17px;">
-            <div class="modal-dialog">
-                <!-- modal-content -->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Confirm Action</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Are you sure you want to delete {{ item.name }}? </p>
-                        <form action="" method="POST">
-                            {% csrf_token %}
-                        </form>
-                    </div>
-                    <div class="modal-footer justify-content-between">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                            Cancel
-                        </button>
-                        <input type="submit" value="Confirm Deletion" class="btn btn-danger">
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <!-- /.col-md-12 -->
     <script>
@@ -298,28 +274,5 @@
                 row.querySelector("td").textContent.toLowerCase().startsWith(q) ? (row.style.display = "table-row") : (row.style.display = "none");
             });
         });
-
-        //Delete Item
-        function openForm() {
-            document.getElementById('deleteForm').style.display = "block";
-        }
-
-        function closeDeleteForm() {
-            document.getElementById('deleteForm').style.display = "none";
-        }
-
-        $(function () {
-            //read item
-            function readItemModalForm() {
-                $(".read-item").each(function () {
-                    $(this).modalForm({formURL: $(this).data("form-url")});
-                })
-            }
-
-            function reinstantiateModalForms() {
-                readItemModalForm();
-            }
-        });
-
     </script>
 {% endblock content %}

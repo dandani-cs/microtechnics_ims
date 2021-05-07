@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ItemListView, ItemEditListView
+from .views import ItemListView
 from . import views
 
 urlpatterns = [
@@ -8,4 +8,5 @@ urlpatterns = [
     path('add/', views.addItem, name = "add_items"),
     path('edit/<str:pk>/', views.editItem, name = "edit_items"),
     path('delete/<str:pk>/', views.deleteItem, name = "delete_items"),
+    path('add_category/', views.addCategory, name = "add_category"),
 ]

@@ -20,6 +20,8 @@ class Category(models.Model):
     cat_id = models.CharField(max_length = 10, primary_key = True, unique = True, default = generate_uuid)
     name   = models.CharField(max_length = 20)
     option = models.IntegerField(choices = CategoryOptions.CATEGORY_CHOICES, default = 2)
+    def __str__(self):
+        return self.name
 
 class Item(models.Model):
     item_code    = models.CharField(max_length = 10, primary_key = True, unique = True, default = generate_uuid)

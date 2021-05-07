@@ -3,8 +3,8 @@ from django.views.generic.list import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
-from inventory.models import Item
-from .forms import InventoryForm
+from inventory.models import Item, Category
+from .forms import InventoryForm, CategoryForm
 from django.views import View
 from .filters import ItemFilter
 from bootstrap_modal_forms.generic import (
@@ -19,12 +19,6 @@ class ItemListView(LoginRequiredMixin, ListView):
     template_name = "inventory/item_view.html"
     item_Filter = ItemFilter()
     paginate_by = 10
-
-class ItemEditListView(LoginRequiredMixin, ListView):
-    login_url = 'final_login'
-    redirect_field_name = 'redirect_to'
-    model = Item
-    template_name = "inventory/edit_inv.html"
 
 class ItemReadView(BSModalReadView):
     model = Item
@@ -81,3 +75,14 @@ def deleteItem(request, pk):
 
     context = {'item': item}
     return render(request, 'inventory/delete_item.html', context)
+
+def addCategory(request):
+    addCat = CategoryForm()
+    if request.method == 'POST':
+        addCat = CategoryForm(request.POST)
+        if addCat.is_valid():
+            addCat.save()
+            return redirect('view_items')
+
+    context = {'form': addCat}
+    return render(request, 'inventory/add_category.html', context)
