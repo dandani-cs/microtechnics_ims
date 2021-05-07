@@ -14,6 +14,13 @@
             <div class="col">
                 <label class="floatLabel">First Name</label>
                 {% render_field form.first_name class="form-control lg" %}
+                {% if form.errors %}
+                  {% for field in form %}
+                 {% for error in field.errors %}
+                    <p> {{ error }} </p>
+                  {% endfor %}
+                  {% endfor %}
+              {% endif %}
             </div>
             <div class="col">
                  <label class="floatLabel">Last Name</label>
@@ -36,9 +43,12 @@
             {% render_field form.password1 class="form-control lg" %}
         </div>
         <div>
-            <label for="confirm_password" class="floatLabel">Password</label>
+            <label for="confirm_password" class="floatLabel">Confirm Password</label>
             {% render_field form.password2 class="form-control lg" %}
         </div>
+                {% for error in form.errors %}
+                        <p style="color: red">{{ error }}</p>
+                {% endfor %}
         <div>
             <input style="width: 100%; margin-top: 20px; background-color:#00334e; color:#FFF" class="btn" type="submit" value="Submit" id="submit">
         </div>
@@ -47,7 +57,15 @@
         </div>
             
         </form>
-    </form>
+        {% if form.errors %}
+           {% for field in form %}
+              {% for error in field.errors %}
+                <p> {{ error }} </p>
+              {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+    
 
 <script>
 var $password = $("#password");
