@@ -7,6 +7,9 @@ from inventory.models import Item
 from .forms import InventoryForm
 from django.views import View
 from .filters import ItemFilter
+from bootstrap_modal_forms.generic import (
+    BSModalReadView
+)
 
 # Create your views here.
 class ItemListView(LoginRequiredMixin, ListView):
@@ -22,6 +25,10 @@ class ItemEditListView(LoginRequiredMixin, ListView):
     redirect_field_name = 'redirect_to'
     model = Item
     template_name = "inventory/edit_inv.html"
+
+class ItemReadView(BSModalReadView):
+    model = Item
+    template_name = 'inventory/read_item.html'
 
 def addItem(request):
     add = InventoryForm()

@@ -142,6 +142,10 @@
                                                 </td>
                                                 <!-- inventory management tools -->
                                                 <td class="project-actions text-right">
+                                                    <!-- view item details button -->
+                                                    <button class="read-item btn btn-success btn-sm bs-modal" data-form-url="{% url 'read_items' item.pk %}">
+                                                        <i class="fa fa-eye"></i>
+                                                    </button>
                                                     <!-- edit item -->
                                                     <a class="btn btn-info btn-sm" href="{% url 'edit_items' pk=item.pk %}">
                                                         <i class="fa fa-pencil">
@@ -303,5 +307,19 @@
         function closeDeleteForm() {
             document.getElementById('deleteForm').style.display = "none";
         }
+
+        $(function () {
+            //read item
+            function readItemModalForm() {
+                $(".read-item").each(function () {
+                    $(this).modalForm({formURL: $(this).data("form-url")});
+                })
+            }
+
+            function reinstantiateModalForms() {
+                readItemModalForm();
+            }
+        });
+
     </script>
 {% endblock content %}
