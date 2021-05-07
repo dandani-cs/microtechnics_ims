@@ -7,13 +7,6 @@
     {% include 'content-header.html' %}
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header p-2">
-                <ul class="nav nav-pills">
-                  <li class="nav-item"><a class="nav-link active" href="#invTable" data-toggle="tab">Inventory</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#details" data-toggle="tab">Details</a></li>
-                </ul>
-            </div>
-            <!-- /.card-header -->
             <!-- .tab-content -->
             <div class="tab-content">
                 <!-- .tab-pane #invTable -->
@@ -24,7 +17,7 @@
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="card-title">
+                                        <h3 class="card-title p-3">
                                             Inventory Overview
                                         </h3>
                                     </div>
@@ -66,7 +59,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!-- /.card -->
                             </div>
+                            <!-- /.col-md-12 -->
                         </div>
                         <div class="row">
                             <div class="col-12">
@@ -75,8 +70,18 @@
                                         <h3 class="card-title">Inventory Table</h3>
                                         <!-- card-tools -->
                                         <div class="card-tools">
-                                            <div class="input-group input-group-sm" style="width: 150px;">
-                                            <input type="text" name="table_search" id="searchInv" class="form-control float-right" placeholder="Search..."></div>
+                                            <div class="input-group">
+                                                <input type="text" name="table_search" id="searchInv" class="form-control float-right" placeholder="Search...">
+                                                <ul class="nav ml-auto p-2">
+                                                    <li class="nav-item dropdown">
+                                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Options</a>
+                                                        <div class="dropdown-menu" x-placement="bottom-start">
+                                                            <a href="{% url 'add_items' %}" class="dropdown-item" tabindex="-1">Add Item</a>
+                                                            <a href="{% url 'add_category' %}" class="dropdown-item" tabindex="-1">Create New Category</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
@@ -202,7 +207,7 @@
                                             </ul>
                                         {% endif %}
                                         <!-- add data -->
-                                        <a href="{% url 'add_items' %}" class="btn btn-info float-right"><i class="fa fa-plus"></i> Add Item </a>
+                                        <!-- <a href="{% url 'add_items' %}" class="btn btn-info float-right"><i class="fa fa-plus"></i> Add Item </a> -->
                                     </div>
                                     <!-- /.card-footer -->
                                 </div>
@@ -211,54 +216,9 @@
                             <!-- /.col-12 -->
                         </div>
                         <!-- /inventoryTable -->
-                        <!-- add item category -->
-                        <a href="{% url 'add_category' %}">Add Category</a>
                     </div>
                     <!-- /.card-body -->
                 </div>
-                <!-- .tab-pane -->
-                <!-- .tab-pane #details -->
-                <div class="tab-pane" id="details">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-12">
-                                <div id="accordion">
-                                    <div class="card">
-                                      <div class="card-header" id="headingTwo">
-                                        <h5 class="mb-0">
-                                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                            Inventory Details
-                                          </button>
-                                        </h5>
-                                      </div>
-                                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                                        <div class="card-body">
-                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                        </div>
-                                      </div>
-                                    </div>
-                                    <div class="card">
-                                      <div class="card-header" id="headingThree">
-                                        <h5 class="mb-0">
-                                          <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                            Inventory Log
-                                          </button>
-                                        </h5>
-                                      </div>
-                                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                                        <div class="card-body">
-                                          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                            </div>
-                        </div>
-                        <!-- /.row -->
-                    </div>
-                    <!-- /.card-body -->
-                </div>
-                <!-- /.tab-pane #settings -->
             </div>
         </div>
         <!-- /.card -->
@@ -266,6 +226,7 @@
     <!-- /.col-md-12 -->
     <script>
         // Search table
+        // will edit later
         const searchInput = document.getElementById("searchInv");
         const rows = document.querySelectorAll("tbody tr");
         searchInput.addEventListener("keyup", function(event) {
