@@ -21,6 +21,17 @@
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
+    {% if form.errors %}
+                  {% for field in form %}
+                 {% for error in field.errors %}
+                 <div  class="mb-2" style="width: 100%; background-color: #85150d;  ">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                   <p class="p-3" style="color: white"><i class="bi bi-exclamation-triangle-fill"></i> Error: {{ error }} </p>
+                 </div>
+                    
+                  {% endfor %}
+                  {% endfor %}
+              {% endif %}
     <section class="page-container">
         <form method="POST" class="pt-4" >
             {% csrf_token %}

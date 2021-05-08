@@ -5,16 +5,23 @@
 {% endblock title %}
 {% load widget_tweaks %}
 {% block content %}
-   <form method="post">
-    {% csrf_token %}
 
-    {% if form.errors %}
+{% if form.errors %}
                   {% for field in form %}
                  {% for error in field.errors %}
-                    <p style="color: red"> {{ error }} </p>
+                 <div  class="mb-2" style="width: 100%; background-color: #85150d;  ">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                   <p class="p-3" style="color: white"><i class="bi bi-exclamation-triangle-fill"></i> Error: {{ error }} </p>
+                 </div>
+                    
                   {% endfor %}
                   {% endfor %}
               {% endif %}
+
+   <form method="post">
+    {% csrf_token %}
+
+    
   <h2>Create New User</h2>
     <div class="form-group" style="width: 100%;">
         <div class="row">
@@ -50,7 +57,7 @@
             <input style="width: 100%; margin-top: 20px; background-color:#00334e; color:#FFF" class="btn" type="submit" value="Submit" id="submit">
         </div>
         <div>
-            <a href="{% url 'show_list' %}" class="btn btn-danger" style="width: 100%; margin-top: 20px; color:#FFF" >Cancel </a>
+            <a href="{% url 'show_list' %}" class="btn " style="width: 100%; margin-top: 20px; color:#FFF; background-color: #85150d;" >Cancel </a>
         </div>
         </form>
         
