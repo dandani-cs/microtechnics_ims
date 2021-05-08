@@ -1,0 +1,19 @@
+{% extends "projects.html" %}
+
+{% block title %}
+  Delete Projects
+{% endblock title %}
+
+{% block content %}
+
+<h1>Are you sure you want to delete {{projectsDelete.projects_Name}}?:</h1>
+    <hr>
+
+<form action = "{% url 'projects_delete' projectsDelete.project_ID %}"            method = "POST">
+  {% csrf_token %}
+  
+  <button class="btn btn-danger" type="submit">Delete</button> 
+  </form>
+
+<a href="{% url 'projects_view' %}" class="btn btn-info float-left">Go Back To The Projects Page</a>   
+{% endblock content %}

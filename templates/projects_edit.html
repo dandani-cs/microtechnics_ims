@@ -1,0 +1,25 @@
+{% extends "projects.html" %}
+
+{% block title %}
+  Edit Projects
+{% endblock title %}
+
+{% block content %}
+<h1>Edit Projects Here:</h1>
+    <hr>
+    
+    <form method = "POST">
+      {% csrf_token %}
+      {% for field in edit  Form %}
+        <tr>
+            <th>{{ field.label }}</th>
+            <td>{{ field }}</td>
+        </tr>
+
+      
+      {% endfor %}
+      <button class="btn btn-info" type="submit">Submit</button> 
+      </form>
+
+    <a href="{% url 'projects_view' %}" class="btn btn-info float-left">Go Back To The Projects Page</a>   
+{% endblock content %}

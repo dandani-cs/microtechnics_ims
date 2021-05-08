@@ -4,7 +4,6 @@
   Projects
 {% endblock title %}
 
-
 <head>
   <title>Projects</title>
   <meta charset="utf-8">
@@ -13,7 +12,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-	
+  
+
+  
 <style type="text/css">
   @import url("StylesProgress.css"); 
 </style>
@@ -23,43 +24,111 @@
 {% block content %}
 {% include 'content-header.html' %}
 
+
+{% if object_list %}
 <section class="projects no-padding-top">
 <div class="container">
   <!-- Project-->
-  <body>
-	
+  
     <section class="projects no-padding-top">
     <div class="container">
-      <!-- Project-->
       <div class="project">
         <div class="row bg-white has-shadow">
           <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
-            <div class="project-title d-flex align-items-center">
-              <div class="text">
-                <h3 class="h4">Project Title</h3><small>Project Description</small>
-              </div>
-            </div>
-            <div class="project-date"><span class="hidden-sm-down">Today at 4:24 AM</span></div>
-          </div>
-          <div class="right-col col-lg-6 d-flex align-items-center">
-            <div class="time"><i class="fa fa-clock-o"></i>12:00 PM </div>
+            <table class="table table-hover" id="projectsTable">
+              <thead>
+                  <tr>
+                      <tr>
+                          <th>Project ID:</th>
+                          <th>Project Name:</th>
+                          <th>Client Name:</th>
+                          <th >Date Created:</th>
+                          <th>Status:</th>
+                       </tr>
+                   </tr>
+              </thead>
+              <tbody>
+                
+                {% for Projects in object_list %}           
+              <tr>
+                  <td>{{Projects.project_ID}}</td>
+                  <td>{{Projects.projects_Name}}</td>
+                  <td>{{Projects.clients_Name}}</td>
+                  <td>{{Projects.date_Created}}</td>
+                  <td>{{Projects.status}}</td>
+                  <td>
+                      <a href="{% url 'projects_edit' Projects.pk %}" class="btn btn-info float-middle">Edit</a>
+                      <a href="{% url 'projects_delete' Projects.pk %}" class="btn btn-danger float-right"></i>Delete</a>
+                  </td>
+               </tr>
+               {% endfor %}
+               {% else %}
+               <tr>
+                <td>
+                     <div class="container">
+                       <div class="jumbotron">
+                         <h1>Projects are Empty! Please Add a New Project</h1>      
+                       </div>     
+                    </div>
+              </td>
+           </tr>
+           <a href="{% url 'projects_add' %}" class="btn btn-info float-left"><i class="fa fa-plus"></i>Add A New Project</a>
+    
+            {% endif %}
+              </tbody>
+          </table>
+
+<!-- table pagination -->
+{% if page_obj.has_other_pages %}
+  <ul class="pagination pagination-sm m-0 float-left">
+    {% if page_obj.has_previous %}
+    <li class="page-item">
+        <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+        <span class="page-link">Previous</span>
+    </li>
+    {% endif %}
+
+    {% for page_num in page_obj.paginator.page_range %}
+        {% if page_obj.number == page_num %}
+            <li class="page-item active">
+                <span class="page-link">{{ page_num }}</span>
+            </li>
+        {% else %}
+            <li class="page-item">
+                <a href="?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+            </li>
+        {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+        <li class="page-item">
+            <a href="?page={{ page_obj.next_page_number}}" class="page-link">Next</a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">Next</span>
+        </li>
+    {% endif %}
+  </ul>
+  {% endif %}
           </div>
         </div>
       </div>
     </div>		
-      
-    <div class="container">
-      <button type="button" class="btn btn-info">Add</button>
-      
-      <button type="button" class="btn btn-info">Delete</button>
-    </div>	
-    
-      
-      
+
     </section>
     
-    </body>
+    <br>
+    <br>
+
+
+    <a href="{% url 'projects_add' %}" class="btn btn-info float-left"><i class="fa fa-plus"></i>Add A New Project</a>
+    
 {% endblock content %}
+
 
 
 
