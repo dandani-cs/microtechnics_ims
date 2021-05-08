@@ -1,0 +1,35 @@
+{% extends "Empbase.html" %}
+    {% block title %} 
+        Add Item
+    {% endblock title %}
+    {% load widget_tweaks %}
+{% block content %}
+{% include 'content-header.html' %}
+    <section class="content">
+        <div class="row">
+            <!-- Add Item Form -->
+            <div class="col-md-12">
+                <!-- .card card-primary -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Add Item</h3>
+                    </div>
+                    <!-- add-form start -->
+                    <form action="" method="POST" novalidate>
+                        <!-- .card-body -->
+                        <div class="card-body">
+                            {% csrf_token %}
+                            {% include 'inventory/inventory_form.html' with form=form %}
+                        </div>
+                        <!-- .card-footer -->
+                        <div class="card-footer">
+                            <a href="{% url 'view_items' %}" class="btn btn-info">Cancel</a>
+                            <button type="submit" class="btn btn-success float-right"><i class="fa fa-plus"></i> Add</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </section>
+{% endblock content %}

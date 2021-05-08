@@ -1,0 +1,45 @@
+{% extends 'Empbase.html' %}
+{% block title %}
+    Item Details
+{% endblock title %}
+{% block content %}
+    {% include 'content-header.html' %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Item Details</h3>
+        </div>
+        <div class="card-body">
+            <div>
+                <label for="item_id">Item ID: </label>
+                <p id="item_id">{{ item.item_code }}</p>
+            </div>
+            <div>
+                <label for="item_name">Name: </label>
+                <p id="item_name">{{ item.name }}</p>
+            </div>
+            <div>
+                <label for="item_price">Price: </label>
+                <p id="item_price"><span>&#8369;</span>{{ item.price }}</p>
+            </div>
+            <div>
+                <label for="item_quantity">Quantity: </label>
+                <p id="item_quantity">{{ item.quantity }}</p>
+            </div>
+            <div>
+                <label for="item_category">Category: </label>
+                <p id="item_category">{{ item.category.name }}</p>
+            </div>
+            <div>
+                <label for="item_max_quantity">Max Quantity: </label>
+                <p id="item_max_quantity">{{ item.max_quantity }}</p>
+            </div>
+            <div>
+                <label for="item_desc">Description:</label>
+                <p id="item_desc">{{ item.description }}</p>
+            </div>
+        </div>
+        <div class="card-footer clearfix">
+            <a href="{% url 'view_items' %}" class="btn btn-info">Return</a>
+        </div>
+    </div>
+{% endblock content %}
