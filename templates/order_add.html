@@ -8,40 +8,39 @@
     <h2>Select Items to Order</h2>
     <p class="lead"> Use the form below to select the desired items to order and enter the desired quantity </p>
 
-    <form>
-        {% csrf_token %}
-        {{ form.management_form }}
-
-        <div class="justify-content-center">
-            <table id="item_input_container" class="table">
-                <tr class="row unset-css">
-                    <th class="col-6">Item Name</th>
-                    <th class="col-4">Desired Quantity</th>
-                </tr>
+    <form method="POST">
+        <div class="container">
+            <div id="item_input_container">
+                {% csrf_token %}
+                {{ form.management_form }}
+                <div class="row mt-3">
+                    <div class="col-6"><p class="h6">Item Name</p></div>
+                    <div class="col-4"><p class="h6">Desired Quantity</p></div>
+                </div>
                 {% for f in form %}
-                <tr class="row form_input">
-                    <td class="col-6">{{ f.item }}</td>
-                    <td class="col-4">{{ f.quantity }}</td>
-                    <td class="col-2 item-btn-group">
+                <div class="row mb-3 form_input">
+                    <div class="col-6">{{ f.item }}</div>
+                    <div class="col-4">{{ f.quantity }}</div>
+                    <div class="col-2 item-btn-group">
                         <button type="button" class="del-item btn btn-outline-danger" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="divue">&times;</span>
                         </button>
                         <button id="add-item" type="button" class="btn btn-outline-success" onclick="create_new_item_input()">+</button>
-                    </td>
-                </tr>
+                    </div>
+                </div>
                 {% endfor %}
-            </table>
-        </div>
-        <div class="row">
-            <div class="col-6">
-            <button type="button" class="btn btn-block btn-secondary"/>Reset</button>
             </div>
-            <div class="col-6">
-            <button type="submit" class="btn btn-block btn-success"/>Proceed</button>
+
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" onclick="reset_item_form()" class="btn btn-block btn-secondary"/>Reset</button>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-block btn-success"/>Proceed</button>
+                </div>
             </div>
         </div>
     </form>
-    </div>
 
     <script src="{% static 'js/item_selection.js' %}"></script>
 
@@ -61,10 +60,23 @@
                 var item_code       = adjacent_select.options[adjacent_select.selectedIndex].value;
 
                 quantity_field.max = item_set[item_code];
+                quantity_field.min = 1;
                 quantity_field.placeholder = item_set[item_code];
+                quantity_field.required = true;
             }
 
         }
+        
+        function reset_item_form() {
+            var all_current_items = document.querySelectorAll(".form_input");
+            var formset_counter   = document.querySelector("#id_form-TOTAL_FORMS");
+            
+            while(parseInt(formset_counter.value) > 1) {
+                delete_item_input(1);
+            }
+            all_current_items[0].querySelector("select").selectedIndex = 0;
+        }
+
 
         function delete_item_input(index) {
             var all_current_items = document.querySelectorAll(".form_input");
@@ -86,7 +98,7 @@
                 all_current_items[index].remove();
 
                 formset_counter.value = parseInt(formset_counter.value) - 1;
-                update_row_deletion();
+                update_item_choices();
             }
         }
 
@@ -101,7 +113,6 @@
                 })(i);
             }
         }
-
         update_max_quantity_fields({{ item_codes | safe}});
 
         function update_item_choices() {
@@ -109,6 +120,14 @@
             update_max_quantity_fields(item_codes);
             update_item_dropdowns(item_codes);
             update_row_deletion();
+
+            var max_num_forms     = document.querySelector("#id_form-MAX_NUM_FORMS");
+            var all_current_items = document.getElementsByClassName("form_input");
+            var add_item_btn      = document.querySelector("#add-item");
+
+            console.log(all_current_items.length, parseInt(max_num_forms.value));
+
+            add_item_btn.disabled = (all_current_items.length >= parseInt(max_num_forms.value));
         }
     </script>
 

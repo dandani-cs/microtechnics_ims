@@ -51,7 +51,12 @@ function update_clone_children(clone, last_selected_index) {
 
 function create_new_item_input() {
     var main_container    = document.getElementById("item_input_container");
+    var max_num_forms     = document.querySelector("#id_form-MAX_NUM_FORMS");
     var all_current_items = document.getElementsByClassName("form_input");
+
+    if(parseInt(max_num_forms.value) == all_current_items.length)
+        return;
+
     var last_input        = all_current_items[all_current_items.length - 1];
     var last_input_clone  = last_input.cloneNode(true)
 
@@ -61,7 +66,6 @@ function create_new_item_input() {
     var add_item_btn  = last_input.querySelector("#add-item");
     all_current_items[all_current_items.length - 1].appendChild(add_item_btn);
     add_item_btn.remove();
-
 
     var total_forms   = document.querySelector("#id_form-TOTAL_FORMS");
     total_forms.value = parseInt(total_forms.value) + 1;
