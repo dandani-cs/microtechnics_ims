@@ -21,7 +21,7 @@ from .views import UserLoginView, home, export_csv
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', UserLoginView.as_view(), name="final_login"),
-    path('', include('django.contrib.auth.urls')),  
+    path('', include('django.contrib.auth.urls')),
     path('home/', home, name="home"),
     path('export_csv/', export_csv, name="export-csv"),
     path('', include("accounts.urls")),

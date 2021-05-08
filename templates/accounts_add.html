@@ -4,10 +4,9 @@
     ADD USER PAGE
 {% endblock title %}
 {% load widget_tweaks %}
-{% block content %}           
-                                                     
+{% block content %}
    <form method="post">
-    {% csrf_token %} 
+    {% csrf_token %}
   <h2>Create New User</h2>
     <div class="form-group" style="width: 100%;">
         <div class="row">
@@ -37,7 +36,7 @@
           <label for="sex_f" class="register-switch-label">Admin</label>
           <input type="radio" name="is_admin" value="False" id="sex_m" class="register-switch-input">
           <label for="sex_m" class="register-switch-label">Employee</label>
-        </div>        
+        </div>
         <div>
             <label for="password" class="floatLabel">Password</label>
             {% render_field form.password1 class="form-control lg" %}
@@ -55,7 +54,7 @@
         <div>
             <a href="{% url 'show_list' %}" class="btn btn-danger" style="width: 100%; margin-top: 20px; color:#FFF" >Cancel </a>
         </div>
-            
+
         </form>
         {% if form.errors %}
            {% for field in form %}
@@ -65,7 +64,7 @@
             {% endfor %}
         {% endif %}
 
-    
+
 
 <script>
 var $password = $("#password");
@@ -87,7 +86,7 @@ function canSubmit() {
 }
 
 function passwordEvent(){
-    //Find out if password is valid  
+    //Find out if password is valid
     if(isPasswordValid()) {
       //Hide hint if valid
       $password.next().hide();
@@ -103,7 +102,7 @@ function confirmPasswordEvent() {
     //Hide hint if match
     $confirmPassword.next().hide();
   } else {
-    //else show hint 
+    //else show hint
     $confirmPassword.next().show();
   }
 }
@@ -119,6 +118,5 @@ $password.focus(passwordEvent).keyup(passwordEvent).keyup(confirmPasswordEvent).
 $confirmPassword.focus(confirmPasswordEvent).keyup(confirmPasswordEvent).keyup(enableSubmitEvent);
 
 enableSubmitEvent();
-</script>
+    </script>
 {% endblock content %}
-
