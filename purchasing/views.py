@@ -158,7 +158,7 @@ class PurchasingApproveView(View):
 
         if "btn_approve" in request.POST:
             purchase.status = 2
-        elif btn_receive in request.POST:
+        elif "btn_receive" in request.POST:
             purchase.status = 3
 
         purchase.save()
