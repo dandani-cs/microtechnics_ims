@@ -27,10 +27,37 @@
                                 <p class="subtitle no-margin"> {{ purchase.total_price }}</p>
                                 <p class="grayed">Total price</p>
 
-                                
+                                <p class="subtitle no-margin">
+                                    {% if purchase.status == 1 %}
+                                        For Approval
+                                    {% elif purchase.status == 2 %}
+                                        Approved
+                                    {% endif %}
+                                </p>
+                                <p class="grayed">Status </p>
                             </div>
+                            <div class="col-sm-6">
+                                <p class="subtitle no-margin">{{ purchase.date_created }}</p>
+                                <p class="grayed">Date created</p>
 
+                                <p class="subtitle no-margin">{{ purchase.requested_user.last_name }}, {{ purchase.requested_user.first_name }}</p>
+                                <p class="grayed">Requested User</p>
 
+                                <p class="subtitle no-margin">
+                                    {% if purchase.approved_admin %}
+                                        {{ purchase.approved_admin.last_name }}, {{ purchase.approved_admin.first_name }}
+                                    {% else %}
+                                        None
+                                    {% endif %}
+                                </p>
+                                <p class="grayed">Approved Admin</p>
+                            </div>
+                            </div>
+                            <div class="row m-l-0 m-r-0 page-content">
+                                <div class="col-sm-12 width-100">
+                                    <button class="btn btn-danger width-100"> Cancel </button>
+                                    <button class="btn btn-default mt-10">Return</button>
+                                </div>
                             </div>
                         </div>
                     </div>

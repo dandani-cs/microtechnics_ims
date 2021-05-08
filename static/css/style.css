@@ -8459,7 +8459,7 @@ a[data-toggle="collapse"] {
 #profile {
   width: 80%;
   height: 50%;
-  margin-top: 200px;
+  margin-top: 100px;
   max-width: 700px;
   vertical-align: middle;
 }
@@ -8723,4 +8723,8 @@ form {
 
 .indented {
     margin-left: 15px;
+}
+
+.width-100 {
+    width: 100% !important;
 }
