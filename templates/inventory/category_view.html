@@ -5,6 +5,7 @@
 {% block content %}
     {% include 'content-header.html' %}
     <div class="col-md-12">
+        {% if object_list %}
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -96,5 +97,13 @@
             </div>
         </div>
     </div>
+    {% else %}
+    <div class="jumbotron" style="background-color: transparent;">
+        <h1 class="display-4">No categories yet!</h1>
+        <p class="lead">The table is currently empty.</p>
+        <hr class="my-4">
+        <p>Why don't you start <a href="{% url 'add_category' %}">adding new categories</a>?</p>
+      </div>
+    {% endif %}
     <!-- /.col-md-12 -->
 {% endblock content %}
