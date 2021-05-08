@@ -8393,9 +8393,13 @@ a[data-toggle="collapse"] {
 .form-container {
   max-width: 50%;
   background: rgba(0, 0, 0, 0.6);
-  height: 50%;
+  height: 30%;
   padding: 1%;
   background-color: white;
+}
+
+.form-popup body {
+  opacity: 0.2;
 }
 
 /* Full-width input fields */
@@ -8723,4 +8727,45 @@ form {
 
 .indented {
     margin-left: 15px;
+}
+
+.register-switch {
+  height: 50px;
+  margin-bottom: 15px;
+  padding: 4px;
+  background:#00334e;
+  border-radius: 2px;
+  background-image: -webkit-linear-gradient(top, #00334e, #00334e);
+  background-image: -moz-linear-gradient(top, #00334e,#00334e);
+  background-image: -o-linear-gradient(top, #00334e, #00334e);
+  background-image: linear-gradient(to bottom, #00334e,#00334e);
+  -webkit-box-shadow: inset 0 1px rgba(0, 0, 0, 0.05), inset 1px 0 rgba(0, 0, 0, 0.02), inset -1px 0 rgba(0, 0, 0, 0.02);
+  box-shadow: inset 0 1px rgba(0, 0, 0, 0.05), inset 1px 0 rgba(0, 0, 0, 0.02), inset -1px 0 rgba(0, 0, 0, 0.02);
+}
+
+.register-switch-input {
+  display: none;
+}
+
+.register-switch-label {
+  float: left;
+  width: 50%;
+  line-height: 42px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 -1px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.register-switch-input:checked + .register-switch-label {
+  font-weight: 500;
+  color: #434248;
+  text-shadow: 0 1px rgba(255, 255, 255, 0.5);
+  background: #8b8b8c;
+  border-radius: 2px;
+  background-image: -webkit-linear-gradient(top,#dedede, #dedede);
+  background-image: -moz-linear-gradient(top, #dedede, #dedede);
+  background-image: -o-linear-gradient(top, #dedede, #dedede);
+  background-image: linear-gradient(to bottom, #dedede, #dedede);
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }

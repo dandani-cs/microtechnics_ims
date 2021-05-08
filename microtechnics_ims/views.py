@@ -29,7 +29,7 @@ class UserLoginView(View):
         return render(request, 'login/login.html', {'error':False})
 
 def get_user(email):
-    try: 
+    try:
         return User.objects.get(email=email.lower())
     except User.DoesNotExist:
         return None
