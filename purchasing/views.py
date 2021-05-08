@@ -126,10 +126,14 @@ class PurchasingCancelView(LoginRequiredMixin, View):
         return render(request, 'purchasing_cancel_confirm.html', {"purchase": purchase, "total_items": len(purchase.items)})
 
 
-    def post(request):
-        purchase = get_purchase(purchasing_num)
+    def post(self, request, purchase_num):
+        purchase = get_purchase(purchase_num)
 
-        return HttpResponseRedirect('purchasing_view')
+        purchase.status = 0
+
+        purchase.save()
+
+        return HttpResponseRedirect(reverse_lazy('purchasing_detail', args=[purchase_num]))
 
         # if purchase:
         #     item_set = Item.objects.filter(Q(item_code__in = purchase.items.keys()))
