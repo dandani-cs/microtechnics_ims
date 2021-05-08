@@ -7,6 +7,6 @@ from orders.models import Order
 
 class OrderConfirmForm(forms.ModelForm):
     class Meta:
-        all_users = Item.objects.all()
         model     = Order
         fields    = ( 'requested_user', ) # Not necessarily an employee
+        widgets   = { 'requested_user' : forms.Select(attrs = { 'class' : 'form-control' }) }

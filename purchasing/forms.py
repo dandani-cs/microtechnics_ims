@@ -20,4 +20,5 @@ class ItemAddForm(forms.Form):
     item.widget.attrs.update({ 'class'   : 'form-control form-select',
                                'onchange': 'update_item_choices()'})
 
-ItemFormSet = formset_factory(ItemAddForm, extra = 1)
+ItemFormSet = formset_factory(ItemAddForm, extra   = 1,
+                                           max_num = len(Item.objects.all()))
