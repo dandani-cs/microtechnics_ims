@@ -34,7 +34,7 @@ class CreateUserView(View):
 
         else:
             print(user_form.errors)
-            return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
+            return render(request, "accounts_add.html", {'form': user_form})
 
 
 def forgotpass(request):

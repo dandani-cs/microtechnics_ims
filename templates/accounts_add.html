@@ -7,19 +7,20 @@
 {% block content %}
    <form method="post">
     {% csrf_token %}
+
+    {% if form.errors %}
+                  {% for field in form %}
+                 {% for error in field.errors %}
+                    <p style="color: red"> {{ error }} </p>
+                  {% endfor %}
+                  {% endfor %}
+              {% endif %}
   <h2>Create New User</h2>
     <div class="form-group" style="width: 100%;">
         <div class="row">
             <div class="col">
                 <label class="floatLabel">First Name</label>
                 {% render_field form.first_name class="form-control lg" %}
-                {% if form.errors %}
-                  {% for field in form %}
-                 {% for error in field.errors %}
-                    <p> {{ error }} </p>
-                  {% endfor %}
-                  {% endfor %}
-              {% endif %}
             </div>
             <div class="col">
                  <label class="floatLabel">Last Name</label>
@@ -45,24 +46,14 @@
             <label for="confirm_password" class="floatLabel">Confirm Password</label>
             {% render_field form.password2 class="form-control lg" %}
         </div>
-                {% for error in form.errors %}
-                        <p style="color: red">{{ error }}</p>
-                {% endfor %}
         <div>
             <input style="width: 100%; margin-top: 20px; background-color:#00334e; color:#FFF" class="btn" type="submit" value="Submit" id="submit">
         </div>
         <div>
             <a href="{% url 'show_list' %}" class="btn btn-danger" style="width: 100%; margin-top: 20px; color:#FFF" >Cancel </a>
         </div>
-
         </form>
-        {% if form.errors %}
-           {% for field in form %}
-              {% for error in field.errors %}
-                <p> {{ error }} </p>
-              {% endfor %}
-            {% endfor %}
-        {% endif %}
+        
 
 
 
