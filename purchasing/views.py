@@ -149,7 +149,7 @@ class PurchasingCancelView(LoginRequiredMixin, View):
         #     return HttpResponseRedirect('purchasing_404')
 
 
-class PurchasingApproveView(View):
+class PurchasingUpdateStatusView(View):
     def post(self, request, purchase_num):
         purchase = get_purchase(purchase_num)
 
@@ -158,6 +158,8 @@ class PurchasingApproveView(View):
 
         if "btn_approve" in request.POST:
             purchase.status = 2
+            purchase.approved_admin = request.user
+            
         elif "btn_receive" in request.POST:
             purchase.status = 3
 

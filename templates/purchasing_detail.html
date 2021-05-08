@@ -70,11 +70,12 @@
                     <p class="subtitle no-margin"> {{ object.status_verbose }} </p>
                     <p class="grayed"> Status </p>
 
-                    <form class="remove-css" method="post">
+                    <form action="{% url 'purchasing_update_status' object.purchase_num %}" class="remove-css" method="post">
+                        {% csrf_token %}
                         {% if object.status == 1 and request.user.is_superuser %}
-                            <button class="btn btn-default" type="button" name="btn_approve">Approve</button>
-                        {% elif object.status == 3 and request.user.is_superuser %}
-                            <button class="btn btn-default" type="button" name="btn_receive">Received</button>
+                            <button class="btn btn-default" type="submit" name="btn_approve">Approve</button>
+                        {% elif object.status == 2 and request.user.is_superuser %}
+                            <button class="btn btn-default" type="submit" name="btn_receive">Received</button>
                         {% endif %}
 
                         {% if object.status != 0 %}
