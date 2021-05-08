@@ -57,13 +57,17 @@
                     <p class="subtitle no-margin"> {{ object.status }} </p>
                     <p class="grayed"> Status </p>
 
-                    {% if object.status == 1 and request.user.is_superuser %}
-                        <button class="btn btn-default" type="button" name="button">Approve</button>
-                    {% elif object.status == 3 and request.user.is_superuser %}
-                        <button class="btn btn-default" type="button" name="button">Received</button>
-                    {% else %}
-                        <button class="btn btn-danger full-width" type="button" name="button">Cancel</button>
-                    {% endif %}
+                    <form class="remove-css" method="post">
+                        {% if object.status == 1 and request.user.is_superuser %}
+                            <button class="btn btn-default" type="button" name="btn_approve">Approve</button>
+                        {% elif object.status == 3 and request.user.is_superuser %}
+                            <button class="btn btn-default" type="button" name="btn_receive">Received</button>
+                        {% endif %}
+
+                        {% if object.status != 0 %}
+                            <a href="{% url 'purchasing_cancel_confirm' purchasing.purchase_num %}"<button class="btn btn-danger full-width" type="button" name="button">Cancel</button></a>
+                        {% endif %}
+                    </form>
                 </div>
                 <div class="col-sm-6">
                     <p class="subtitle no-margin"> {{ object.date_created }}</p>
