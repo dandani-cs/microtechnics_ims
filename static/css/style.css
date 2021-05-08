@@ -8728,3 +8728,9 @@ form {
 .width-100 {
     width: 100% !important;
 }
+
+.remove-css {
+    padding: 0;
+    box-shadow: None !important;
+    border-radius: 0;
+}

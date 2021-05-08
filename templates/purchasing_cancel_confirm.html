@@ -55,7 +55,10 @@
                             </div>
                             <div class="row m-l-0 m-r-0 page-content">
                                 <div class="col-sm-12 width-100">
-                                    <button class="btn btn-danger width-100"> Cancel </button>
+                                    <form class="remove-css" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger width-100"> Cancel </button>
+                                    </form>
                                     <a href="{% url 'purchasing_detail' purchase.purchase_num %}">
                                         <button class="btn btn-default mt-10">Return</button>
                                     </a>

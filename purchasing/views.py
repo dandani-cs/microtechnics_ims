@@ -129,6 +129,8 @@ class PurchasingCancelView(LoginRequiredMixin, View):
     def post(request):
         purchase = get_purchase(purchasing_num)
 
+        return HttpResponseRedirect('purchasing_view')
+
         # if purchase:
         #     item_set = Item.objects.filter(Q(item_code__in = purchase.items.keys()))
         #     for item in item_set:
