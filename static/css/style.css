@@ -8393,9 +8393,13 @@ a[data-toggle="collapse"] {
 .form-container {
   max-width: 50%;
   background: rgba(0, 0, 0, 0.6);
-  height: 50%;
+  height: 30%;
   padding: 1%;
   background-color: white;
+}
+
+.form-popup body {
+  opacity: 0.2;
 }
 
 /* Full-width input fields */

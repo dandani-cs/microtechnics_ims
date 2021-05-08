@@ -55,30 +55,49 @@
             </div>
         </div>
     </div>
-    <div class="form-popup page_container p-4" id="myForm" style="background-color: #FFF">
+    <div class="form-popup form-container  p-4" id="myForm" style="background-color: #FFF">
          
+            
             <h1>Delete User</h1>
             <p>Are you sure you want to delete this user? </p>
 
-            <label><b>Name: </b></label>
-            <p>{{emp.first_name}}&nbsp;{{emp.last_name}}</p>
+           
+            <div class="row">
+                <div class="col">
+                    <label><b>Name: </b></label>
+                    <p>{{emp.first_name}}&nbsp;{{emp.last_name}}</p>
+                </div>
+                <div class="col">
+                    <label><b>Email: </b></label>
+                    <p>{{emp.email}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label><b>Employee ID: </b></label>
+                    <p>{{emp.username}}</p>
 
-            <label><b>Email: </b></label>
-            <p>{{emp.email}}</p>
-
-            <label><b>Employee ID: </b></label>
-            <p>{{emp.username}}</p>
-
-            <label><b>Role: </b></label>
-            {% if emp.is_admin == 1 %}
-                <p>Admin</p>
-            {% endif %}
-            {% if emp.is_admin == 0 %}
-                <p>Employee </p>
-            {% endif %}
-
-            <a  href="{% url 'delete_user' emp.username %}"  data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm"  id="deleteForm" style="margin-bottom: 10px; height: 100%; width: 100%;"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
-            <a style="margin-bottom: 10px; color: #FFF; height: 100%; width: 100%; background-color: #00334e;"  class="btn cancel" onclick="closePrompt()">Cancel</a>
+                </div>
+                <div class="col">
+                    <label><b>Role: </b></label>
+                    {% if emp.is_admin == 1 %}
+                        <p>Admin</p>
+                    {% endif %}
+                    {% if emp.is_admin == 0 %}
+                        <p>Employee </p>
+                    {% endif %}
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col">
+                     <a style="margin-bottom: 10px; color: #FFF; height: 70%; width: 100%; background-color: #00334e; vertical-align: middle;"  class="btn cancel" onclick="closePrompt()">Cancel<br></a>
+                </div>
+                <div class="col">
+                    <a  href="{% url 'delete_user' emp.username %}"  data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm"  id="deleteForm" style="margin-bottom: 10px; height: 70%; width: 100%; vertical-align: middle;"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
+                </div>
+            </div>          
+            
+           
 
 </div>
 
