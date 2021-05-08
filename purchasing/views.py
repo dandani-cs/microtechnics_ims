@@ -117,30 +117,30 @@ class PurchasingDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
-class PurchasingDeleteView(LoginRequiredMixin, View):
+class PurchasingCancelView(LoginRequiredMixin, View):
     login_url = 'final_login'
     redirect_field_name = 'redirect_to'
 
     def get(self, request, purchase_num):
         purchase = get_purchase(purchase_num)
-        return render(request, 'purchasing_delete_confirm.html', {"purchase": purchase, "total_items": len(purchase.items)})
+        return render(request, 'purchasing_cancel_confirm.html', {"purchase": purchase, "total_items": len(purchase.items)})
 
 
     def post(request):
         purchase = get_purchase(purchasing_num)
 
-        if purchase:
-            item_set = Item.objects.filter(Q(item_code__in = purchase.items.keys()))
-            for item in item_set:
-                item.quantity     = item.quantity - purchase.items[item.item_code]
-                item.save()
-
-            purchase.delete()
-
-            return HttpResponseRedirect('purchasing_delete_confirmed')
-
-        else:
-            return HttpResponseRedirect('purchasing_404')
+        # if purchase:
+        #     item_set = Item.objects.filter(Q(item_code__in = purchase.items.keys()))
+        #     for item in item_set:
+        #         item.quantity     = item.quantity - purchase.items[item.item_code]
+        #         item.save()
+        #
+        #     purchase.delete()
+        #
+        #     return HttpResponseRedirect('purchasing_cancel_confirmed')
+        #
+        # else:
+        #     return HttpResponseRedirect('purchasing_404')
 
 
 
