@@ -42,14 +42,7 @@
                                 {% endif %}
                             </td>
                             <td>{{ purchasing.total_price }}</td>
-                            <td>{% if purchasing.status == 1 %}
-                                    For approval
-                                {% elif purchasing.status == 2 %}
-                                    Approved
-                                {% elif purchasing_status == 3 %}
-                                    Received
-                                {% endif %}
-                            </td>
+                            <td> {{ purchasing.status_verbose }} </td>
                          </tr>
                         {% endfor %}
                         </tbody>

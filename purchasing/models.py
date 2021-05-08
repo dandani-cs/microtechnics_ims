@@ -40,3 +40,6 @@ class Purchasing(models.Model):
                                        related_name = "approved_by")
     status = models.IntegerField(choices = StatusPurchasingOptions.STATUS_CHOICES, default = 1)
     date_created = models.DateTimeField(auto_now_add=True)
+
+    def status_verbose(self):
+        return dict(StatusPurchasingOptions.STATUS_CHOICES)[self.status]
