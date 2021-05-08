@@ -17,6 +17,7 @@ class ItemListView(LoginRequiredMixin, ListView):
     redirect_field_name = 'redirect_to'
     model         = Item
     template_name = "inventory/item_view.html"
+    queryset = Item.objects.order_by("name")
     item_Filter = ItemFilter()
     paginate_by = 10
 
