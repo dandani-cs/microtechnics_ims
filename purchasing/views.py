@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from decimal import *
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import ItemAddForm, ItemFormSet, PurchaseConfirmForm
@@ -115,3 +115,40 @@ class PurchasingDetailView(LoginRequiredMixin, DetailView):
             context['item_details'][item_key] =  Item.objects.get(item_code=item_key)
 
         return context
+
+
+class PurchasingDeleteView(LoginRequiredMixin, View):
+    login_url = 'final_login'
+    redirect_field_name = 'redirect_to'
+
+    def get(self, request, purchase_num):
+        purchase = get_purchase(purchase_num)
+        return render(request, 'purchasing_delete_confirm.html', {"purchase": purchase, "total_items": len(purchase.items)})
+
+
+    def post(request):
+        purchase = get_purchase(purchasing_num)
+
+        if purchase:
+            item_set = Item.objects.filter(Q(item_code__in = purchase.items.keys()))
+            for item in item_set:
+                item.quantity     = item.quantity - purchase.items[item.item_code]
+                item.save()
+
+            purchase.delete()
+
+            return HttpResponseRedirect('purchasing_delete_confirmed')
+
+        else:
+            return HttpResponseRedirect('purchasing_404')
+
+
+
+
+
+
+def get_purchase(num):
+    try:
+        return Purchasing.objects.get(purchase_num = num)
+    except Purchasing.DoesNotExist:
+        return None
