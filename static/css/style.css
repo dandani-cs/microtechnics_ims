@@ -8717,6 +8717,10 @@ form {
     color: #808080;
 }
 
+.grayed.mb-10 {
+    margin-bottom: 10px !important;
+}
+
 .full-width {
     width: 100%;
 }
@@ -8734,4 +8738,9 @@ form {
     box-shadow: None !important;
     border-radius: 0;
     border: 0;
+}
+
+.row-hover:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075);
 }

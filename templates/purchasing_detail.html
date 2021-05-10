@@ -32,10 +32,10 @@
             <hr class="no-margin"/>
 
             {% for item_code, details in item_details.items %}
-                <div class="row">
+                <div class="row row-hover">
                     <div class="col-sm-4">
                         <p class="subtitle no-margin"> {{ details.name }}</p>
-                        <p class="grayed indented"> {{ item_code }} </p>
+                        <p class="grayed indented mb-10"> {{ item_code }} </p>
                     </div>
                     <div class="col-sm-4">
                         <p class=""> {{ details.price }} @ {{ object.items|purchase_item_quantity:item_code }} </p>
