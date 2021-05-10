@@ -64,7 +64,13 @@
                     <p class="subtitle no-margin">{{ object.requested_user.last_name }}, {{ object.requested_user.first_name }}</p>
                     <p class="grayed">Requested User</p>
 
-                    <p class="subtitle no-margin">{{ object.approved_admin.last_name}}, {{ object.approved_admin.first_name }}</p>
+                    <p class="subtitle no-margin">
+                        {% if object.approved_admin %}
+                        {{ object.approved_admin.last_name}}, {{ object.approved_admin.first_name }}
+                        {% else %}
+                        None
+                        {% endif %}
+                    </p>
                     <p class="grayed">Approved Admin</p>
                 </div>
                 <div class="col-sm-6">
