@@ -1,0 +1,25 @@
+{% extends 'Empbase.html' %}
+    {% block title %}
+        Category Details
+    {% endblock title %}
+{% block content %}
+    {% include 'content-header.html' %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Category Details</h3>
+        </div>
+        <div class="card-body">
+            <div>
+                <label for="id">Category ID:</label>
+                <p id="id">{{ category.cat_id }}</p>
+            </div>
+            <div>
+                <label for="name">Category Name:</label>
+                <p id="name">{{ category }}</p>
+            </div>
+        </div>
+        <div class="card-footer clearfix">
+            <a href="{% url 'view_category' %}" class="btn btn-info">Return</a>
+        </div>
+    </div>
+{% endblock content %}
