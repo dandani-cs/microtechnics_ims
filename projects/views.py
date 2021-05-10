@@ -10,9 +10,8 @@ from .filters import ProjectsFilter
 class ProjectsView(ListView):
     model = Projects
     template_name = "projects.html"
-    paginate_by = 5
-    projects_filter = ProjectsFilter()
-
+    paginate_by = 10
+    
 
 
 def Add_Projects (request):

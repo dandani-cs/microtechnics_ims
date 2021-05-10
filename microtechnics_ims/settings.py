@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'inventory.apps.InventoryConfig',
     'projects',
-    'django_filters'
+    'django_filters',
+    
 ]
 
 MIDDLEWARE = [

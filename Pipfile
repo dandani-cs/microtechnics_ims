@@ -9,6 +9,7 @@ verify_ssl = true
 django = "==3.1.7"
 django-bootstrap-modal-forms = "*"
 django-filter = "*"
+django-bootstrap-form-horizontal = "*"
 
 [requires]
 python_version = "3.7"
