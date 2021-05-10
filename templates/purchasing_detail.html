@@ -79,7 +79,7 @@
                             <button class="btn btn-default" type="submit" name="btn_receive">Received</button>
                         {% endif %}
 
-                        {% if object.status != 0 %}
+                        {% if object.status != 0 and object.status != 3 %}
                             <a href="{% url 'purchasing_cancel_confirm' purchasing.purchase_num %}"<button class="btn btn-danger full-width" type="button" name="button">Cancel</button></a>
                         {% endif %}
                     </form>
