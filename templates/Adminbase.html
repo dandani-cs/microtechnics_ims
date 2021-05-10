@@ -32,7 +32,7 @@
                 <a href="#" class="sideNavText"><img src="{% static 'icons/notification.png' %}" class="sideNavIcon"> &nbsp;Notifications</a>
             </li>
             <li class="{% if request.path == dash %}active{% endif %}">
-              <a href="#homeSubmenu" class="sideNavText">
+              <a href="{% url 'home' %}" class="sideNavText">
                 <img src="{% static 'icons/Dashboard.png' %}" class="sideNavIcon">&nbsp; Dashboard
               </a>
             </li>
