@@ -4,6 +4,9 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.db.models import Q
 
+from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 import json
 from decimal import *
 
@@ -12,6 +15,7 @@ from purchasing.forms import ItemFormSet
 from accounts.models import User
 
 from .forms import OrderConfirmForm
+from .models import Order
 
 # Create your views here.
 class ConfirmOrderView(View):
@@ -28,11 +32,6 @@ class ConfirmOrderView(View):
             if current_user != None and current_user.is_admin:
                 order.is_approved    = True
                 order.approved_admin = current_user
-
-            item_set = Item.objects.filter(Q(item_code__in = order.items.keys()))
-            for item in item_set:
-                item.quantity = item.quantity - order.items[item.item_code]
-                item.save()
 
             order.save()
 
@@ -78,6 +77,32 @@ class CreateOrderView(View):
         item_formset = ItemFormSet()
         return render(request, "order_add.html", { 'form':       item_formset, 
                                                    'item_codes': json.dumps(items) })
+
+class OrderListView(LoginRequiredMixin, ListView):
+    login_url           = 'final_login'
+    redirect_field_name = 'redirect_to'
+
+    model         = Order
+    template_name = 'order_view.html'
+
+class OrderDetailView(LoginRequiredMixin, DetailView):
+    login_url           = 'final_login'
+    redirect_field_name = 'redirect_to'
+    model         = Order
+    template_name = 'order_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order_items'] = context['object'].items
+
+        context['order_item_details'] = dict()
+
+        keys = list(context['object'].items.keys())
+
+        for item_key in keys:
+            context['order_item_details'][item_key] =  Item.objects.get(item_code=item_key)
+
+        return context
 
 def get_user(user):
     try:
