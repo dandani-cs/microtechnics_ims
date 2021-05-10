@@ -1,5 +1,6 @@
 {% extends "Adminbase.html" %}
 {% load widget_tweaks %}
+{% load dict_lookup %}
 {% block title %}
 	USER MANAGEMENT | Edit Account
 {% endblock title %}
@@ -37,7 +38,7 @@
                         <p class="grayed indented"> {{ item_code }} </p>
                     </div>
                     <div class="col-sm-4">
-                        <p class=""> {{ details.price }} @ x5 </p>
+                        <p class=""> {{ details.price }} @ {{ object.items|purchase_item_quantity:item_code }} </p>
                     </div>
                     <div class="col-sm-4">
                         <p class="subtitle"> 51.25</p>
