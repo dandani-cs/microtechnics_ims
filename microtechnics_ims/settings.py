@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'purchasing.apps.PurchasingConfig',
     'django_filters',
     'bootstrap_modal_forms',
+    'notifications',
 ]
 
 MIDDLEWARE = [
