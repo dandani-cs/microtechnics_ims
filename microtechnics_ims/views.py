@@ -23,7 +23,6 @@ class UserLoginView(View):
             return HttpResponseRedirect(reverse_lazy('home'))
 
         else:
-            print(form.errors)
             return render(request, 'login/login.html', {'error': True})
 
     def get(self, request):
