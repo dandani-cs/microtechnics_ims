@@ -135,19 +135,6 @@ class PurchasingCancelView(LoginRequiredMixin, View):
 
         return HttpResponseRedirect(reverse_lazy('purchasing_detail', args=[purchase_num]))
 
-        # if purchase:
-        #     item_set = Item.objects.filter(Q(item_code__in = purchase.items.keys()))
-        #     for item in item_set:
-        #         item.quantity     = item.quantity - purchase.items[item.item_code]
-        #         item.save()
-        #
-        #     purchase.delete()
-        #
-        #     return HttpResponseRedirect('purchasing_cancel_confirmed')
-        #
-        # else:
-        #     return HttpResponseRedirect('purchasing_404')
-
 
 class PurchasingUpdateStatusView(View):
     def post(self, request, purchase_num):
@@ -159,7 +146,7 @@ class PurchasingUpdateStatusView(View):
         if "btn_approve" in request.POST:
             purchase.status = 2
             purchase.approved_admin = request.user
-            
+
         elif "btn_receive" in request.POST:
             purchase.status = 3
 
