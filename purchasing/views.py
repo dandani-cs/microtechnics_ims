@@ -5,7 +5,7 @@ from django.urls import reverse_lazy
 from django.db.models import Q
 from decimal import *
 
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import ItemAddForm, ItemFormSet, PurchaseConfirmForm
@@ -64,6 +64,7 @@ class ConfirmPurchasingView(View):
                                         'current_user'  : current_user
                                     })
 
+
 class CreatePurchasingView(View):
     def post(self, request):
         items = [[i.item_code, i.name] for i in Item.objects.all()]
@@ -80,12 +81,12 @@ class CreatePurchasingView(View):
         return render(request, "purchasing_add.html", {'form': item_formset, 'item_codes': json.dumps(items)})
 
 
-
 def get_user(user):
     try:
         return User.objects.get(username = user)
     except User.DoesNotExist:
         return None
+
 
 class PurchasingListView(LoginRequiredMixin, ListView):
     login_url = 'final_login'
@@ -114,3 +115,49 @@ class PurchasingDetailView(LoginRequiredMixin, DetailView):
             context['item_details'][item_key] =  Item.objects.get(item_code=item_key)
 
         return context
+
+
+class PurchasingCancelView(LoginRequiredMixin, View):
+    login_url = 'final_login'
+    redirect_field_name = 'redirect_to'
+
+    def get(self, request, purchase_num):
+        purchase = get_purchase(purchase_num)
+        return render(request, 'purchasing_cancel_confirm.html', {"purchase": purchase, "total_items": len(purchase.items)})
+
+
+    def post(self, request, purchase_num):
+        purchase = get_purchase(purchase_num)
+
+        purchase.status = 0
+
+        purchase.save()
+
+        return HttpResponseRedirect(reverse_lazy('purchasing_detail', args=[purchase_num]))
+
+
+class PurchasingUpdateStatusView(View):
+    def post(self, request, purchase_num):
+        purchase = get_purchase(purchase_num)
+
+        if not purchase:
+            return HttpResponseRedirect(reverse_lazy("purchasing_404"))
+
+        if "btn_approve" in request.POST:
+            purchase.status = 2
+            purchase.approved_admin = request.user
+
+        elif "btn_receive" in request.POST:
+            purchase.status = 3
+
+        purchase.save()
+
+        return HttpResponseRedirect(reverse_lazy('purchasing_detail', args=[purchase_num]))
+
+
+
+def get_purchase(num):
+    try:
+        return Purchasing.objects.get(purchase_num = num)
+    except Purchasing.DoesNotExist:
+        return None
