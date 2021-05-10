@@ -5,8 +5,23 @@
 {% endblock title %}
 {% load widget_tweaks %}
 {% block content %}
+
+{% if form.errors %}
+                  {% for field in form %}
+                 {% for error in field.errors %}
+                 <div  class="mb-2" style="width: 100%; background-color: #85150d;  ">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                   <p class="p-3" style="color: white"><i class="bi bi-exclamation-triangle-fill"></i> Error: {{ error }} </p>
+                 </div>
+                    
+                  {% endfor %}
+                  {% endfor %}
+              {% endif %}
+
    <form method="post">
-    {% csrf_token %} 
+    {% csrf_token %}
+
+    
   <h2>Create New User</h2>
     <div class="form-group" style="width: 100%;">
         <div class="row">
@@ -24,27 +39,34 @@
               {% render_field form.email class="form-control lg" %}
             </div>
         </div>
+        <div class="register-switch">
+          <input type="radio" name="is_admin" value="True" id="sex_f" class="register-switch-input" checked>
+          <label for="sex_f" class="register-switch-label">Admin</label>
+          <input type="radio" name="is_admin" value="False" id="sex_m" class="register-switch-input">
+          <label for="sex_m" class="register-switch-label">Employee</label>
+        </div>
         <div>
             <label for="password" class="floatLabel">Password</label>
             {% render_field form.password1 class="form-control lg" %}
         </div>
         <div>
-            <label for="confirm_password" class="floatLabel">Password</label>
+            <label for="confirm_password" class="floatLabel">Confirm Password</label>
             {% render_field form.password2 class="form-control lg" %}
         </div>
         <div>
             <input style="width: 100%; margin-top: 20px; background-color:#00334e; color:#FFF" class="btn" type="submit" value="Submit" id="submit">
         </div>
         <div>
-            <a href="{% url 'show_list' %}" class="btn btn-danger" style="width: 100%; margin-top: 20px; color:#FFF" >Cancel </a>
+            <a href="{% url 'show_list' %}" class="btn " style="width: 100%; margin-top: 20px; color:#FFF; background-color: #85150d;" >Cancel </a>
         </div>
-            
         </form>
-    </form>
+        
 
-    <script>
-    var $password = $("#password");
-    var $confirmPassword = $("#confirm_password");
+
+
+<script>
+var $password = $("#password");
+var $confirmPassword = $("#confirm_password");
 
 //Hide hints
 $("form span").hide();
@@ -62,7 +84,7 @@ function canSubmit() {
 }
 
 function passwordEvent(){
-    //Find out if password is valid  
+    //Find out if password is valid
     if(isPasswordValid()) {
       //Hide hint if valid
       $password.next().hide();
@@ -78,7 +100,7 @@ function confirmPasswordEvent() {
     //Hide hint if match
     $confirmPassword.next().hide();
   } else {
-    //else show hint 
+    //else show hint
     $confirmPassword.next().show();
   }
 }

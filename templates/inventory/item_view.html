@@ -5,87 +5,243 @@
 {% endblock title %}
 {% block content %}
     {% include 'content-header.html' %}
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Inventory Overview</h3>
-                    <!-- card-tools -->
-                    <div class="card-tools">
-                        <div class="input-group input-group-sm" style="width:150px;">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search..." id="searchInv">
+    <div class="col-md-12">
+        {% if object_list %}
+        <div class="card">
+            <!-- .tab-content -->
+            <div class="tab-content">
+                <!-- .tab-pane #invTable -->
+                <div class="tab-pane active" id="invTable">
+                    <!-- inventory stats and information -->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title p-3">
+                                            Inventory Overview
+                                        </h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="col-12 col-md-12 col-lg-16 order-2 order-md-1">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="info-box bg-light">
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text text-center text-muted">
+                                                                Total Items Stored
+                                                            </span>
+                                                            <span class="info-box-number text-center text-muted mb-0">{{ object_list.count }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="info-box bg-light">
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text text-center text-muted">
+                                                                Title
+                                                            </span>
+                                                            <span class="info-box-number text-center text-muted mb-0">69</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-4">
+                                                    <div class="info-box bg-light">
+                                                        <div class="info-box-content">
+                                                            <span class="info-box-text text-center text-muted">
+                                                                Title
+                                                            </span>
+                                                            <span class="info-box-number text-center text-muted mb-0">69</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- /.row -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col-md-12 -->
                         </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Inventory Table</h3>
+                                        <!-- card-tools -->
+                                        <div class="card-tools">
+                                            <div class="input-group">
+                                                <input type="text" name="table_search" id="searchInv" class="form-control float-right" placeholder="Search...">
+                                                <ul class="nav ml-auto p-2">
+                                                    <li class="nav-item dropdown">
+                                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Options</a>
+                                                        <div class="dropdown-menu" x-placement="bottom-start">
+                                                            <a href="{% url 'view_category' %}" class="dropdown-item" tabindex="-1">Categories</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <a href="#" class="dropdown-item">Delete All Items</a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    {% if object_list %}
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover" id="inventoryTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Category</th>
+                                                    <th>Price</th>
+                                                    <th>Quantity Status</th>
+                                                    <th style="width: 40px">Left</th>
+                                                    <th style="width: 20px">Max Quantity</th>
+                                                    <th style="width: 20%"></th>
+                                                 </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in object_list %}
+                                            <tr>
+                                                <td>{{ item.name    }}</td>
+                                                <td>{{ item.category     }}</td>
+                                                <td><span>&#8369;</span>{{ item.price        }}</td>
+                                                <td>
+                                                    {% if item.calc_quantity_level == 2 %}
+                                                        <!-- OK -->
+                                                        <div class="progress-group">
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar bg-success" style="width: 80%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    {% elif item.calc_quantity_level == 1 %}
+                                                        <!-- LOW -->
+                                                        <div class="progress-group">
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar bg-warning" style="width: 40%;"></div>
+                                                            </div>
+                                                        </div>
+                                                    {% else %}
+                                                        <!-- CRITICAL -->
+                                                        <div class="progress-group">
+                                                            <div class="progress progress-sm">
+                                                                <div class="progress-bar bg-danger" style="width: 20%"></div>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                </td>
+                                                <!-- Threshold Label -->
+                                                <td>
+                                                    <!-- OK -->
+                                                    {% if item.calc_quantity_level == 2 %}
+                                                        <span class="badge bg-success">{{item.quantity}}</span>
+                                                    <!-- LOW -->
+                                                    {% elif item.calc_quantity_level == 1 %}
+                                                        <span class="badge bg-warning">{{item.quantity}}</span>
+                                                    <!-- CRITICAL -->
+                                                    {% else %}
+                                                        <span class="badge bg-danger">{{item.quantity}}</span>
+                                                    {% endif %}
+                                                </td>
+                                                <!-- max quantity -->
+                                                <td>
+                                                    {{item.max_quantity}}
+                                                </td>
+                                                <!-- inventory management tools -->
+                                                <td class="project-actions text-right">
+                                                    <!-- view item details button -->
+                                                    <a href="{% url 'read_items' item.pk %}" class="btn btn-success btn-sm">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <!-- edit item -->
+                                                    <a class="btn btn-info btn-sm" href="{% url 'edit_items' pk=item.pk %}">
+                                                        <i class="fa fa-pencil">
+                                                        </i>
+                                                    </a>
+                                                    <!-- delete item [redirect to webpage] -->
+                                                    <a href="{% url 'delete_items' pk=item.pk %}" class="btn btn-danger btn-sm">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                             </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                        <!-- /.table -->
+                                    </div>
+                                    <!-- /.card-body -->
+                                    {% endif %}
+                                    <!-- table footer -->
+                                    <div class="card-footer clearfix">
+                                        <!-- table pagination -->
+                                        {% if page_obj.has_other_pages %}
+                                            <ul class="pagination pagination-sm m-0 float-left">
+                                                {% if page_obj.has_previous %}
+                                                <li class="page-item">
+                                                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+                                                </li>
+                                                {% else %}
+                                                <li class="page-item disabled">
+                                                    <span class="page-link">Previous</span>
+                                                </li>
+                                                {% endif %}
+
+                                                {% for page_num in page_obj.paginator.page_range %}
+                                                    {% if page_obj.number == page_num %}
+                                                        <li class="page-item active">
+                                                            <span class="page-link">{{ page_num }}</span>
+                                                        </li>
+                                                    {% else %}
+                                                        <li class="page-item">
+                                                            <a href="?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+                                                        </li>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                {% if page_obj.has_next %}
+                                                    <li class="page-item">
+                                                        <a href="?page={{ page_obj.next_page_number}}" class="page-link">Next</a>
+                                                    </li>
+                                                {% else %}
+                                                    <li class="page-item disabled">
+                                                        <span class="page-link">Next</span>
+                                                    </li>
+                                                {% endif %}
+                                            </ul>
+                                        {% endif %}
+                                        <a href="{% url 'add_items' %}" class="btn btn-success btn-sm float-right" tabindex="-1"><i class="fa fa-plus"></i> Add New Item</a>
+                                    </div>
+                                    <!-- /.card-footer -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <!-- /.col-12 -->
+                        </div>
+                        <!-- /inventoryTable -->
                     </div>
+                    <!-- /.card-body -->
                 </div>
-                <!-- /.card-header -->
-                <!-- table of inventory -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Item Code</th>
-                                <th>Category</th>
-                                <th>Price</th>
-                                <th>Quantity Status</th>
-                                <th style="width: 40px">Left</th>
-                             </tr>
-                        </thead>
-                        <tbody>
-                            {% for item in object_list %}
-                        <tr>
-                            <td>{{ item.item_code    }}</td>
-                            <td>{{ item.category     }}</td>
-                            <td><span>&#8369;</span>{{ item.price        }}</td>
-                            <td>
-                                {% if item.calc_quantity_level == 2 %}
-                                    <!-- OK -->
-                                    <div class="progress-group">
-                                        <div class="progress progress-sm">
-                                            <div class="progress-bar bg-success" style="width: 80%;"></div>
-                                        </div>
-                                    </div>
-                                {% elif item.calc_quantity_level == 1 %}
-                                    <!-- LOW -->
-                                    <div class="progress-group">
-                                        <div class="progress progress-sm">
-                                            <div class="progress-bar bg-warning" style="width: 60%;"></div>
-                                        </div>
-                                    </div>
-                                {% else %}
-                                    <!-- CRITICAL -->
-                                    <div class="progress-group">
-                                        <div class="progress progress-sm">
-                                            <div class="progress-bar bg-danger" style="width: 20%"></div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            </td>
-                            <!-- Threshold Label -->
-                            <td>
-                                <!-- OK -->
-                                {% if item.calc_quantity_level == 2 %}
-                                    <span class="badge bg-success">{{item.quantity}}</span>
-                                <!-- LOW -->
-                                {% elif item.calc_quantity_level == 1 %}
-                                    <span class="badge bg-warning">{{item.quantity}}</span>
-                                <!-- CRITICAL -->
-                                {% else %}
-                                    <span class="badge bg-danger">{{item.quantity}}</span>
-                                {% endif %}
-                            </td>
-                         </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                    <!-- /.table -->
-                </div>
-                <!-- /.card-body -->
             </div>
-            <!-- /.card -->
         </div>
+        <!-- /.card -->
     </div>
-    <!-- Search inventory table -->
+    {% else %}
+    <div class="jumbotron" style="background-color: transparent;">
+        <h1 class="display-4">
+            Inventory empty!
+        </h1>
+        <p class="lead">
+            Welcome to the inventory management page. The table is currently empty.
+        </p>
+        <hr class="my-4">
+        <p>Why don't you start <a href="{% url 'add_items' %}">adding new items</a>?</p>
+    </div>
+    {% endif %}
+    <!-- /.col-md-12 -->
     <script>
+        // Search table
+        // will edit later
         const searchInput = document.getElementById("searchInv");
         const rows = document.querySelectorAll("tbody tr");
         searchInput.addEventListener("keyup", function(event) {

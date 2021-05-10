@@ -5,6 +5,7 @@ from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.http import HttpResponse
+from django.contrib import messages
 
 # system info
 from .forms import CustomUserCreationForm, CustomUserChangeForm
@@ -33,10 +34,8 @@ class CreateUserView(View):
 
         else:
             print(user_form.errors)
-            return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
+            return render(request, "accounts_add.html", {'form': user_form})
 
-
-  
 
 def forgotpass(request):
     return render(request, 'forgot_pass.html')
@@ -45,27 +44,34 @@ def newpass(request):
     return render(request, 'add_new_pass.html')
 
 
-  
+def userProfile(request, employee_id):
+    user = User.objects.get(username = employee_id)
+    return render(request, "user_profile.html", {'user': user})
 
 def updateUser(request, employee_id):
     if request.method  == "GET":
-        emp = User.objects.get(username = employee_id)   
+        emp = User.objects.get(username = employee_id)
         return render(request, "edit_account.html", {'emp': emp})
     else:
-        emp = User.objects.get(username = employee_id)  
-        form = CustomUserChangeForm(request.POST, instance = emp)  
-        if form.is_valid():  
+        emp = User.objects.get(username = employee_id)
+        form = CustomUserChangeForm(request.POST, instance = emp)
+        if form.is_valid():
             print("valid")
             emp = form.save(commit = False)
 
-            emp.save() 
-        print(form.errors) 
-        return redirect("show_list")    
+            emp.save()
+            
+            print(form.errors)
+            return redirect("show_list")
+        else: 
+            print(form.errors)
+            return render(request, "edit_account.html", {'form': form})
+        
 
-   
+
 
 def deleteUser(request, employee_id):
-    emp = User.objects.get(username= employee_id)  
+    emp = User.objects.get(username= employee_id)
     emp.is_active = False
     emp.save()
     return redirect("show_list")

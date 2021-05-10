@@ -1,5 +1,6 @@
 <!-- for active links -->
 {% url 'home' as dash %}
+{% url 'view_items' as inv %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -42,16 +43,18 @@
               <a href="#" class="sideNavText"><img src="{% static 'icons/purchase.png' %}" class="sideNavIcon"> &nbsp; Purchase Management</a>
             </li>
             <li>
-              <a href="#" class="sideNavText"><img src="{% static 'icons/inventory.png' %}" class="sideNavIcon"> &nbsp; Inventory Management</a>
+              <a href="{% url 'view_items' %}" class="sideNavText"><img src="{% static 'icons/inventory.png' %}" class="sideNavIcon"> &nbsp; Inventory Management</a>
             </li>
             <li>
               <a href="#" class="sideNavText"><img class="sideNavIcon" src="{% static 'icons/orders.png' %}"> &nbsp; Order Management</a>
             </li>
+            {% if request.user.is_superuser %} 
             <li>
               <a href="{% url 'show_list' %}" class="sideNavText"><img src="{% static 'icons/user.png' %}">&nbsp; User Management</a>
             </li>
+            {% endif %} 
             <li>
-              <a href="#" class="sideNavText"><img class="sideNavIcon" src="{% static 'icons/logout.png' %}"> &nbsp; Log Out</a>
+              <a href="{% url 'logout' %}" class="sideNavText"><img class="sideNavIcon" src="{% static 'icons/logout.png' %}"> &nbsp; Log Out</a>
             </li>
           </ul>
           <div class="footer">

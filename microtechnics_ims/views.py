@@ -23,13 +23,14 @@ class UserLoginView(View):
             return HttpResponseRedirect(reverse_lazy('home'))
 
         else:
+            print(form.errors)
             return render(request, 'login/login.html', {'error': True})
 
     def get(self, request):
         return render(request, 'login/login.html', {'error':False})
 
 def get_user(email):
-    try: 
+    try:
         return User.objects.get(email=email.lower())
     except User.DoesNotExist:
         return None

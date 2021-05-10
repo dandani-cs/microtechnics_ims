@@ -9,6 +9,5 @@ urlpatterns = [
     path('user_profile/<str:employee_id>', views.userProfile, name="user_profile"),
     path('userManagement/', views.usermanagement.as_view(), name="show_list"),
     path('update/<str:employee_id>', views.updateUser, name="update_user"),
-    #path('editUser/<str:employee_id>', views.editUser, name="edit_user"),
     path('deleteUser/<str:employee_id>', views.deleteUser, name="delete_user")
 ]

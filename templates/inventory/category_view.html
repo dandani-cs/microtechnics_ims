@@ -1,0 +1,121 @@
+{% extends "Empbase.html" %}
+{% block title %}
+    Inventory Categories
+{% endblock title %}
+{% block content %}
+    {% include 'content-header.html' %}
+    <div class="col-md-12">
+        {% if object_list %}
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Categories</h3>
+                        <div class="card-tools">
+                            <div class="input-group">
+                                <input type="text" name="cat_search" id="searchCat" class="form-control float-right" placeholder="Search...">
+                                <ul class="nav ml-auto p-2">
+                                    <li class="nav-item dropdown">
+                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Options</a>
+                                        <div class="dropdown-menu" x-placement="bottom-start">
+                                            <a href="{% url 'view_items' %}" class="dropdown-item" tabindex="-1">Inventory</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover" id="categoryTable">
+                            <thead>
+                                <tr>
+                                    <th>Category ID</th>
+                                    <th>Category Name</th>
+                                    <th style="width: 20%;"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cat in object_list %}
+                                    <tr>
+                                        <td>{{ cat.cat_id }}</td>
+                                        <td>{{ cat.name }}</td>
+                                        <!-- tools -->
+                                        <td class="project-actions text-right">
+                                            <a href="{% url 'read_category' cat.pk %}" class="btn btn-success btn-sm"><i class="fa fa-eye"></i></a>
+                                            <a href="{% url 'edit_category' pk=cat.pk %}" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i></a>
+                                            <a href="{% url 'delete_category' pk=cat.pk %}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer clearfix">
+                        <!-- table pagination -->
+                        {% if page_obj.has_other_pages %}
+                            <ul class="pagination pagination-sm m-0 float-left">
+                                {% if page_obj.has_previous %}
+                                <li class="page-item">
+                                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a>
+                                </li>
+                                {% else %}
+                                <li class="page-item disabled">
+                                    <span class="page-link">Previous</span>
+                                </li>
+                                {% endif %}
+
+                                {% for page_num in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == page_num %}
+                                        <li class="page-item active">
+                                            <span class="page-link">
+                                                {{ page_num }}
+                                            </span>
+                                        </li>
+                                    {% else %}
+                                        <li class="page-item">
+                                            <a href="?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+
+                                {% if page_obj.has_next %}
+                                    <li class="page-item">
+                                        <a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item disabled">
+                                        <span class="page-link">Next</span>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% endif %}
+                        <a href="{% url 'add_category' %}" class="btn btn-success btn-sm float-right" tabindex="-1"><i class="fa fa-plus"></i> Create New Category</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="jumbotron" style="background-color: transparent;">
+        <h1 class="display-4">No categories yet!</h1>
+        <p class="lead">The table is currently empty.</p>
+        <hr class="my-4">
+        <p>Why don't you start <a href="{% url 'add_category' %}">adding new categories</a>?</p>
+      </div>
+    {% endif %}
+    <!-- /.col-md-12 -->
+    <script>
+        // Search table
+        // will edit later
+        const searchInput = document.getElementById("searchInv");
+        const rows = document.querySelectorAll("tbody tr");
+        searchInput.addEventListener("keyup", function(event) {
+            const q = event.target.value.toLowerCase();
+            rows.forEach((row) => {
+                row.querySelector("td").textContent.toLowerCase().startsWith(q) ? (row.style.display = "table-row") : (row.style.display = "none");
+            });
+        });
+    </script>
+{% endblock content %}

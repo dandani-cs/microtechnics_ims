@@ -5,7 +5,7 @@
         <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0 text-dark">
-                    Welcome, {{user}}!
+                    Welcome, {{user}}! <!-- pano i-display title ng current page dito using template tags? -->
                 </h1>
             </div>
             <div class="col-sm-6">
@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item">
                         <a href="#">Return to previous page</a>
                     </li>
-                    <li class="breadcrumb-item active">Home</li>
+                    <li class="breadcrumb-item active">{{ title }}</li> <!-- display current page title/name -->
                 </ol>
             </div>
         </div>

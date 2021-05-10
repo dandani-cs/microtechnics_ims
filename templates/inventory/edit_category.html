@@ -1,0 +1,34 @@
+{% extends 'Empbase.html' %}
+    {% block title %}
+        Edit Category
+    {% endblock title %}
+{% block content %}
+    {% include 'content-header.html' %}
+    <section class="content">
+        <div class="row">
+            <!-- Edit Category Form -->
+            <div class="col-md-12">
+                <!-- .card card-primary -->
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Update Category</h3>
+                    </div>
+                    <!-- edit-form start -->
+                    <form action="" method="POST" novalidate>
+                        <!-- .card-body -->
+                        <div class="card-body">
+                            {% csrf_token %}
+                            {% include 'inventory/inventory_form.html' with form=form %}
+                        </div>
+                        <!-- .card-footer -->
+                        <div class="card-footer">
+                            <a href="{% url 'view_category' %}" class="btn btn-info">Cancel</a>
+                            <button type="submit" class="btn btn-info float-right"> Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+    </section>
+{% endblock content %}

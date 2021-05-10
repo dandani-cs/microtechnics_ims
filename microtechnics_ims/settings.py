@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'inventory.apps.InventoryConfig',
     'purchasing.apps.PurchasingConfig',
+    'django_filters',
+    'bootstrap_modal_forms',
 ]
 
 MIDDLEWARE = [
@@ -88,7 +90,7 @@ DATABASES = {
 # Custom user model
 AUTH_USER_MODEL = 'accounts.User'
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # Password validation

@@ -1,0 +1,22 @@
+{% extends 'Empbase.html' %}
+    {% block title %}
+        Delete Category
+    {% endblock title %}
+{% block content %}
+    {% include 'content-header.html' %}
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Confirm Deletion</h3>
+        </div>
+        <form action="{% url 'delete_category' pk=cat.pk %}" method="post">
+            {% csrf_token %}
+            <div class="card-body">
+                <p>Are you sure you want to delete <b>{{ cat.name }}</b>?</p>
+            </div>
+            <div class="card-footer clearfix">
+                <a href="{% url 'view_category' %}" class="btn btn-info">Cancel</a>
+                <input type="submit" value="Confirm Action" class="btn btn-danger float-right">
+            </div>
+        </form>
+    </div>
+{% endblock content %}
