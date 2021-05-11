@@ -1,4 +1,4 @@
-{% extends "Empbase.html" %}
+{% extends "Adminbase.html" %}
 
 {% block title %}
     View Purchases
@@ -12,7 +12,7 @@
             <div class="card">
                 <!-- table of inventory -->
                 <div class="card-body table-responsive p-0">
-                    <table class="table table-hover">
+                    <table class="table table-hover no-break">
                         <thead class="thead-dark">
                             <tr>
                                 <th> Date Requested</th>
@@ -30,7 +30,7 @@
                                 {{ purchasing.date_created|date:'m/d/y' }}
                                 {{ purchasing.date_created|time:'G:iA'}}
                             </td>
-                            <td>{{ purchasing.purchase_num }}</a></td>
+                            <td><a class="remove-css" href="{% url 'purchasing_detail' purchasing.pk %}">{{ purchasing.purchase_num }}</a></td>
                             <td>{{ purchasing.requested_user.last_name }},
                                 {{ purchasing.requested_user.first_name }}
                             </td>
@@ -42,14 +42,7 @@
                                 {% endif %}
                             </td>
                             <td>{{ purchasing.total_price }}</td>
-                            <td>{% if purchasing.status == 1 %}
-                                    For approval
-                                {% elif purchasing.status == 2 %}
-                                    Approved
-                                {% elif purchasing_status == 3 %}
-                                    Received
-                                {% endif %}
-                            </td>
+                            <td> {{ purchasing.status_verbose }} </td>
                          </tr>
                         {% endfor %}
                         </tbody>
@@ -59,6 +52,9 @@
                 <!-- /.card-body -->
             </div>
             <!-- /.card -->
+            <div class="d-grid mx-auto float-lg-right" style="margin-bottom: 20px; margin-top: 20px; margin-left: 20px">
+                <a style="background-color: #00334e; color: #FFF;" href="{% url 'purchasing_add' %}" class="p-2 btn btn-default btn-for-add">Add new purchase <i class="fa fa-plus-circle"></i></a>
+            </div>
         </div>
     </div>
     <!-- Search inventory table -->

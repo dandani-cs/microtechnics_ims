@@ -6,6 +6,7 @@
 {% block content %}
     {% include 'content-header.html' %}
     <div class="col-md-12">
+        {% if object_list %}
         <div class="card">
             <!-- .tab-content -->
             <div class="tab-content">
@@ -76,8 +77,9 @@
                                                     <li class="nav-item dropdown">
                                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Options</a>
                                                         <div class="dropdown-menu" x-placement="bottom-start">
-                                                            <a href="{% url 'add_items' %}" class="dropdown-item" tabindex="-1">Add Item</a>
-                                                            <a href="{% url 'add_category' %}" class="dropdown-item" tabindex="-1">Create New Category</a>
+                                                            <a href="{% url 'view_category' %}" class="dropdown-item" tabindex="-1">Categories</a>
+                                                            <div class="dropdown-divider"></div>
+                                                            <a href="#" class="dropdown-item">Delete All Items</a>
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -85,6 +87,7 @@
                                         </div>
                                     </div>
                                     <!-- /.card-header -->
+                                    {% if object_list %}
                                     <div class="card-body table-responsive p-0">
                                         <table class="table table-hover" id="inventoryTable">
                                             <thead>
@@ -168,6 +171,7 @@
                                         <!-- /.table -->
                                     </div>
                                     <!-- /.card-body -->
+                                    {% endif %}
                                     <!-- table footer -->
                                     <div class="card-footer clearfix">
                                         <!-- table pagination -->
@@ -206,8 +210,7 @@
                                                 {% endif %}
                                             </ul>
                                         {% endif %}
-                                        <!-- add data -->
-                                        <!-- <a href="{% url 'add_items' %}" class="btn btn-info float-right"><i class="fa fa-plus"></i> Add Item </a> -->
+                                        <a href="{% url 'add_items' %}" class="btn btn-success btn-sm float-right" tabindex="-1"><i class="fa fa-plus"></i> Add New Item</a>
                                     </div>
                                     <!-- /.card-footer -->
                                 </div>
@@ -223,6 +226,18 @@
         </div>
         <!-- /.card -->
     </div>
+    {% else %}
+    <div class="jumbotron" style="background-color: transparent;">
+        <h1 class="display-4">
+            Inventory empty!
+        </h1>
+        <p class="lead">
+            Welcome to the inventory management page. The table is currently empty.
+        </p>
+        <hr class="my-4">
+        <p>Why don't you start <a href="{% url 'add_items' %}">adding new items</a>?</p>
+    </div>
+    {% endif %}
     <!-- /.col-md-12 -->
     <script>
         // Search table

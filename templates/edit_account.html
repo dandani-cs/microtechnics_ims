@@ -10,21 +10,26 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">User Management | Edit </h1>
-                </div><!-- /.col -->
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">User Management</li>
-                    </ol>
+                   
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
+    {% if form.errors %}
+                  {% for field in form %}
+                 {% for error in field.errors %}
+                 <div  class="mb-2" style="width: 100%; background-color: #85150d;  ">
+                  <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                   <p class="p-3" style="color: white"><i class="bi bi-exclamation-triangle-fill"></i> Error: {{ error }} </p>
+                 </div>
+                    
+                  {% endfor %}
+                  {% endfor %}
+              {% endif %}
     <section class="page-container">
         <form method="POST" class="pt-4" >
             {% csrf_token %}
-             <h3 class="mt-1 mb-4" style="text-align: center;">Update Details</h3>
+             <h3 class="mt-1 mb-4">Update User Details</h3>
             <div class="form-group">
                 <div class="col-sm-4">
 
@@ -59,10 +64,10 @@
         </div>
              <div class="row">
                  <div class="col">
-                    <button style="height: 50px; width: 100%; margin-top: 20px; background-color:#00334e; color:#FFF" type="submit" class="btn ">Update</button>
+                    <button type="submit" class="btn default-button"><i class="bi bi-check-circle"></i></button>
                 </div>
                 <div class="col">
-                    <a href="{% url 'user_profile' emp.username %}" class="btn btn-danger" style=" height: 50px; width: 100%; margin-top: 20px; color:#FFF;">Cancel</a>
+                    <a href="{% url 'user_profile' emp.username %}" class="btn cncl-button"><i class="bi bi-x-circle"></i></a>
                 </div>
              </div>
 

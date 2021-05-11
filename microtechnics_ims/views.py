@@ -26,6 +26,8 @@ class UserLoginView(View):
             return render(request, 'login/login.html', {'error': True})
 
     def get(self, request):
+        if request.user.is_authenticated:
+            return HttpResponseRedirect(reverse_lazy('home'))
         return render(request, 'login/login.html', {'error':False})
 
 def get_user(email):

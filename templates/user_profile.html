@@ -15,13 +15,16 @@
                         <div class="col-sm-4 " style="background-color: #00334e">
                             <div class="card-block text-center text-white">
                                 <div class="m-b-25"> <img src="https://img.icons8.com/bubbles/100/000000/user.png" class="img-radius" alt="User-Profile-Image"> </div>
-                                <h6 class="f-w-600">{{emp.first_name}}&nbsp;{{emp.last_name}}</h6>
-                                {% if emp.is_admin == 1 %}
-                                  <p>Admin</p>
-                                {% endif %}
-                                {% if emp.is_admin == 0 %}
-                                    <p>Employee </p>
-                                {% endif %}
+                                <span>
+                                   <h6 class="f-w-600">{{emp.first_name}}&nbsp;{{emp.last_name}}</h6>
+                                    {% if emp.is_admin == 1 %}
+                                        <p>Admin</p>
+                                    {% endif %}
+                                    {% if emp.is_admin == 0 %}
+                                        <p>Employee </p>
+                                    {% endif %}  
+                                </span>
+                               
                                 <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                             </div>
                         </div>
@@ -42,10 +45,10 @@
                                 40 p-b-5 b-b-default f-w-600">Actions</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <a href="{% url 'update_user' emp.username %}" style="margin-bottom: 10px; height: 100%; width: 100%; background-color: #00334e;"  id="editForm" class="p-2 btn  btn-group-sm" ><img src="{% static 'icons/edit.png'%}" class="sideNavIcon"></a>
+                                        <a href="{% url 'update_user' emp.username %}" id="editForm" class="p-2 btn  btn-group-sm default-button"><img src="{% static 'icons/edit.png'%}" class="sideNavIcon"></a>
                                     </div>
                                     <div class="col-sm-6">
-                                        <a  onclick="openPrompt()"  data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm"  id="deleteForm" style="margin-bottom: 10px; height: 100%; width: 100%;"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
+                                        <a  onclick="openPrompt()"  data-toggle="lightbox" class="p-2 btn cncl-button btn-group-sm"  id="deleteForm" ><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
                                     </div>
                                 </div>
                             </div>
@@ -55,9 +58,8 @@
             </div>
         </div>
     </div>
-    <div class="form-popup form-container  p-4" id="myForm" style="background-color: #FFF">
-
-
+    
+        <div class="form-popup form-container p-4" id="deletePrompt" style="background-color: #FFF">
             <h1>Delete User</h1>
             <p>Are you sure you want to delete this user? </p>
 
@@ -90,23 +92,23 @@
             </div>
             <div class="row">
                 <div class="col">
-                     <a style="margin-bottom: 10px; color: #FFF; height: 70%; width: 100%; background-color: #00334e; vertical-align: middle;"  class="btn cancel" onclick="closePrompt()">Cancel<br></a>
+                     <a class="btn p-2 btn-group-sm default-button" onclick="closePrompt()"><i class="bi bi-x-circle"></i></a>
                 </div>
                 <div class="col">
-                    <a  href="{% url 'delete_user' emp.username %}"  data-toggle="lightbox" class="p-2 btn btn-danger btn-group-sm"  id="deleteForm" style="margin-bottom: 10px; height: 70%; width: 100%; vertical-align: middle;"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
+                    <a  href="{% url 'delete_user' emp.username %}"  data-toggle="lightbox" class="p-2 btn cncl-button btn-group-sm"  id="deleteForm"><img src="{% static 'icons/delete.png'%}" class="sideNavIcon"></a>
                 </div>
             </div>
-
-
-
+    </div>
+    
+    
 </div>
 
 <script>
     function openPrompt() {
-        document.getElementById("myForm").style.display = "block";
+        document.getElementById("deletePrompt").style.display = "block";
     }
     function closePrompt() {
-        document.getElementById("myForm").style.display = "none";
+        document.getElementById("deletePrompt").style.display = "none";
     }
 </script>
 {% endblock content %}

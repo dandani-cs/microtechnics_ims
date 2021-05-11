@@ -34,7 +34,7 @@ class CreateUserView(View):
 
         else:
             print(user_form.errors)
-            return render(request, "accounts_add.html", {'form': CustomUserCreationForm()})
+            return render(request, "accounts_add.html", {'form': user_form})
 
 
 def forgotpass(request):
@@ -60,8 +60,13 @@ def updateUser(request, employee_id):
             emp = form.save(commit = False)
 
             emp.save()
-        print(form.errors)
-        return redirect("show_list")
+            
+            print(form.errors)
+            return redirect("show_list")
+        else: 
+            print(form.errors)
+            return render(request, "edit_account.html", {'form': form})
+        
 
 
 

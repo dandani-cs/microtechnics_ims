@@ -1,20 +1,19 @@
-{% extends "Empbase.html" %}
-    {% block title %} 
-        Add Category
+{% extends 'Empbase.html' %}
+    {% block title %}
+        Edit Category
     {% endblock title %}
-    {% load widget_tweaks %}
 {% block content %}
-{% include 'content-header.html' %}
+    {% include 'content-header.html' %}
     <section class="content">
         <div class="row">
-            <!-- Add Category Form -->
+            <!-- Edit Category Form -->
             <div class="col-md-12">
                 <!-- .card card-primary -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Add Category</h3>
+                        <h3 class="card-title">Update Category</h3>
                     </div>
-                    <!-- add-category start -->
+                    <!-- edit-form start -->
                     <form action="" method="POST" novalidate>
                         <!-- .card-body -->
                         <div class="card-body">
@@ -24,7 +23,7 @@
                         <!-- .card-footer -->
                         <div class="card-footer">
                             <a href="{% url 'view_category' %}" class="btn btn-info">Cancel</a>
-                            <button type="submit" class="btn btn-success float-right"><i class="fa fa-plus"></i> Add</button>
+                            <button type="submit" class="btn btn-info float-right"> Save Changes</button>
                         </div>
                     </form>
                 </div>
