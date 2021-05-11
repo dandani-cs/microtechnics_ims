@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'django_filters',
     'bootstrap_modal_forms',
+    'projects.apps.ProjectsConfig'
 ]
 
 MIDDLEWARE = [

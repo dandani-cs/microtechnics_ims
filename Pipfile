@@ -11,6 +11,7 @@ django-widget-tweaks = "*"
 fontawesome-free = "==5.15.3"
 django-filter = "*"
 django-bootstrap-modal-forms = "*"
+django-bootstrap-form-horizontal = "*"
 
 [requires]
 python_version = "3.7"
