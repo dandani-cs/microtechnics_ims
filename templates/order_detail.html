@@ -5,6 +5,16 @@
 {% endblock title %}
 
 {% block content %}
+<style type="text/css">
+    .unset-css { 
+        all: unset; 
+        padding: 0;
+        box-shadow: None !important;
+        border-radius: 0;
+        border: 0;
+    }
+</style>
+
 <div class="page-container">
     <div class="content-header">
         <div class="container-fluid">
@@ -37,10 +47,10 @@
                         <p class="grayed indented"> {{ item_code }} </p>
                     </div>
                     <div class="col-sm-4">
-                        <p class=""> {{ details.price }} @ x5 </p>
+                        <p class="">PHP {{ details.price }} @ {{ details.quantity }} </p>
                     </div>
                     <div class="col-sm-4">
-                        <p class="subtitle"> 51.25</p>
+                        <p class="subtitle">PHP 51.25</p>
                     </div>
                 </div>
             {% endfor %}
@@ -54,22 +64,30 @@
             <hr class="no-margin" />
             <div class="row">
                 <div class="col-sm-6">
-                    <p class="subtitle no-margin"> {{ object.status }} </p>
+                    {% if object.is_approved == True %}
+                        <p class="subtitle no-margin">Approved</p>
+                    {% else %}
+                        <p class="subtitle no-margin">Pending approval</p>
+                    {% endif %}
                     <p class="grayed"> Status </p>
 
-                    {% if object.is_approved == False and request.user.is_superuser %}
-                        <button class="btn btn-default" type="button" name="button">Approve</button>
-                    {% endif %}
+                    <form action='{% url 'order_update_status' order.order_num %}' class="unset-css" method="post">
+                        {% csrf_token %}
+                        {% if request.user.is_superuser %}
+                            {% if object.is_approved == False %}
+                            <button class="btn btn-default" type="submit" name="btn_approve">Approve</button>
+                            {% else %}
+                            <button class="btn btn-default" disabled type="button" name="btn_approve">Already Approved</button>
+                            {% endif %}
+                        {% endif %}
 
-                    {% if object.is_approved != 0 %}
-                        <button class="btn btn-danger full-width" type="button" name="button">Cancel</button>
-                    {% endif %}
+                    </form>
                 </div>
                 <div class="col-sm-6">
                     <p class="subtitle no-margin"> {{ object.date_created }}</p>
                     <p class="grayed">Date created</p>
 
-                    <p class="subtitle no-margin">{{ object.total_price }}</p>
+                    <p class="subtitle no-margin">PHP {{ object.total_price }}</p>
                     <p class="grayed">Total Price </p>
 
                     <p class="subtitle no-margin">{{ object.requested_user.last_name }}, {{ object.requested_user.first_name }}</p>

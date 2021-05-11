@@ -70,6 +70,7 @@ class CreateOrderView(View):
 
         if item_formset.is_valid():
             request.session['order_info'] = [(form.cleaned_data['item'], form.cleaned_data['quantity']) for form in item_formset]
+
         return HttpResponseRedirect(reverse_lazy('order_confirm')) 
 
     def get(self, request):
@@ -100,9 +101,49 @@ class OrderDetailView(LoginRequiredMixin, DetailView):
         keys = list(context['object'].items.keys())
 
         for item_key in keys:
-            context['order_item_details'][item_key] =  Item.objects.get(item_code=item_key)
+            item = Item.objects.get(item_code=item_key)
+            item.quantity = context['object'].items[item_key]
+            context['order_item_details'][item_key] = item
 
         return context
+
+class OrderUpdateStatusView(View):
+    def post(self, request, order_num):
+        order = get_order(order_num)
+
+        if 'btn_approve' in request.POST:
+            order.is_approved    = True
+            order.approved_admin = request.user
+
+            item_set = Item.objects.filter(item_code__in = order.items.keys())
+            for item in item_set:
+                item.quantity = item.quantity - order.items[item.item_code]
+                item.save()
+
+        order.save()
+
+        return HttpResponseRedirect(reverse_lazy('order_detail', args = [order_num]))
+
+class OrderCancelConfirmView(LoginRequiredMixin, View):
+    login_url = 'final_login'
+    redirect_field_name = 'redirect_to'
+
+    def get(self, request, order_num):
+        order = get_order(order_num)
+        return render(request, 'order_cancel_confirm.html', {"order": order, "total_items": len(order.items)})
+
+
+    def post(self, request, order_num):
+        order = get_order(order_num)
+        print("Cancelled order#", order.order_num)
+        return HttpResponseRedirect(reverse_lazy('order_detail', args=[order_num]))
+
+
+def get_order(order_no):
+    try:
+        return Order.objects.get(order_num = order_no)
+    except Order.DoesNotExist:
+        return None
 
 def get_user(user):
     try:

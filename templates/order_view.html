@@ -4,6 +4,15 @@
     View Purchases
 {% endblock title %}
 {% block content %}
+<style type="text/css">
+    .unset-css { 
+        padding: 0;
+        box-shadow: None !important;
+        border-radius: 0;
+        border: 0;
+    }
+</style>
+
     <h1 class="m-0 text-dark mb-3">
         Orders
     </h1>
@@ -30,7 +39,7 @@
                                 {{ order.date_created|date:'m/d/y' }}
                                 {{ order.date_created|time:'G:iA'}}
                             </td>
-                            <td>{{ order.order_num }}</a></td>
+                            <td><a class="unset-css" href="{% url 'order_detail' order.order_num %}">{{ order.order_num }}</a></td>
                             <td>{{ order.requested_user.last_name }},
                                 {{ order.requested_user.first_name }}
                             </td>

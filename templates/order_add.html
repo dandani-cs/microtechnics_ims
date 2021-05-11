@@ -83,7 +83,6 @@
             var formset_counter   = document.querySelector("#id_form-TOTAL_FORMS");
 
             if(parseInt(formset_counter.value) > 1) {
-                console.log("Removing input index", index);
                 var last_input   = all_current_items[all_current_items.length - 1];
                 var add_item_btn = document.querySelector("#add-item");
 
@@ -95,10 +94,25 @@
                     .querySelector(".item-btn-group")
                     .appendChild(add_item_btn);
 
+                console.log("Before", all_current_items.length);
                 all_current_items[index].remove();
 
                 formset_counter.value = parseInt(formset_counter.value) - 1;
                 update_item_choices();
+
+                var new_current_items = document.querySelectorAll(".form_input");
+                console.log("After", new_current_items.length);
+                for( i = 0; i < new_current_items.length; i++) {
+                    var item = new_current_items[i].querySelector("select");
+                    var qty  = new_current_items[i].querySelector("input[type = 'number']");
+
+                    item.id   = item.id.replace(/(\d+)/, i);
+                    qty.id    = qty.id.replace(/(\d+)/, i);
+                    item.name = item.name.replace(/(\d+)/, i);
+                    qty.name  = qty.name.replace(/(\d+)/, i);
+
+                    console.log(item, qty)
+                }   
             }
         }
 
@@ -124,8 +138,6 @@
             var max_num_forms     = document.querySelector("#id_form-MAX_NUM_FORMS");
             var all_current_items = document.getElementsByClassName("form_input");
             var add_item_btn      = document.querySelector("#add-item");
-
-            console.log(all_current_items.length, parseInt(max_num_forms.value));
 
             add_item_btn.disabled = (all_current_items.length >= parseInt(max_num_forms.value));
         }
