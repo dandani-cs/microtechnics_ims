@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    {% load static %}
     <title>{% block title %} {% endblock title %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {% load static %}
     <link rel="icon"  href="{%static 'images/MSClogo.png'%}"/>
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -24,7 +24,6 @@
             <span class="sr-only">Toggle Menu</span>
           </button>
         </div>
-
         <div class="p-4 pt-5">
           <a href="index.html" class="logo"><img src="{% static 'images/MSC.png' %}" class="mainLogo"></a>
           <ul class="list-unstyled components mb-5">
@@ -32,12 +31,15 @@
                 <a href="#" class="sideNavText"><img src="{% static 'icons/notification.png' %}" class="sideNavIcon"> &nbsp;Notifications</a>
             </li>
             <li class="{% if request.path == dash %}active{% endif %}">
-              <a href="#homeSubmenu" class="sideNavText">
+              <a href="{% url 'home' %}" class="sideNavText">
                 <img src="{% static 'icons/Dashboard.png' %}" class="sideNavIcon">&nbsp; Dashboard
               </a>
             </li>
             <li>
-                <a href="#" class="sideNavText"><img src="{% static 'icons/receipt.png' %}" class="sideNavIcon"> &nbsp; For Approval</a>
+                <a href="{% url 'home' %}" class="sideNavText"><i class="bi bi-check-square sideNavIcon"></i> &nbsp; For Approval</a>
+            </li>
+            <li>
+              <a href="#" class="sideNavText"><i class="bi bi-journal sideNavIcon"></i> &nbsp; Project Management</a>
             </li>
             <li>
               <a href="#" class="sideNavText"><img src="{% static 'icons/purchase.png' %}" class="sideNavIcon"> &nbsp; Purchase Management</a>
