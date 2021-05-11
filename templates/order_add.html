@@ -1,0 +1,146 @@
+{% extends "Adminbase.html" %}
+{% load static %}
+{% block title %}
+    ADD ORDER PAGE
+{% endblock title %}
+{% block content %}
+    <div class="m-auto w-75 align-items-center">
+    <h2>Select Items to Order</h2>
+    <p class="lead"> Use the form below to select the desired items to order and enter the desired quantity </p>
+
+    <form method="POST">
+        <div class="container">
+            <div id="item_input_container">
+                {% csrf_token %}
+                {{ form.management_form }}
+                <div class="row mt-3">
+                    <div class="col-6"><p class="h6">Item Name</p></div>
+                    <div class="col-4"><p class="h6">Desired Quantity</p></div>
+                </div>
+                {% for f in form %}
+                <div class="row mb-3 form_input">
+                    <div class="col-6">{{ f.item }}</div>
+                    <div class="col-4">{{ f.quantity }}</div>
+                    <div class="col-2 item-btn-group">
+                        <button type="button" class="del-item btn btn-outline-danger" aria-label="Close">
+                            <span aria-hidden="divue">&times;</span>
+                        </button>
+                        <button id="add-item" type="button" class="btn btn-outline-success" onclick="create_new_item_input()">+</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <button type="button" onclick="reset_item_form()" class="btn btn-block btn-secondary"/>Reset</button>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-block btn-success"/>Proceed</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script src="{% static 'js/item_selection.js' %}"></script>
+
+    <script type="text/javascript">
+        function update_max_quantity_fields(options_arr) {
+            var all_quantity_fields = document.querySelectorAll("#item_input_container input[type='number']");
+            var all_item_dropdowns  = document.querySelectorAll("#item_input_container select");
+
+            var item_set = {};
+
+            for(i = 0; i < options_arr.length; i++)
+                item_set[options_arr[i][0]] = options_arr[i][2];
+
+            for(i = 0; i < all_quantity_fields.length; i++) {
+                var adjacent_select = all_item_dropdowns[i];
+                var quantity_field  = all_quantity_fields[i]; 
+                var item_code       = adjacent_select.options[adjacent_select.selectedIndex].value;
+
+                quantity_field.max = item_set[item_code];
+                quantity_field.min = 1;
+                quantity_field.placeholder = item_set[item_code];
+                quantity_field.required = true;
+            }
+
+        }
+        
+        function reset_item_form() {
+            var all_current_items = document.querySelectorAll(".form_input");
+            var formset_counter   = document.querySelector("#id_form-TOTAL_FORMS");
+            
+            while(parseInt(formset_counter.value) > 1) {
+                delete_item_input(1);
+            }
+            all_current_items[0].querySelector("select").selectedIndex = 0;
+        }
+
+
+        function delete_item_input(index) {
+            var all_current_items = document.querySelectorAll(".form_input");
+            var formset_counter   = document.querySelector("#id_form-TOTAL_FORMS");
+
+            if(parseInt(formset_counter.value) > 1) {
+                var last_input   = all_current_items[all_current_items.length - 1];
+                var add_item_btn = document.querySelector("#add-item");
+
+                // Index might be the last input the form, so moving the 
+                // add item to the last row causes it to be duplicated and deleted anyway
+                var last_input_offset = index < all_current_items.length - 1 ? 1 : 2;
+
+                all_current_items[all_current_items.length - last_input_offset]
+                    .querySelector(".item-btn-group")
+                    .appendChild(add_item_btn);
+
+                console.log("Before", all_current_items.length);
+                all_current_items[index].remove();
+
+                formset_counter.value = parseInt(formset_counter.value) - 1;
+                update_item_choices();
+
+                var new_current_items = document.querySelectorAll(".form_input");
+                console.log("After", new_current_items.length);
+                for( i = 0; i < new_current_items.length; i++) {
+                    var item = new_current_items[i].querySelector("select");
+                    var qty  = new_current_items[i].querySelector("input[type = 'number']");
+
+                    item.id   = item.id.replace(/(\d+)/, i);
+                    qty.id    = qty.id.replace(/(\d+)/, i);
+                    item.name = item.name.replace(/(\d+)/, i);
+                    qty.name  = qty.name.replace(/(\d+)/, i);
+
+                    console.log(item, qty)
+                }   
+            }
+        }
+
+        function update_row_deletion() {
+            var main_container    = document.getElementById("item_input_container");
+            var all_current_items = document.getElementsByClassName("form_input");
+
+            for(i = 0; i < all_current_items.length; i++) {
+                (function(i) {
+                    var delete_button = all_current_items[i].querySelector(".del-item");
+                    delete_button.onclick = function() { delete_item_input(i); }
+                })(i);
+            }
+        }
+        update_max_quantity_fields({{ item_codes | safe}});
+
+        function update_item_choices() {
+            var item_codes = {{ item_codes|safe }};
+            update_max_quantity_fields(item_codes);
+            update_item_dropdowns(item_codes);
+            update_row_deletion();
+
+            var max_num_forms     = document.querySelector("#id_form-MAX_NUM_FORMS");
+            var all_current_items = document.getElementsByClassName("form_input");
+            var add_item_btn      = document.querySelector("#add-item");
+
+            add_item_btn.disabled = (all_current_items.length >= parseInt(max_num_forms.value));
+        }
+    </script>
+
+{% endblock content %}

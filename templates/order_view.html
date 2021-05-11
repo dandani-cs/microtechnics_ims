@@ -1,0 +1,82 @@
+{% extends "Empbase.html" %}
+
+{% block title %}
+    View Purchases
+{% endblock title %}
+{% block content %}
+<style type="text/css">
+    .unset-css { 
+        padding: 0;
+        box-shadow: None !important;
+        border-radius: 0;
+        border: 0;
+    }
+</style>
+
+    <h1 class="m-0 text-dark mb-3">
+        Orders
+    </h1>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <!-- table of inventory -->
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th> Date Requested</th>
+                                <th> Order Number </th>
+                                <th> Requested By </th>
+                                <th> Approved By</th>
+                                <th> Total Price </th>
+                                <th> Status </th>
+                             </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in object_list %}
+                        <tr>
+                            <td>
+                                {{ order.date_created|date:'m/d/y' }}
+                                {{ order.date_created|time:'G:iA'}}
+                            </td>
+                            <td><a class="unset-css" href="{% url 'order_detail' order.order_num %}">{{ order.order_num }}</a></td>
+                            <td>{{ order.requested_user.last_name }},
+                                {{ order.requested_user.first_name }}
+                            </td>
+                            <td>{% if order.approved_admin == None %}
+                                    For approval
+                                {% else %}
+                                    {{ order.approved_admin.last_name }},
+                                    {{ order.approved_admin.first_name }}
+                                {% endif %}
+                            </td>
+                            <td>PHP {{ order.total_price }}</td>
+                            <td>{% if order.is_approved %}
+                                    Approved
+                                {% else %}
+                                    For approval
+                                {% endif %}
+                            </td>
+                         </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    <!-- /.table -->
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+    <!-- Search inventory table -->
+    <script>
+        const searchInput = document.getElementById("searchInv");
+        const rows = document.querySelectorAll("tbody tr");
+        searchInput.addEventListener("keyup", function(event) {
+            const q = event.target.value.toLowerCase();
+            rows.forEach((row) => {
+                row.querySelector("td").textContent.toLowerCase().startsWith(q) ? (row.style.display = "table-row") : (row.style.display = "none");
+            });
+        });
+    </script>
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends "Adminbase.html" %}
+
+{% block title %}
+    Confirm Your Order
+{% endblock title %}
+{% block content %}
+    
+<div class="container m-auto w-75">
+    <h2>Order Confirmation</h2>
+    <p class="lead">
+        Please verify that all of the details as well as the items of the order to be placed are correct.
+    </p>
+    <div class="row my-3"></div>
+
+    <form method = "POST">
+        {% csrf_token %}
+        <h5 class="h5">Order Details</h5>
+        <div class="row my-3">
+            <div class="col-4">Requested User:</div>
+            <div class="col-8">{{ order_form.requested_user }}</div>
+        </div>
+        <div class="row my-3">
+            <div class="col-4">Approved Admin:</div>
+            <div class="col-8">
+                {% if current_user != None and current_user.is_admin %}
+                {{ current_user.username }}
+                {% else %}
+                <i>(Pending for approval)</i>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row my-3">
+            <div class="col-4">Associated Project ID:</div>
+            <div class="col-8">AAAABBBBCC</div>
+        </div>
+        <div class="row my-3"></div>
+
+        <h5 class="h5">Selected Items</h5>
+        <div class="row">
+            <table class="table table-striped">
+                <thead>
+                    <th>Item Code  </th>
+                    <th>Name       </th>
+                    <th>Category   </th>
+                    <th>Description</th>
+                    <th>Quantity   </th>
+                    <th>Price      </th>
+                </thead>
+
+                {% for item in item_set %}
+                <tr>
+                    <td>{{ item.item_code   }}</td>
+                    <td>{{ item.name        }}</td>
+                    <td>{{ item.category    }}</td>
+                    <td>{{ item.description }}</td>
+                    <td>{{ item.quantity    }}</td>
+                    <td>PHP {{ item.price | floatformat:2 }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td colspan=5 align=right><b>Subtotal</b></td>
+                    <td>PHP {{ subtotal | floatformat:2 }}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="row align-items-right">
+            <div class="col-6">
+                <button type="Button" class="btn btn-block btn-danger">Cancel</button>
+            </div>
+            <div class="col-6">
+                <button type="Submit" class="btn btn-block btn-success">Confirm</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock content %}
