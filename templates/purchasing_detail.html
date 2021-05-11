@@ -1,5 +1,6 @@
 {% extends "Adminbase.html" %}
 {% load widget_tweaks %}
+{% load purchasing_tags %}
 {% block title %}
 	USER MANAGEMENT | Edit Account
 {% endblock title %}
@@ -31,16 +32,16 @@
             <hr class="no-margin"/>
 
             {% for item_code, details in item_details.items %}
-                <div class="row">
+                <div class="row row-hover">
                     <div class="col-sm-4">
                         <p class="subtitle no-margin"> {{ details.name }}</p>
-                        <p class="grayed indented"> {{ item_code }} </p>
+                        <p class="grayed indented mb-10"> {{ item_code }} </p>
                     </div>
                     <div class="col-sm-4">
-                        <p class=""> {{ details.price }} @ x5 </p>
+                        <p class=""> {{ details.price }} @ {{ object.items|purchase_item_quantity:item_code }} </p>
                     </div>
                     <div class="col-sm-4">
-                        <p class="subtitle"> 51.25</p>
+                        <p class="subtitle"> {% calculate_price_per_item details.price object.items|purchase_item_quantity:item_code %}</p>
                     </div>
                 </div>
             {% endfor %}
@@ -54,20 +55,6 @@
             <hr class="no-margin" />
             <div class="row">
                 <div class="col-sm-6">
-                    <p class="subtitle no-margin"> {{ object.status }} </p>
-                    <p class="grayed"> Status </p>
-
-                    {% if object.status == 1 and request.user.is_superuser %}
-                        <button class="btn btn-default" type="button" name="button">Approve</button>
-                    {% elif object.status == 3 and request.user.is_superuser %}
-                        <button class="btn btn-default" type="button" name="button">Received</button>
-                    {% endif %}
-
-                    {% if object.status != 0 %}
-                        <button class="btn btn-danger full-width" type="button" name="button">Cancel</button>
-                    {% endif %}
-                </div>
-                <div class="col-sm-6">
                     <p class="subtitle no-margin"> {{ object.date_created }}</p>
                     <p class="grayed">Date created</p>
 
@@ -77,8 +64,31 @@
                     <p class="subtitle no-margin">{{ object.requested_user.last_name }}, {{ object.requested_user.first_name }}</p>
                     <p class="grayed">Requested User</p>
 
-                    <p class="subtitle no-margin">{{ object.approved_admin.last_name}}, {{ object.approved_admin.first_name }}</p>
+                    <p class="subtitle no-margin">
+                        {% if object.approved_admin %}
+                        {{ object.approved_admin.last_name}}, {{ object.approved_admin.first_name }}
+                        {% else %}
+                        None
+                        {% endif %}
+                    </p>
                     <p class="grayed">Approved Admin</p>
+                </div>
+                <div class="col-sm-6">
+                    <p class="subtitle no-margin"> {{ object.status_verbose }} </p>
+                    <p class="grayed"> Status </p>
+
+                    <form action="{% url 'purchasing_update_status' object.purchase_num %}" class="remove-css" method="post">
+                        {% csrf_token %}
+                        {% if object.status == 1 and request.user.is_superuser %}
+                            <button class="btn btn-default" type="submit" name="btn_approve">Approve</button>
+                        {% elif object.status == 2 and request.user.is_superuser %}
+                            <button class="btn btn-default" type="submit" name="btn_receive">Received</button>
+                        {% endif %}
+
+                        {% if object.status != 0 and object.status != 3 %}
+                            <a href="{% url 'purchasing_cancel_confirm' purchasing.purchase_num %}"<button class="btn btn-danger full-width" type="button" name="button">Cancel</button></a>
+                        {% endif %}
+                    </form>
                 </div>
             </div>
         </div> <!-- container fluid card -->

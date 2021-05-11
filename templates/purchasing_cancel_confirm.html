@@ -1,0 +1,75 @@
+{% extends "Adminbase.html" %}
+{% load widget_tweaks %}
+{% block title %}
+    USER PROFILE
+{% endblock title %}
+
+{% block content %}
+{% load static %}
+<div class="page-content pt-10 mt-10" id="page-content" style="width: 100%;">
+    <div class="page_container mt-10">
+        <div class="row  justify-content-center page-content">
+            <div class="page_container" id="profile">
+                <h2>Are you sure you want to cancel this purchase?</h2>
+                <div class="card user-card-full page-content">
+                    <div class="card-block">
+                        <div class="row m-l-0 m-r-0 page-content justify-content-center">
+                            <div class="col-sm-12">
+                                <p class="subtitle no-margin">Purchase #{{ purchase.purchase_num }}</p>
+                                <hr class="no-margin" />
+                            </div>
+                        </div>
+                        <div class="row m-l-0 m-r-0 page-content">
+                            <div class="col-sm-6">
+                                <p class="subtitle no-margin">{{ total_items }}</p>
+                                <p class="grayed">Number of items</p>
+
+                                <p class="subtitle no-margin"> {{ purchase.total_price }}</p>
+                                <p class="grayed">Total price</p>
+
+                                <p class="subtitle no-margin">
+                                    {% if purchase.status == 1 %}
+                                        For Approval
+                                    {% elif purchase.status == 2 %}
+                                        Approved
+                                    {% endif %}
+                                </p>
+                                <p class="grayed">Status </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p class="subtitle no-margin">{{ purchase.date_created }}</p>
+                                <p class="grayed">Date created</p>
+
+                                <p class="subtitle no-margin">{{ purchase.requested_user.last_name }}, {{ purchase.requested_user.first_name }}</p>
+                                <p class="grayed">Requested User</p>
+
+                                <p class="subtitle no-margin">
+                                    {% if purchase.approved_admin %}
+                                        {{ purchase.approved_admin.last_name }}, {{ purchase.approved_admin.first_name }}
+                                    {% else %}
+                                        None
+                                    {% endif %}
+                                </p>
+                                <p class="grayed">Approved Admin</p>
+                            </div>
+                            </div>
+                            <div class="row m-l-0 m-r-0 page-content">
+                                <div class="col-sm-12 width-100">
+                                    <form class="remove-css" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-danger width-100"> Cancel </button>
+                                    </form>
+                                    <a href="{% url 'purchasing_detail' purchase.purchase_num %}">
+                                        <button class="btn btn-default mt-10">Return</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

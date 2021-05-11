@@ -8464,7 +8464,7 @@ a[data-toggle="collapse"] {
 #profile {
   width: 80%;
   height: 50%;
-  margin-top: 200px;
+  margin-top: 100px;
   max-width: 700px;
   vertical-align: middle;
 }
@@ -8722,6 +8722,10 @@ form {
     color: #808080;
 }
 
+.grayed.mb-10 {
+    margin-bottom: 10px !important;
+}
+
 .full-width {
     width: 100%;
 }
@@ -8730,6 +8734,21 @@ form {
     margin-left: 15px;
 }
 
+.width-100 {
+    width: 100% !important;
+}
+
+.remove-css {
+    padding: 0;
+    box-shadow: None !important;
+    border-radius: 0;
+    border: 0;
+}
+
+.row-hover:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075);
+}
 .register-switch {
   height: 50px;
   margin-bottom: 15px;
@@ -8801,24 +8820,24 @@ form {
 }
 
 .cncl-button {
-  width: 100%; 
-  margin-top: 20px; 
-  color:#FFF !important; 
-  background-color: #85150d !important; 
+  width: 100%;
+  margin-top: 20px;
+  color:#FFF !important;
+  background-color: #85150d !important;
 }
 
 .default-button {
-  width: 100%; 
-  margin-top: 20px; 
-  background-color:#00334e !important; 
+  width: 100%;
+  margin-top: 20px;
+  background-color:#00334e !important;
   color:#FFF !important;
 }
 
 .search-bar {
-  width: 30% !important; 
-  color: #000; 
-  background-color: #e6e6e6; 
-  border-width: 0.5px; 
+  width: 30% !important;
+  color: #000;
+  background-color: #e6e6e6;
+  border-width: 0.5px;
   margin-bottom: 10px;
   float: right !important;
 }
