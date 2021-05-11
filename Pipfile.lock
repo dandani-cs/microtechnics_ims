@@ -62,6 +62,28 @@
             "index": "pypi",
             "version": "==5.15.3"
         },
+        "django-bootstrap-form-horizontal": {
+            "hashes": [
+                "sha256:8430d61cc4532d6998327d902e495bd2bf414d1433bb1de500c19dc568fdb98c"
+            ],
+            "index": "pypi",
+            "version": "==0.0.4"
+        },
+        "django-bootstrap-modal-forms": {
+            "hashes": [
+                "sha256:be180b30892aa7b8012718dfca7586de7d0c143585bc44ed507d50569cdd41cd"
+            ],
+            "index": "pypi",
+            "version": "==2.2.0"
+        },
+        "django-filter": {
+            "hashes": [
+                "sha256:84e9d5bb93f237e451db814ed422a3a625751cbc9968b484ecc74964a8696b06",
+                "sha256:e00d32cebdb3d54273c48f4f878f898dced8d5dfaad009438fe61ebdf535ace1"
+            ],
+            "index": "pypi",
+            "version": "==2.4.0"
+        },
         "pytz": {
             "hashes": [
                 "sha256:83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da",

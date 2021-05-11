@@ -1,0 +1,51 @@
+{% extends "projects.html" %}
+
+{% block title %}
+  Edit Projects
+{% endblock title %}
+
+{% block content %}
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Edit Project
+                    </h3>
+                </div>
+                <form action="" method="POST">
+                    <div class="card-body">
+                        {% csrf_token %}
+                        {% for field in editForm %}
+                        <tr>
+                            <th>{{ field.label }}</th>
+                            <td>{{ field }}</td>
+                        </tr>
+                        {% endfor %}
+                    </div>
+                    <div class="card-footer">
+                      <button class="btn btn-info" type="submit">Submit</button>
+                        <a href="{% url 'projects_view' %}" class="btn btn-info">Cancel</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
